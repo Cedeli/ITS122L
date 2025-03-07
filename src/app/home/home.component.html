@@ -1,0 +1,116 @@
+<div class="home-container">
+  <!-- TO DO: Separate each of the main sections into their own components -->
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a class="navbar-brand" [routerLink]="['/']">Block Rosary Movement</a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/']">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/about']">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/events']">Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/announcements']">Announcements</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/contact']">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/register']">Register</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Welcome to Block Rosary Movement</h1>
+      <p>Tagline here.</p>
+      <div class="hero-buttons">
+        <a [routerLink]="['/about']" class="btn btn-primary">Learn More</a>
+        <a [routerLink]="['/events']" class="btn btn-secondary">View Events</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Events Section -->
+  <section class="featured-events">
+    <div class="section-header">
+      <h2>Featured Events</h2>
+      <a [routerLink]="['/events']" class="view-all">View All Events</a>
+    </div>
+    <div class="events-container">
+      <div *ngFor="let event of featuredEvents;" class="event-card">
+        <div class="event-image">
+          <img [src]="event.imageUrl || 'placeholder.png'" [alt]="event.title"/>
+        </div>
+        <div class="event-content">
+          <h3>{{ event.title }}</h3>
+          <p class="event-date">{{ event.date }}</p>
+          <p class="event-description">{{ event.description }}</p>
+          <a [routerLink]="['/events', event.id]" class="btn btn-outline">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Announcements Section -->
+  <section class="announcements">
+    <div class="section-header">
+      <h2>Latest Announcements</h2>
+      <a [routerLink]="['/announcements']" class="view-all">View All Announcements</a>
+    </div>
+    <div class="announcements-container">
+      @for (announcement of recentAnnouncements; track announcement.id) {
+        <div class="announcement-card" [class.important]="announcement.important">
+          @if (announcement.important) {
+            <span class="important-tag">Important</span>
+          }
+          <h3>{{ announcement.title }}</h3>
+          <p class="announcement-date">{{ announcement.date }}</p>
+          <p class="announcement-summary">{{ announcement.summary }}</p>
+          <a [routerLink]="['/announcements', announcement.id]" class="read-more">Read More</a>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- About Summary Section -->
+  <section class="about-summary">
+    <div class="about-content">
+      <h2>About Our Organization</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <a [routerLink]="['/about']" class="btn btn-primary">Learn More About Us</a>
+    </div>
+  </section>
+
+  <!-- TO DO: Find better icons than emojis -->
+  <!-- Quick Links Section -->
+  <section class="quick-links">
+    <h2>Quick Links</h2>
+    <div class="links-container">
+      <a [routerLink]="['/about']" class="quick-link">
+        <span class="icon">📖</span>
+        <span class="link-text">About Us</span>
+      </a>
+      <a [routerLink]="['/contact']" class="quick-link">
+        <span class="icon">📞</span>
+        <span class="link-text">Contact Directory</span>
+      </a>
+      <a [routerLink]="['/register']" class="quick-link">
+        <span class="icon">📝</span>
+        <span class="link-text">Become a Member</span>
+      </a>
+      <a [routerLink]="['/info']" class="quick-link">
+        <span class="icon">ℹ️</span>
+        <span class="link-text">Information Hub</span>
+      </a>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,19 @@
+// Decide on variables and main font.
+:root {
+  font-family: "Times New Roman", sans-serif;
+  scroll-behavior: smooth;
+  --primary-color: #FFFFF;
+  --secondary-color: #FFFFF;
+  --background-color: #FFFFFF;
+  --text-color: #FFFFFF;
+}
+
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: inherit;
+  font-size: 100%;
+}
