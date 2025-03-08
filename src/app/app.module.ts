@@ -9,6 +9,7 @@ import { HeroSectionComponent } from './hero-section/hero-section.component';
 import { FeaturedEventsComponent } from './featured-events/featured-events.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
 import { AboutSummaryComponent } from './about-summary/about-summary.component';
+import { QuickLinksComponent } from './quick-links/quick-links.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AboutSummaryComponent } from './about-summary/about-summary.component';
     HeroSectionComponent,
     FeaturedEventsComponent,
     AnnouncementsComponent,
-    AboutSummaryComponent
+    AboutSummaryComponent,
+    QuickLinksComponent
   ],
   imports: [
     BrowserModule,
