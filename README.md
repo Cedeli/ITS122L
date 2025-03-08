@@ -20,7 +20,7 @@ Firstly, install dependencies:
 npm install
 ```
 
-Secondly, generate environment files
+Secondly, generate environment files (refer to MS Teams for environment contents)
 
 ```bash
 cd src
