@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HeroSectionComponent } from './hero-section/hero-section.component';
 import { FeaturedEventsComponent } from './featured-events/featured-events.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
+import { AboutSummaryComponent } from './about-summary/about-summary.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
     NavbarComponent,
     HeroSectionComponent,
     FeaturedEventsComponent,
-    AnnouncementsComponent
+    AnnouncementsComponent,
+    AboutSummaryComponent
   ],
   imports: [
     BrowserModule,
