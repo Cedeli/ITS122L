@@ -20,6 +20,13 @@ Firstly, install dependencies:
 npm install
 ```
 
+Secondly, generate environment files
+
+```bash
+cd src
+ng generate environments
+```
+
 To build the project run:
 
 ```bash
