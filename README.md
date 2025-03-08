@@ -27,7 +27,7 @@ cd src
 ng generate environments
 ```
 
-put production: true for development.ts and production: false for environment.ts
+put production: false for development.ts and production: true for environment.ts
 
 To build the project run:
 
