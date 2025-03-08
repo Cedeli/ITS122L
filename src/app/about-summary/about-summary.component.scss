@@ -22,4 +22,10 @@
     }
   }
   
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .about-summary {
+      flex-direction: column;
+    }
+  }
   

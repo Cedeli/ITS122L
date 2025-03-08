@@ -27,3 +27,10 @@
       }
     }
   }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .hero-section .hero-content h1 {
+      font-size: 2.2rem;
+    }
+  }
