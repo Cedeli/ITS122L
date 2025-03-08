@@ -14,6 +14,11 @@ ng serve
 ```
 
 ## Building
+Firstly, install dependencies:
+
+```bash
+npm install
+```
 
 To build the project run:
 
