@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-announcements',
-  standalone: false,
   templateUrl: './announcements.component.html',
+  imports: [
+    RouterLink
+  ],
   styleUrls: ['./announcements.component.scss']
 })
 export class AnnouncementsComponent {

@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import {RouterLink} from '@angular/router';
+import {NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-featured-events',
-  standalone: false,
   templateUrl: './featured-events.component.html',
+  imports: [
+    RouterLink,
+    NgForOf
+  ],
   styleUrls: ['./featured-events.component.scss']
 })
 export class FeaturedEventsComponent implements OnInit {
