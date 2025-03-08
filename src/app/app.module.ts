@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HeroSectionComponent } from './hero-section/hero-section.component';
 import { FeaturedEventsComponent } from './featured-events/featured-events.component';
+import { AnnouncementsComponent } from './announcements/announcements.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HeroSectionComponent,
-    FeaturedEventsComponent
+    FeaturedEventsComponent,
+    AnnouncementsComponent
   ],
   imports: [
     BrowserModule,
