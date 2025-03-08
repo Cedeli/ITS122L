@@ -6,9 +6,10 @@ import {LoginComponent} from './login/login.component';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet, NgOptimizedImage, HomeComponent, LoginComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'BRMO';

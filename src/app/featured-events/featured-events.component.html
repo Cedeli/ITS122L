@@ -1,0 +1,19 @@
+<section class="featured-events">
+  <div class="section-header">
+    <h2>Featured Events</h2>
+    <a [routerLink]="['/events']" class="view-all btn btn-outline">View All Events</a>
+  </div>
+  <div class="events-container">
+    <div *ngFor="let event of featuredEvents;" class="event-card">
+      <div class="event-image">
+        <img [src]="event.imageUrl || 'placeholder.png'" [alt]="event.title"/>
+      </div>
+      <div class="event-content">
+        <h3>{{ event.title }}</h3>
+        <p class="event-date">{{ event.date }}</p>
+        <p class="event-description">{{ event.description }}</p>
+        <a [routerLink]="['/events', event.id]" class="btn btn-outline">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
