@@ -32,7 +32,7 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/global-styles.scss"
             ],
             "scripts": []
           },
@@ -96,12 +96,15 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/global-styles.css"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "5d9f853c-f395-431b-9d85-b5843eab66be"
   }
 }
