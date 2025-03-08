@@ -1,0 +1,72 @@
+<div class="login-container">
+  <!-- Login Section -->
+  <section class="login-section">
+    <div class="login-content">
+      <h1>Welcome to Block Rosary Movement</h1>
+      <p>Please log in to access your account.</p>
+
+      <div class="login-form">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              class="form-control"
+              placeholder="Enter your email">
+            <div *ngIf="email?.invalid && email?.dirty" class="error-message">
+              <div *ngIf="email?.errors?.['required']">Email is required</div>
+              <div *ngIf="email?.errors?.['email']">Please enter a valid email address</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              formControlName="password"
+              class="form-control"
+              placeholder="Enter your password">
+            <div *ngIf="password?.invalid && password?.dirty" class="error-message">
+              <div *ngIf="password?.errors?.['required']">Password is required</div>
+              <div *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters long</div>
+            </div>
+          </div>
+
+          <div class="form-options">
+            <div class="remember-me">
+              <input type="checkbox" id="remember" formControlName="rememberMe">
+              <label for="remember">Remember me</label>
+            </div>
+            <a [routerLink]="['/forgot-password']" class="forgot-password">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid || isLoading">
+            <span *ngIf="!isLoading">Login</span>
+            <span *ngIf="isLoading">Logging in...</span>
+          </button>
+
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+        </form>
+
+        <div class="social-login">
+          <p>Or login with</p>
+          <div class="social-buttons">
+            <button (click)="loginWithGoogle()" class="btn btn-outline social-btn">
+              <span class="icon">G</span>
+              <span class="link-text">Google</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="register-prompt">
+          <p>Don't have an account? <a [routerLink]="['/register']">Register now</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
