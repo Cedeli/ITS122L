@@ -1,0 +1,30 @@
+
+.hero-section {
+    background: url('/placeholder.png') no-repeat center center;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+    margin-bottom: 50px;
+  
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+  
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+  
+      p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+      }
+  
+      .hero-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+      }
+    }
+  }
+  
