@@ -6,16 +6,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HeroSectionComponent } from './hero-section/hero-section.component';
+import { FeaturedEventsComponent } from './featured-events/featured-events.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    HeroSectionComponent
+    HeroSectionComponent,
+    FeaturedEventsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent],
