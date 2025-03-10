@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Policies & FAQ</title>
+    <style>
+        /* Decide on variables and main font. */
+        :root {
+          font-family: "Times New Roman", sans-serif;
+          scroll-behavior: smooth;
+          --primary-color: #3f51b5;
+          --secondary-color: #303f9f;
+          --accent-color: #ff4081;
+          --light-accent: #ffe0eb;
+          --background-color: #FFFFFF;
+          --text-color: #333333;
+          --light-gray: #f5f5f5;
+        }
+
+        *,
+        ::before,
+        ::after {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          color: inherit;
+          font-size: 100%;
+        }
+
+        body {
+          background-color: var(--background-color);
+          color: var(--text-color);
+          line-height: 1.6;
+        }
+
+        /* Button Styles */
+        .btn {
+          display: inline-block;
+          padding: 12px 24px;
+          border-radius: 5px;
+          font-weight: 500;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+          background-color: #3f51b5;
+          color: white;
+        }
+        
+        .btn-primary:hover {
+          background-color: #303f9f;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+
+        .btn-secondary {
+          background-color: transparent;
+          border: 2px solid white;
+          color: white;
+        }
+        
+        .btn-secondary:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+          transform: translateY(-2px);
+          box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+
+        .btn-outline {
+          background-color: transparent;
+          border: 1px solid #3f51b5;
+          color: #3f51b5;
+          padding: 8px 16px;
+        }
+        
+        .btn-outline:hover {
+          background-color: #3f51b5;
+          color: white;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+
+        /* Section Styles */
+        section {
+          padding: 50px 20px;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        .section-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 30px;
+          position: relative;
+        }
+
+        .section-header h2 {
+          font-size: 2.2rem;
+          color: #3f51b5;
+          position: relative;
+          padding-bottom: 10px;
+        }
+        
+        .section-header h2::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 80px;
+          height: 3px;
+          background-color: var(--accent-color);
+          border-radius: 2px;
+        }
+
+        .view-all {
+          color: #3f51b5;
+          text-decoration: none;
+          font-weight: 500;
+        }
+        
+        .view-all:hover {
+          text-decoration: underline;
+        }
+        
+        /* Specific styles for Policies & FAQ page */
+        .page-header {
+          background: linear-gradient(135deg, #3f51b5 0%, #5c6bc0 100%);
+          color: white;
+          padding: 60px 20px;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .page-header::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,5 C60,20 40,20 0,5 Z" fill="%23ffffff" opacity="0.1"/></svg>');
+          background-size: 100% 100%;
+        }
+        
+        .page-header::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,95 C40,80 60,80 100,95 L100,100 L0,100 Z" fill="%23ffffff" opacity="0.1"/></svg>');
+          background-size: 100% 100%;
+        }
+        
+        .page-header h1 {
+          font-size: 2.8rem;
+          margin-bottom: 15px;
+          position: relative;
+          display: inline-block;
+        }
+        
+        .page-header h1::after {
+          content: "";
+          position: absolute;
+          bottom: -10px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100px;
+          height: 3px;
+          background-color: var(--accent-color);
+          border-radius: 2px;
+        }
+        
+        .page-header p {
+          max-width: 800px;
+          margin: 0 auto;
+          font-size: 1.1rem;
+        }
+        
+        .policies-container, .faq-container {
+          margin-bottom: 50px;
+        }
+        
+        .policy-item, .faq-item {
+          margin-bottom: 30px;
+          border-radius: 8px;
+          padding: 25px;
+          transition: all 0.3s ease;
+          position: relative;
+          background-color: white;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+          border-left: 4px solid var(--primary-color);
+        }
+        
+        .policy-item:hover, .faq-item:hover {
+          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+          transform: translateY(-3px);
+        }
+        
+        .policy-item h3, .faq-item h3 {
+          color: var(--primary-color);
+          margin-bottom: 15px;
+          font-size: 1.4rem;
+          display: flex;
+          align-items: center;
+        }
+        
+        .policy-item h3::before {
+          content: "📜";
+          margin-right: 10px;
+          font-size: 1.5rem;
+        }
+        
+        .faq-item h3::before {
+          content: "❓";
+          margin-right: 10px;
+          font-size: 1.5rem;
+        }
+        
+        .faq-item {
+          cursor: pointer;
+        }
+        
+        .faq-answer {
+          padding-top: 15px;
+          border-top: 1px solid #eee;
+          margin-top: 15px;
+        }
+        
+        .policy-item ul, .policy-item ol, .faq-answer ul, .faq-answer ol {
+          padding-left: 20px;
+          margin: 15px 0;
+        }
+        
+        .policy-item li, .faq-answer li {
+          margin-bottom: 8px;
+        }
+        
+        .back-to-top {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background-color: var(--accent-color);
+          color: white;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-decoration: none;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+          font-size: 1.5rem;
+          transition: all 0.3s ease;
+        }
+        
+        .back-to-top:hover {
+          background-color: var(--primary-color);
+          transform: translateY(-5px);
+          box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+        }
+        
+        /* Accent elements */
+        .accent-divider {
+          height: 5px;
+          background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+          margin: 40px 0;
+          border-radius: 5px;
+        }
+        
+        .rosary-decoration {
+          position: absolute;
+          width: 150px;
+          height: 150px;
+          background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%23ff4081" stroke-width="2" stroke-dasharray="5 3"/></svg>');
+          opacity: 0.1;
+          z-index: -1;
+        }
+        
+        .decoration-1 {
+          top: 50px;
+          right: 50px;
+          transform: rotate(20deg);
+        }
+        
+        .decoration-2 {
+          bottom: 100px;
+          left: 30px;
+          transform: rotate(-15deg);
+        }
+        
+        /* Tab navigation for sections */
+        .tab-navigation {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 40px;
+          gap: 10px;
+        }
+        
+        .tab-btn {
+          padding: 12px 24px;
+          background-color: var(--light-gray);
+          border: none;
+          border-radius: 30px;
+          cursor: pointer;
+          font-weight: 600;
+          color: var(--text-color);
+          transition: all 0.3s ease;
+        }
+        
+        .tab-btn:hover {
+          background-color: #e0e0e0;
+        }
+        
+        .tab-btn.active {
+          background-color: var(--primary-color);
+          color: white;
+          box-shadow: 0 4px 8px rgba(63, 81, 181, 0.3);
+        }
+        
+        /* Prayer quote box */
+        .prayer-quote {
+          background-color: var(--light-accent);
+          border-radius: 8px;
+          padding: 25px;
+          margin: 40px 0;
+          position: relative;
+          font-style: italic;
+          text-align: center;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        .prayer-quote::before {
+          content: """;
+          font-size: 5rem;
+          position: absolute;
+          top: -20px;
+          left: 20px;
+          color: var(--accent-color);
+          opacity: 0.3;
+          font-family: Georgia, serif;
+        }
+        
+        .prayer-quote p {
+          position: relative;
+          z-index: 1;
+          font-size: 1.1rem;
+        }
+        
+        .prayer-quote cite {
+          display: block;
+          margin-top: 15px;
+          font-weight: bold;
+          color: var(--primary-color);
+        }
+
+        /* Content display control */
+        .content {
+            display: none;
+        }
+        
+        .content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <h1>Policies & Frequently Asked Questions</h1>
+        <p>Learn more about the Block Rosary Movement's guidelines and get answers to common questions</p>
+    </header>
+    
+    <div class="tab-navigation">
+        <button class="tab-btn active" onclick="showSection('policies')">Policies</button>
+        <button class="tab-btn" onclick="showSection('faq')">FAQ</button>
+    </div>
+    
+    <div class="rosary-decoration decoration-1"></div>
+    <div class="rosary-decoration decoration-2"></div>
+    
+    <section id="policies" class="content active">
+        <div class="section-header">
+            <h2>Our Policies</h2>
+        </div>
+        
+        <div class="prayer-quote">
+            <p>"The Rosary is the most excellent form of prayer and the most efficacious means of attaining eternal life. It is the remedy for all our evils, the root of all our blessings."</p>
+            <cite>Pope Leo XIII</cite>
+        </div>
+        
+        <div class="policies-container">
+            <div class="policy-item">
+                <h3>Membership Policy</h3>
+                <p>The Block Rosary Movement welcomes all individuals who share our devotion to Mama Mary. Membership is open to Catholics of all ages who commit to participate in regular prayer meetings and activities.</p>
+                <ul>
+                    <li>Members must register with their local Block Rosary chapter</li>
+                    <li>Annual membership renewal is encouraged to maintain active status</li>
+                    <li>Members are expected to participate in at least one Block Rosary activity per month</li>
+                </ul>
+            </div>
+            
+            <div class="policy-item">
+                <h3>Prayer Group Formation</h3>
+                <p>Block Rosary prayer groups are formed within neighborhoods to facilitate regular gatherings for prayer and devotion.</p>
+                <ul>
+                    <li>A minimum of 5 households is required to form a new Block Rosary group</li>
+                    <li>Each group must designate a coordinator who will liaise with the parish coordinator</li>
+                    <li>Groups are encouraged to meet at least once a week for communal prayer</li>
+                    <li>Rotation of hosting responsibilities among member households is recommended</li>
+                </ul>
+            </div>
+            
+            <div class="policy-item">
+                <h3>Event Organization</h3>
+                <p>The Block Rosary Movement organizes various religious events throughout the year to strengthen faith and community bonds.</p>
+                <ul>
+                    <li>All events must be approved by the parish coordinator and aligned with Catholic teachings</li>
+                    <li>Event proposals should be submitted at least one month in advance</li>
+                    <li>Organizers must ensure proper permits are secured for public gatherings</li>
+                    <li>Safety protocols must be followed during all events</li>
+                </ul>
+            </div>
+            
+            <div class="accent-divider"></div>
+            
+            <div class="policy-item">
+                <h3>Financial Transparency</h3>
+                <p>As a non-government organization, the Block Rosary Movement is committed to financial transparency and accountability.</p>
+                <ul>
+                    <li>All donations and contributions are recorded and reported quarterly</li>
+                    <li>Financial statements are available for review by members upon request</li>
+                    <li>Funds are primarily used for religious materials, event organization, and community outreach</li>
+                    <li>An annual financial report is presented during the general assembly</li>
+                </ul>
+            </div>
+            
+            <div class="policy-item">
+                <h3>Code of Conduct</h3>
+                <p>Members of the Block Rosary Movement are expected to uphold Christian values in all interactions and activities.</p>
+                <ul>
+                    <li>Treat all members with respect, dignity, and compassion</li>
+                    <li>Maintain reverence during prayer meetings and religious activities</li>
+                    <li>Refrain from using the organization for personal gain or political purposes</li>
+                    <li>Uphold the teachings of the Catholic Church in personal conduct</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <section id="faq" class="content">
+        <div class="section-header">
+            <h2>Frequently Asked Questions</h2>
+        </div>
+        
+        <div class="prayer-quote">
+            <p>"The Rosary is a powerful weapon to put the demons to flight and to keep oneself from sin... If you desire peace in your hearts, in your homes, and in your country, assemble each evening to recite the Rosary."</p>
+            <cite>Pope Pius XI</cite>
+        </div>
+        
+        <div class="faq-container">
+            <div class="faq-item" onclick="toggleAnswer(this)">
+                <h3>What is the Block Rosary Movement?</h3>
+                <div class="faq-answer" style="display: none;">
+                    <p>The Block Rosary Movement is a non-government organization dedicated to promoting devotion to Mama Mary through prayers, religious gatherings, and religious activities. Our primary focus is to bring together communities in prayer, particularly through the recitation of the Holy Rosary in neighborhood settings.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" onclick="toggleAnswer(this)">
+                <h3>How can I join the Block Rosary Movement?</h3>
+                <div class="faq-answer" style="display: none;">
+                    <p>Joining the Block Rosary Movement is simple. You can:</p>
+                    <ol>
+                        <li>Contact your parish office to inquire about existing Block Rosary groups in your area</li>
+                        <li>Attend a local Block Rosary prayer meeting and express your interest to the coordinator</li>
+                        <li>Register through our website by filling out the membership form</li>
+                        <li>Start a new Block Rosary group in your neighborhood if none exists</li>
+                    </ol>
+                    <p>There are no membership fees, but voluntary donations are welcome to support our activities.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" onclick="toggleAnswer(this)">
+                <h3>What happens during a Block Rosary meeting?</h3>
+                <div class="faq-answer" style="display: none;">
+                    <p>A typical Block Rosary meeting includes:</p>
+                    <ul>
+                        <li>Opening prayers</li>
+                        <li>Recitation of the Holy Rosary</li>
+                        <li>Reading and reflection on Scripture or Marian devotions</li>
+                        <li>Sharing of prayer intentions</li>
+                        <li>Community announcements</li>
+                        <li>Closing prayers</li>
+                        <li>Fellowship (often including simple refreshments)</li>
+                    </ul>
+                    <p>Meetings usually last between 60-90 minutes, depending on the group.</p>
+                </div>
+            </div>
+            
+            <div class="accent-divider"></div>
+            
+            <div class="faq-item" onclick="toggleAnswer(this)">
+                <h3>How often do Block Rosary groups meet?</h3>
+                <div class="faq-answer" style="display: none;">
+                    <p>Most Block Rosary groups meet weekly, often on a fixed day of the week. However, the frequency can vary based on the availability and preference of the members. Some groups meet more frequently during special occasions like Marian months (May and October) or less frequently during challenging seasons. The important aspect is consistency and commitment to regular prayer.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" onclick="toggleAnswer(this)">
+                <h3>Can children participate in the Block Rosary Movement?</h3>
+                <div class="faq-answer" style="display: none;">
+                    <p>Absolutely! Children are not only welcome but encouraged to participate in the Block Rosary Movement. We believe in nurturing devotion to Mama Mary from a young age. Many groups have special roles for children, such as leading certain prayers or bringing flowers to the image of Mary. Family participation strengthens both faith and family bonds.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" onclick="toggleAnswer(this)">
+                <h3>What materials do I need for Block Rosary meetings?</h3>
+                <div class="faq-answer" style="display: none;">
+                    <p>Basic materials for Block Rosary meetings include:</p>
+                    <ul>
+                        <li>Rosary beads for each participant</li>
+                        <li>An image or statue of the Blessed Virgin Mary</li>
+                        <li>Candles (optional)</li>
+                        <li>Prayer guides or booklets</li>
+                        <li>Bible</li>
+                    </ul>
+                    <p>The Block Rosary Movement can provide starter kits for new groups upon request.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" onclick="toggleAnswer(this)">
+                <h3>How can I start a Block Rosary group in my neighborhood?</h3>
+                <div class="faq-answer" style="display: none;">
+                    <p>To start a new Block Rosary group:</p>
+                    <ol>
+                        <li>Contact your parish priest for approval and guidance</li>
+                        <li>Invite neighbors and friends who might be interested (aim for at least 5 households)</li>
+                        <li>Register your group with the Block Rosary Movement through your parish coordinator</li>
+                        <li>Establish a regular meeting schedule and location rotation system</li>
+                        <li>Request starter materials from the organization if needed</li>
+                    </ol>
+                    <p>Our coordinators are available to help you establish and grow your new group.</p>
+                </div>
+            </div>
+            
+            <div class="accent-divider"></div>
+            
+            <div class="faq-item" onclick="toggleAnswer(this)">
+                <h3>Does the Block Rosary Movement organize other activities besides prayer meetings?</h3>
+                <div class="faq-answer" style="display: none;">
+                    <p>Yes, the Block Rosary Movement organizes various activities throughout the year, including:</p>
+                    <ul>
+                        <li>Marian processions and pilgrimages</li>
+
+
+
+<script>
+    // Function to show the selected section and hide others
+    function showSection(sectionId) {
+        // Remove active class from all content sections
+        document.querySelectorAll('.content').forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        // Remove active class from all tab buttons
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Add active class to the selected section
+        document.getElementById(sectionId).classList.add('active');
+        
+        // Find the button that was clicked and add active class
+        document.querySelector(`.tab-btn[onclick="showSection('${sectionId}')"]`).classList.add('active');
+    }
+    
+    // Function to toggle FAQ answers
+    function toggleAnswer(element) {
+        const answer = element.querySelector('.faq-answer');
+        if (answer.style.display === 'none' || answer.style.display === '') {
+            answer.style.display = 'block';
+        } else {
+            answer.style.display = 'none';
+        }
+    }
+</script>
