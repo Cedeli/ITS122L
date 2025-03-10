@@ -1,19 +1,11 @@
-// MODULE
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-// ROUTER
-import {RouterLink, RouterOutlet} from '@angular/router';
-import { RouterLinkActive } from '@angular/router';
-
-
-// COMPONENT
-import {NavbarComponent} from '../navbar/navbar.component';
 import {HeroSectionComponent} from '../hero-section/hero-section.component';
 import {FeaturedEventsComponent} from '../featured-events/featured-events.component';
 import {AnnouncementsComponent} from '../announcements/announcements.component';
 import {AboutSummaryComponent} from '../about-summary/about-summary.component';
 import {QuickLinksComponent} from '../quick-links/quick-links.component';
+import {NavbarComponent} from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-home',
@@ -25,8 +17,9 @@ import {QuickLinksComponent} from '../quick-links/quick-links.component';
     AnnouncementsComponent,
     AboutSummaryComponent,
     QuickLinksComponent,
+    NavbarComponent,
   ],
  templateUrl: './home.component.html',
  styleUrl: './home.component.scss'
 })
-export class HomeComponent {}
+export class HomeComponent { }

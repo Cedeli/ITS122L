@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-
-import { RouterOutlet } from '@angular/router';
-
+import {RouterOutlet} from '@angular/router';
 import {NavbarComponent} from './navbar/navbar.component';
 
 @Component({
@@ -9,7 +7,7 @@ import {NavbarComponent} from './navbar/navbar.component';
   standalone: true,
   imports: [
     RouterOutlet,
-    NavbarComponent,
+    NavbarComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],

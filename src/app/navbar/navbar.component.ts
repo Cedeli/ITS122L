@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-
-// ROUTER
-import {RouterLink, RouterOutlet, RouterLinkActive} from '@angular/router';
+import { RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
