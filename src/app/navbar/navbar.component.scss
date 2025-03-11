@@ -1,42 +1,41 @@
-
 .home-container {
     font-family: 'Roboto', sans-serif;
     color: #333333;
   }
-  
+
   .navbar {
     background-color: #3f51b5;
     padding: 10px 20px;
     color: white;
-  
+
     .navbar-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-  
+
     .navbar-brand {
       font-size: 1.5rem;
       font-weight: bold;
       color: white;
       text-decoration: none;
     }
-  
+
     .navbar-nav {
       list-style: none;
       display: flex;
       margin: 0;
       padding: 0;
-  
+
       .nav-item {
         margin-left: 20px;
-  
+
         .nav-link {
           color: white;
           text-decoration: none;
           font-size: 1rem;
           transition: color 0.3s ease;
-  
+
           &:hover {
             color: rgba(204, 204, 204, 0.8);
           }
@@ -44,4 +43,3 @@
       }
     }
   }
-  

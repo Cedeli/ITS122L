@@ -17,7 +17,6 @@ import {NavbarComponent} from '../navbar/navbar.component';
     AnnouncementsComponent,
     AboutSummaryComponent,
     QuickLinksComponent,
-    NavbarComponent,
   ],
  templateUrl: './home.component.html',
  styleUrl: './home.component.scss'

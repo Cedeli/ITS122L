@@ -3,38 +3,16 @@ import {Routes} from '@angular/router';
 import {AboutComponent} from './about/about.component';
 import {LoginComponent} from './login/login.component';
 import {AnnouncementsComponent} from './announcements/announcements.component';
+import {RegisterComponent} from './register/register.component';
 
 const routeConfig: Routes = [
-  {
-    path: '',
-    component: HomeComponent,
-    title: 'Home',
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-    title: 'Login',
-  },
-  {
-    path: 'about',
-    component: AboutComponent,
-    title: 'About',
-  },
-  {
-    path: 'announcements',
-    component: AnnouncementsComponent,
-    title: "Announcements",
-  },
-  {
-    path: 'events',
-    component: HomeComponent,
-    title: 'Events',
-  },
-  {
-    path: 'contact',
-    component: HomeComponent,
-    title: 'Contact',
-  }
+  { path: '', component: HomeComponent, title: 'Home', },
+  { path: 'about', component: AboutComponent },
+  { path: 'announcements',  component: AnnouncementsComponent,  title: "Announcements", },
+  { path: 'events',  component: HomeComponent,  title: 'Events', },
+  { path: 'contact',  component: HomeComponent,  title: 'Contact', },
+  { path: 'login', component: LoginComponent, title: 'Login', },
+  { path: 'register', component: RegisterComponent, title: 'Register', },
 ]
 
 export default routeConfig;
