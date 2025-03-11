@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.hero-container {
+    background: linear-gradient(to left, #1d2869 20%, rgba(0, 0, 0, 0)), url('/BRM Logo.jpg');
+    background-repeat: no-repeat;
+    color: var(--text-color);
+    height: 95vh;
+    display: flex;
+    align-items: end;
+    justify-content: flex-end;
+}
+
+.hero-info {
+    flex-direction: column;
+    width: 30%;
+    margin: 0 20vh 10vh 0;
+}
+
+.hero-info h1 {
+    font-size: 10vh;
+}
+
+.container {
+    min-height: 50vh;
+    max-height: fit-content;
+    display: flex;
+}
+
+.white {
+    background-color: whitesmoke;
+    color: black;
+}
+
+.blue {
+    background-color: #1d2869;
+    color: var(--text-color);
+}
+
+.multi-col {
+    justify-content: center;
+    gap: 50vh;
+}
+
+.single-col {
+    justify-content: center;
+}
+
+.mission,
+.vision {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.documents {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5vh
+}
+
+.document-card {
+    display: inherit;
+    flex-direction: inherit;
+    width: 60%;
+}
+
+.location {
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10vh;
+}
+
+.document-card h2 {
+    font-size: 3vh;
+}
+
+h1 {
+    padding-top: 5vh;
+    font-size: 5vh;
+}
+
+img {
+    width: 60%;
+}
+
