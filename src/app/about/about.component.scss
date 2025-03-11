@@ -4,23 +4,22 @@
 }
 
 .hero-container {
-    background: linear-gradient(to right, #1d2869 15%, rgba(0, 0, 0, 0)), url('/placeholder.png');
+    background: linear-gradient(to left, #1d2869 20%, rgba(0, 0, 0, 0)), url('/BRM Logo.jpg');
+    background-repeat: no-repeat;
     color: var(--text-color);
     height: 95vh;
     display: flex;
-    align-items: center;
-    padding-left: 40vh;
+    align-items: end;
+    justify-content: flex-end;
 }
 
 .hero-info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
     width: 30%;
+    margin: 0 20vh 10vh 0;
 }
 
-h1 {
+.hero-info h1 {
     font-size: 10vh;
 }
 
@@ -31,7 +30,7 @@ h1 {
 }
 
 .white {
-    background-color: rgb(184, 189, 199);
+    background-color: rgb(203, 209, 219);
     color: black;
 }
 
@@ -51,7 +50,6 @@ h1 {
 
 .mission,
 .vision {
-    padding-top: 5vh;
     width: 30%;
     display: flex;
     flex-direction: column;
@@ -72,13 +70,22 @@ h1 {
     width: 60%;
 }
 
+.location {
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10vh;
+}
+
 .document-card h2 {
     font-size: 3vh;
 }
 
-.mission h1, 
-.vision h1,
-.documents h1 {
+h1 {
+    padding-top: 5vh;
     font-size: 5vh;
+}
+
+img {
+    width: 60%;
 }
 
