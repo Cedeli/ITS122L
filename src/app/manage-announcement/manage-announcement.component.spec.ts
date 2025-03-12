@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule } from '@angular/forms';
 import { ManageAnnouncementComponent } from './manage-announcement.component';
 
 describe('ManageAnnouncementComponent', () => {
@@ -8,7 +8,8 @@ describe('ManageAnnouncementComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ManageAnnouncementComponent]
+      declarations: [ManageAnnouncementComponent],
+      imports: [FormsModule]
     })
     .compileComponents();
 
@@ -19,5 +20,13 @@ describe('ManageAnnouncementComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have a form with title, date, summary, and important fields', () => {
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('input[name="title"]')).toBeTruthy();
+    expect(compiled.querySelector('input[name="date"]')).toBeTruthy();
+    expect(compiled.querySelector('textarea[name="summary"]')).toBeTruthy();
+    expect(compiled.querySelector('input[name="important"]')).toBeTruthy();
   });
 });
