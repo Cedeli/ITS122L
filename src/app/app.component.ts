@@ -1,17 +1,26 @@
 import { Component } from '@angular/core';
-import {RouterOutlet} from '@angular/router';
-import {NavbarComponent} from './navbar/navbar.component';
+import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
+import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarService } from './services/navbar.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    RouterOutlet,
-    NavbarComponent
-  ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  imports: [
+    NavbarComponent,
+    RouterOutlet,
+  ]
 })
 export class AppComponent {
-  title = 'BRMO';
+  constructor(private router: Router, public nav: NavbarService) {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      if (!event.url.startsWith('/login') && !event.url.startsWith('/register')) {
+        this.nav.show();
+      }
+    });
+  }
 }

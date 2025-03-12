@@ -5,6 +5,7 @@ export interface User {
   last_name?: string;
   birth_date?: string;
   age?: number;
+  phone_number?: string;
   address?: string;
   role?: string;
   created_at: string;

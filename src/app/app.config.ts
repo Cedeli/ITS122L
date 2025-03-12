@@ -5,7 +5,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager, provideFirestore } from '@angular/fire/firestore';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
-import routeConfig from './routes';
+import routeConfig from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
