@@ -37,7 +37,7 @@ const routeConfig: Routes = [
     title: 'Contact',
   },
   {
-    path: 'policies-faq',
+    path: 'info',
     component: PoliciesFaqComponent,
     title: 'Policies * FAQ'
   }
