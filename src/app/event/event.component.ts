@@ -7,5 +7,24 @@ import { Component } from '@angular/core';
   styleUrl: './event.component.scss'
 })
 export class EventComponent {
-
+  public eventList = [
+    {
+      id: 1,
+      title: 'Event Title #1',
+      description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia quisquam doloremque nostrum laboriosam, blanditiis libero corporis nulla a aut?',
+      imgsrc: '/placeholder.png'
+    },
+    {
+      id: 2,
+      title: 'Event Title #2',
+      description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia quisquam doloremque nostrum laboriosam, blanditiis libero corporis nulla a aut?',
+      imgsrc: '/placeholder.png'
+    },
+    {
+      id: 3,
+      title: 'Event Title #3',
+      description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia quisquam doloremque nostrum laboriosam, blanditiis libero corporis nulla a aut?',
+      imgsrc: '/placeholder.png'
+    },
+  ];
 }
