@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-policies-faq',
-  imports: [],
+  imports: [
+    CommonModule
+  ],
   templateUrl: './policies-faq.component.html',
   styleUrl: './policies-faq.component.scss'
 })
