@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav class="navbar" *ngIf="nav.visible">
   <div class="navbar-container">
     <a class="navbar-brand" [routerLink]="['/']">Block Rosary Movement</a>
       <ul class="navbar-nav">
@@ -20,5 +20,3 @@
       </ul>
   </div>
 </nav>
-
-<router-outlet />

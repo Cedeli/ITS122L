@@ -6,6 +6,7 @@ import { NgIf } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { User as FirebaseUser } from '@angular/fire/auth';
 import { User } from '../models/user.model';
+import {NavbarService} from '../services/navbar.service';
 
 /**
  * Component that handles user registration functionality.
@@ -46,11 +47,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
    * @param fb - FormBuilder service for creating reactive forms
    * @param authService - Service for handling authentication operations
    * @param router - Router service for navigation
+   * @param nav - Navigation bar component
    */
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private nav: NavbarService,
   ) {
     this.registerForm = this.fb.group({
       firstName: ['', [Validators.required]],
@@ -119,6 +122,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
    * Redirects to home page if user is already authenticated.
    */
   ngOnInit(): void {
+    this.nav.hide();
     this.authSubscription = this.authService.getCurrentUser().subscribe((user: FirebaseUser | null) => {
       if (user) {
         this.router.navigate(['/home']);
