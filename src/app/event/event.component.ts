@@ -63,5 +63,20 @@ export class EventComponent {
       description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia quisquam doloremque nostrum laboriosam, blanditiis libero corporis nulla a aut?',
       imgsrc: '/placeholder.png'
     },
-  ]
+  ];
+
+  /*
+  public filteredEventList = [...this.eventList];
+  public filteredEventHistory = [...this.eventHistory];
+
+  filterEvents(month: string) {
+    if (month) {
+      this.filteredEventList = this.eventList.filter(event => new Date(event.date).toLocaleString('default', { month: 'long' }) === month);
+      this.filteredEventHistory = this.eventHistory.filter(event => new Date(event.date).toLocaleString('default', { month: 'long' }) === month);
+    } else {
+      this.filteredEventList = [...this.eventList];
+      this.filteredEventHistory = [...this.eventHistory];
+    }
+  }
+  */
 }
