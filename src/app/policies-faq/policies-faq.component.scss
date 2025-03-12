@@ -184,9 +184,9 @@
       align-items: center;
     }
   }
-  
-  .policy-item h3::before {
-    content: "📜";
+
+  .policy-item h3::before { 
+    content: "ඞ"; /* Temporary sus */
     margin-right: 10px;
     font-size: 1.5rem;
   }
@@ -195,7 +195,7 @@
     cursor: pointer;
     
     h3::before {
-      content: "❓";
+      content: "🤱"; /* Temporary sus */
       margin-right: 10px;
       font-size: 1.5rem;
     }
