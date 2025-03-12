@@ -166,4 +166,14 @@ export class PoliciesFaqComponent {
   isSectionActive(sectionId: string): boolean {
     return this.activeSection === sectionId;
   }
+
+  // Method to scroll to top (because it wasn't invented bruh)
+  scrollToTop(): void {
+    window.scrollTo(
+      {
+        top: 0,
+        behavior: 'smooth' // not sure if smooth is better than instant
+      }
+    );
+  }
 }
