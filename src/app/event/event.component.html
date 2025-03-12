@@ -4,7 +4,22 @@
 
     <!-- Upcomming Events -->
     <div class="header-container"> 
-        
+        <h2>Upcomming events</h2>
+        <select id="monthFilter">
+            <option value="">All Months</option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+        </select>
     </div>
     <div class="card-holder"> 
         @for (event of eventList; track event.id) {
@@ -13,7 +28,7 @@
             <h3 class="card-hover__title">
                 <span>{{ event.title }}</span> 
             </h3>
-            <p class="card-hover__text">{{event.description}}</p>
+            <p class="card-hover__text">{{event.description}} The event starts in {{event.date}}</p>
             <a href="#" class="card-hover__link">
                 <span>Want to join?</span>
                 <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -25,6 +40,47 @@
             <h4>Register <span>now</span> and <span>join</span> the Event!</h4>
             </div>
             <img src="{{event.imgsrc}}" alt="">
+        </div>
+        }
+    </div>
+    
+    <div class="header-container">
+        <h2>Previous Events</h2>
+        <select id="monthFilter">
+            <option value="">All Months</option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+        </select>
+    </div>
+    <div class="card-holder"> 
+        @for (history of eventHistory; track history.id) {
+        <div class="card-hover">
+            <div class="card-hover__content">
+            <h3 class="card-hover__title">
+                <span>{{ history.title }}</span> 
+            </h3>
+            <p class="card-hover__text">{{history.description}} The event starts in {{history.date}}</p>
+            <a href="#" class="card-hover__link">
+                <span>Want to join?</span>
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>        
+            </a>
+            </div>
+            <div class="card-hover__extra">
+            <h4>Register <span>now</span> and <span>join</span> the Event!</h4>
+            </div>
+            <img src="{{history.imgsrc}}" alt="">
         </div>
         }
     </div>
