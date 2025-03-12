@@ -7,6 +7,7 @@ import { EventComponent } from './event/event.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminComponent } from './admin/admin.component';
+import { ContactComponent } from './contact/contact.component';
 import { ManageAnnouncementComponent } from './manage-announcement/manage-announcement.component';
 import { ManageEventComponent } from './manage-event/manage-event.component';
 import { ManageInformationComponent } from './manage-information/manage-information.component';
@@ -17,20 +18,26 @@ import { AuthGuard } from './services/auth.guard';
 
 const routeConfig: Routes = [
   { path: '', redirectTo: '/register', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent, title: 'Home' },
+  { path: 'home', component: HomeComponent, title: 'Home', canActivate: [AuthGuard] },
   { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
   { path: 'announcements', component: AnnouncementsComponent, canActivate: [AuthGuard] },
   { path: 'events',  component: EventComponent,  title: 'Events', canActivate: [AuthGuard] },
-  { path: 'contact',  component: HomeComponent,  title: 'Contact', canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent, title: 'Login', },
-  { path: 'register', component: RegisterComponent, title: 'Register', },
-  { path: 'admin', component: AdminComponent, title: 'Admin'},
-  { path: 'admin/announcement', component: ManageAnnouncementComponent, title: 'Manage Annoucement'},
-  { path: 'admin/event', component: ManageEventComponent, title: 'Manage Event'},
-  { path: 'admin/information', component: ManageInformationComponent, title: 'Manage Information'},
-  { path: 'admin/submission', component: ManageSubmissionComponent, title: 'Manage Submission'},
-  { path: 'admin/user', component: ManageUserComponent, title: 'Manage User'},
+  { path: 'contact',  component: ContactComponent,  title: 'Contact', canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent, title: 'Login' },
+  { path: 'register', component: RegisterComponent, title: 'Register' },
+  { 
+    path: 'admin', 
+    component: AdminComponent, 
+    title: 'Admin',
+    children: [
+      { path: 'announcement', component: ManageAnnouncementComponent, title: 'Manage Announcement' },
+      { path: 'event', component: ManageEventComponent, title: 'Manage Event' },
+      { path: 'information', component: ManageInformationComponent, title: 'Manage Information' },
+      { path: 'submission', component: ManageSubmissionComponent, title: 'Manage Submission' },
+      { path: 'user', component: ManageUserComponent, title: 'Manage User' }
+    ]
+  },
   { path: '**', redirectTo: '/register' }
-]
+];
 
 export default routeConfig;
