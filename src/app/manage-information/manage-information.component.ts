@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AdminComponent } from '../admin/admin.component';
 
 @Component({
   selector: 'app-manage-information',
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './manage-information.component.html',
   styleUrls: ['./manage-information.component.scss']

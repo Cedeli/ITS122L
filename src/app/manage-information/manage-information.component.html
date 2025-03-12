@@ -1,4 +1,4 @@
-<app-admin />
+
 <section class="manage-information">
   <h2>Manage Information</h2>
   <form (ngSubmit)="saveInformation()">
@@ -10,6 +10,6 @@
       <label for="content">Content</label>
       <textarea id="content" [(ngModel)]="information.content" name="content" required></textarea>
     </div>
-    <button type="submit">Save Information</button>
+    <button class="btn btn-primary" type="submit">Save Information</button>
   </form>
 </section>
