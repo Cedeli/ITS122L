@@ -62,6 +62,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]],
       birthDate: [''],
+      phoneNumber: ['', [Validators.required]],
       address: ['']
     }, {
       validators: this.passwordMatchValidator
@@ -145,6 +146,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   get password() { return this.registerForm.get('password'); }
   get confirmPassword() { return this.registerForm.get('confirmPassword'); }
   get birthDate() { return this.registerForm.get('birthDate'); }
+  get phoneNumber() { return this.registerForm.get('phoneNumber'); }
   get address() { return this.registerForm.get('address'); }
 
   /**
@@ -160,14 +162,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.errorMessage = null;
 
-    const { email, password, firstName, lastName, birthDate, address } = this.registerForm.value;
-    const age = birthDate ? this.calculateAge(birthDate) : undefined;
+    const { email, password, firstName, lastName, birthDate, phoneNumber, address } = this.registerForm.value;
 
     const userData: Partial<User> = {
       first_name: firstName,
       last_name: lastName,
       birth_date: birthDate ? new Date(birthDate).toISOString() : undefined,
-      age: age,
+      age: birthDate ? this.calculateAge(birthDate) : undefined,
+      phone_number: phoneNumber,
       address: address
     };
 

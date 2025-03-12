@@ -176,6 +176,7 @@ export class AuthService {
         last_name: userData.last_name,
         birth_date: userData.birth_date,
         age: userData.age,
+        phone_number: userData.phone_number,
         address: userData.address,
         role: 'user',
         created_at: new Date().toISOString(),
