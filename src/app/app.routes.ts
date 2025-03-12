@@ -4,7 +4,7 @@ import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
 import { RegisterComponent } from './register/register.component';
-import { AuthGuard } from './services/auth.guard';
+import { AccountDetailsComponent } from './account-details/account-details.component';
 
 const routeConfig: Routes = [
   { path: '', redirectTo: '/register', pathMatch: 'full' },
@@ -15,6 +15,7 @@ const routeConfig: Routes = [
   { path: 'contact',  component: HomeComponent,  title: 'Contact' },
   { path: 'login', component: LoginComponent, title: 'Login', },
   { path: 'register', component: RegisterComponent, title: 'Register', },
+  { path: 'account-details', component: AccountDetailsComponent, title: 'Account Details', },
   { path: '**', redirectTo: '/register' }
 ]
 
