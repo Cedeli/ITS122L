@@ -7,6 +7,7 @@ import {LoginComponent} from './login/login.component';
 import {AnnouncementsComponent} from './announcements/announcements.component';
 import {PoliciesFaqComponent} from './policies-faq/policies-faq.component';
 import {ContactComponent} from './contact/contact.component';
+import {EventComponent} from './event/event.component';
 
 const routeConfig: Routes = [
   {
@@ -31,7 +32,7 @@ const routeConfig: Routes = [
   },
   {
     path: 'events',
-    component: HomeComponent,
+    component: EventComponent,
     title: 'Events',
   },
   {
