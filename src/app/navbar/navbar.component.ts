@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NavbarService } from '../services/navbar.service';
 import {NgIf} from '@angular/common';
 
@@ -9,7 +9,6 @@ import {NgIf} from '@angular/common';
   imports: [
     RouterLink,
     RouterLinkActive,
-    RouterOutlet,
     NgIf
   ],
   styleUrls: ['./navbar.component.scss']
