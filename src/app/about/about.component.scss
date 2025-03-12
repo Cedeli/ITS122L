@@ -1,12 +1,7 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
 .hero-container {
     background: linear-gradient(to left, #1d2869 20%, rgba(0, 0, 0, 0)), url('/BRM Logo.jpg');
     background-repeat: no-repeat;
-    color: var(--text-color);
+    color: var(--light-gray);
     height: 95vh;
     display: flex;
     align-items: end;
@@ -36,7 +31,7 @@
 
 .blue {
     background-color: #1d2869;
-    color: var(--text-color);
+    color: var(--light-gray);
 }
 
 .multi-col {
