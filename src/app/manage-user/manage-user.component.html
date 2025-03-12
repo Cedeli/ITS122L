@@ -1,1 +1,18 @@
-<p>manage-user works!</p>
+<section class="manage-user">
+  <h2>Manage User</h2>
+  <form (ngSubmit)="saveUser()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" [(ngModel)]="user.name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" [(ngModel)]="user.email" name="email" required>
+    </div>
+    <div class="form-group">
+      <label for="role">Role</label>
+      <input type="text" id="role" [(ngModel)]="user.role" name="role" required>
+    </div>
+    <button class="btn btn-primary" type="submit">Save User</button>
+  </form>
+</section>
