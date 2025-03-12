@@ -1,5 +1,88 @@
+* {
+    font-family: var(font-family);
+}
+
+h1 {
+    font-size: 5vh;
+}
+
+label {
+    margin-top: 1vh;
+    font-size: 2vh;
+}
+
+button {
+    margin-top: 1vh;
+    padding: 0.5em 1em; 
+    color: white; 
+    border: none;
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-size: 2vh; 
+    transition: background-color 0.3s; 
+}
+
+button:hover {
+    background-color: #0056b3; 
+}
+
+.contacts, 
+.form{
+    flex-direction: column;
+}
+
+.container {
 body {
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 30vh;
+    height: 95vh;
+}
+
+.contacts{
+    display: inherit;
+    justify-content: left;
+    max-width: 600px; 
+    height: 40vh;
+    gap: 1vh
+}
+
+.grid-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.grid-item {
+    display: inherit;
+    flex-direction: row;
+    gap: 1vh;
+}
+
+.two-col {
+    width: 50%;
+}
+
+.text-area {
+    height: fit-content;
+    min-height: 10vh;
+    max-height: 20vh;
+    width: 100%; 
+    border: 1px solid #ccc;
+    padding: 0.5em; 
+    box-sizing: border-box; 
+    resize: none; 
+}
+
+.one-col,
+.text-area {
+    width: 100%;
+}
+
+.contacts p,
+.contacts strong {
+    font-size: 24px;
+}
     
 }
