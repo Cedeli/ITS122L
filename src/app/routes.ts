@@ -1,9 +1,12 @@
-import {HomeComponent} from './home/home.component';
 import {Routes} from '@angular/router';
+
+// Components
+import {HomeComponent} from './home/home.component';
 import {AboutComponent} from './about/about.component';
 import {LoginComponent} from './login/login.component';
 import {AnnouncementsComponent} from './announcements/announcements.component';
-import { PoliciesFaqComponent } from './policies-faq/policies-faq.component';
+import {PoliciesFaqComponent} from './policies-faq/policies-faq.component';
+import {ContactComponent} from './contact/contact.component';
 
 const routeConfig: Routes = [
   {
@@ -33,7 +36,7 @@ const routeConfig: Routes = [
   },
   {
     path: 'contact',
-    component: HomeComponent,
+    component: ContactComponent,
     title: 'Contact',
   },
   {
