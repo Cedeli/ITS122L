@@ -1,1 +1,19 @@
-<p>manage-submission works!</p>
+
+<section class="manage-submission">
+  <h2>Manage Submission</h2>
+  <form (ngSubmit)="saveSubmission()">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" [(ngModel)]="submission.title" name="title" required>
+    </div>
+    <div class="form-group">
+      <label for="dueDate">Due Date</label>
+      <input type="date" id="dueDate" [(ngModel)]="submission.dueDate" name="dueDate" required>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" [(ngModel)]="submission.description" name="description" required></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">Save Submission</button>
+  </form>
+</section>
