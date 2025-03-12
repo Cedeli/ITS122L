@@ -1,2 +1,43 @@
-<h1> ABOUT IS WORKING </h1>
+<div class="hero-container">
+    <div class="hero-info">
+        <h1>Block Rosary Movement</h1>
+        <p>About Summary stuff - Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Iusto adipisci illo incidunt alias, labore minima omnis voluptatem reprehenderit 
+        rem praesentium, voluptate dolorem facere! Id officia neque quae aperiam nulla hic!</p>
+    </div>
+</div>
+
+<div class="container white multi-col">
+    <div class="mission"> 
+        <h1>MISSION</h1>
+        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus officia aliquid 
+            corrupti dolorum similique quo, vero pariatur odit ad eligendi quas, perspiciatis 
+            qui quam, animi provident. Perferendis inventore eius quibusdam.</p>
+    </div>
+
+    <div class="vision"> 
+        <h1>VISION</h1>
+        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus officia aliquid 
+            corrupti dolorum similique quo, vero pariatur odit ad eligendi quas, perspiciatis 
+            qui quam, animi provident. Perferendis inventore eius quibusdam.</p>
+
+    </div>
+</div>
+
+<div class="container blue single-col">
+    <div class="documents">
+        <h1>LEGAL DOCUMENTS</h1>
+        @for (document of legalDocuments; track document.id) {
+            <div class="document-card">
+                <h2>{{ document.title }}</h2>
+                <p>{{ document.description }}</p>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="container white single-col location">
+    <h1>LOCATION</h1>
+    <img src="/Fairview Map - Chapels - BRMayi.jpg">
+</div>
 

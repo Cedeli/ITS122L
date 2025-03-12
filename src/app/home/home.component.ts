@@ -5,7 +5,6 @@ import {FeaturedEventsComponent} from '../featured-events/featured-events.compon
 import {AnnouncementsComponent} from '../announcements/announcements.component';
 import {AboutSummaryComponent} from '../about-summary/about-summary.component';
 import {QuickLinksComponent} from '../quick-links/quick-links.component';
-import {NavbarComponent} from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-home',
