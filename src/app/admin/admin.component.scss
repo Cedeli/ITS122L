@@ -20,7 +20,9 @@
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
     li {
       a {
         text-decoration: none;
