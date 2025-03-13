@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 export class ManageEventComponent {
   events$: Observable<any[]>; // Observable for events list
   event = {
+    id: '',
     title: '',
     date: '',
     location: '',
@@ -66,6 +67,7 @@ export class ManageEventComponent {
   // Reset form for a new event
   resetForm() {
     this.event = {
+      id: '',
       title: '',
       date: '',
       location: '',
