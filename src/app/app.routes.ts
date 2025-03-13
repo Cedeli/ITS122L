@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { EventComponent } from './event/event.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
 import { RegisterComponent } from './register/register.component';
+import { AccountDetailsComponent } from './account-details/account-details.component';
 import { ContactComponent } from './contact/contact.component';
 import { MembersListComponent } from './members-list/members-list.component';
 
@@ -21,6 +22,7 @@ const routeConfig: Routes = [
   { path: 'members', component: MembersListComponent, title: 'Members', canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent, title: 'Login', },
   { path: 'register', component: RegisterComponent, title: 'Register', },
+  { path: 'account-details', component: AccountDetailsComponent, title: 'Account Details', },
   { path: '**', redirectTo: '/register' }
 ]
 
