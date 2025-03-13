@@ -1,6 +1,6 @@
 
 <!-- Announcement Card -->
-<section class="announcements">
+<div class="announcements">
   <h2> Manage Announcement </h2>
   <div class="announcements-container">
     <div *ngIf="announcements$ | async as announcements; else noAnnouncements">
@@ -21,7 +21,7 @@
       <p>No announcements found.</p>
     </ng-template>
   </div>
-</section>
+</div>
 
 <!-- Create Announcement -->
 <section class="create-announcement">
