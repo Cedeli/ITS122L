@@ -1,0 +1,18 @@
+.members-list {
+    h1 {
+      color: #333;
+    }
+  
+    ul {
+      list-style-type: none;
+      padding: 0;
+  
+      li {
+        background: #f9f9f9;
+        margin: 0.5rem 0;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+      }
+    }
+  }
+
