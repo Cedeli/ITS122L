@@ -10,17 +10,19 @@ import { AdminComponent } from './admin/admin.component';
 import { AccountDetailsComponent } from './account-details/account-details.component';
 import { ContactComponent } from './contact/contact.component';
 import { MembersListComponent } from './members-list/members-list.component';
+import { AnnouncementDetailComponent } from './announcement-detail/announcement-detail.component';
 import { ManageAnnouncementComponent } from './manage-announcement/manage-announcement.component';
 import { ManageEventComponent } from './manage-event/manage-event.component';
-import { ManageInformationComponent } from './manage-information/manage-information.component';
-import { ManageSubmissionComponent } from './manage-submission/manage-submission.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
-import { AnnouncementDetailComponent } from './announcement-detail/announcement-detail.component';
+import { AdminGuard } from './services/admin.guard';
+import { MemberGuard } from './services/member.guard';
+import { InfoComponent } from './info/info.component';
 
 const routeConfig: Routes = [
-  { path: '', redirectTo: '/register', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, title: 'Home' },
   { path: 'about', component: AboutComponent },
+  { path: 'info', component: InfoComponent },
   { path: 'announcements', component: AnnouncementsComponent, title: 'Announcements' },
   { path: 'announcements/:id', component: AnnouncementDetailComponent, title: 'AnnouncementDetail' },
   { path: 'events',  component: EventComponent,  title: 'Events' },
@@ -29,17 +31,19 @@ const routeConfig: Routes = [
   { path: 'login', component: LoginComponent, title: 'Login' },
   { path: 'register', component: RegisterComponent, title: 'Register' },
   { path: 'account-details', component: AccountDetailsComponent, title: 'Account Details', canActivate: [AuthGuard] },
+  { path: 'members', component: MembersListComponent, title: 'Members List', canActivate: [MemberGuard] },
   {
     path: 'admin',
     component: AdminComponent,
     title: 'Admin',
+    canActivate: [AdminGuard],
     children: [
       { path: 'announcement', component: ManageAnnouncementComponent, title: 'Manage Announcement' },
       { path: 'event', component: ManageEventComponent, title: 'Manage Event' },
       { path: 'user', component: ManageUserComponent, title: 'Manage User' }
     ]
   },
-  { path: '**', redirectTo: '/register' }
-];
+  { path: '**', redirectTo: '/home' }
+]
 
 export default routeConfig;

@@ -103,6 +103,30 @@
         cursor: not-allowed;
       }
     }
+
+    &.btn-secondary {
+      background-color: #f0f0f0;
+      color: #333333;
+      border: 1px solid #ccc;
+      &:hover:not(:disabled) {
+        background-color: #e0e0e0;
+        transform: translateY(-2px);
+      }
+    }
+
+    &.btn-danger {
+      background-color: #f44336;
+      color: #ffffff;
+      border: none;
+      &:hover:not(:disabled) {
+        background-color: #d32f2f;
+        transform: translateY(-2px);
+      }
+      &:disabled {
+        background-color: #ef9a9a;
+        cursor: not-allowed;
+      }
+    }
   }
 
   .alert {

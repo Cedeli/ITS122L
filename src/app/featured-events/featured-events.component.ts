@@ -20,24 +20,24 @@ export class FeaturedEventsComponent implements OnInit {
     this.featuredEvents = [
       {
         id: 1,
-        title: 'Rosary Month',
-        date: 'March 2025',
-        description: 'description lorem',
-        imageUrl: 'placeholder.png'
+        title: 'Feast of the Holy Rosary',
+        date: 'October',
+        description: 'living rosary',
+        imageUrl: '/BRM Logo.jpg'
       },
       {
         id: 2,
-        title: 'Community Outreach',
-        date: 'March 7, 2025',
-        description: 'amongusmaongus',
-        imageUrl: 'placeholder.png'
+        title: 'Our Lady of Lourdes',
+        date: 'February 11',
+        description: 'blessing of the sick',
+        imageUrl: '/BRM Logo.jpg'
       },
       {
         id: 3,
-        title: 'Annual General Meeting',
-        date: 'March 7, 2025',
-        description: 'ogmasudsay',
-        imageUrl: 'placeholder.png'
+        title: 'BRM Big Day',
+        date: 'May',
+        description: 'good shepherd feast day',
+        imageUrl: '/BRM Logo.jpg'
       }
     ];
   }
