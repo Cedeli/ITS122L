@@ -3,7 +3,7 @@ export interface Announcement {
   title: string;
   date: string;
   summary: string;
-  content: string;
+  description: string;
   important: boolean;
   author?: string;
   imageUrl?: string | null;

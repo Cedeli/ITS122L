@@ -54,7 +54,7 @@ export class FeaturedAnnouncementsComponent implements OnInit {
           title: data['title'] || '',
           date: formattedDate,
           summary: data['summary'] || '',
-          content: data['content'] || '',
+          description: data['description'] || '',
           important: Boolean(data['important']),
           author: data['author'] || '',
           imageUrl: data['imageUrl'] || null
