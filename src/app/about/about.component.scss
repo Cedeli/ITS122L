@@ -4,7 +4,8 @@
 }
 
 .hero-container {
-    background: linear-gradient(to left, #1d2869 20%, rgba(0, 0, 0, 0)), url('/BRM Logo.jpg');
+    background: linear-gradient(to left, #1d2869 20%, rgba(0, 0, 0, 0)), 
+    url('/BRM Logo.jpg');
     background-repeat: no-repeat;
     color: var(--light-gray);
     height: 95vh;

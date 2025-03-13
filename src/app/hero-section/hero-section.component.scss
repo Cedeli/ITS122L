@@ -1,6 +1,6 @@
 .hero-section {
-  background: url('/placeholder.png') no-repeat center center;
-  color: white;
+  background: url('/BRM Logo.jpg') no-repeat center center;
+  color: white; 
   text-align: center;
   padding: 200px 20px;
   margin-bottom: 50px;
@@ -8,21 +8,47 @@
   .hero-content {
     max-width: 800px;
     margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
 
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
+    // h1 {
+    //   font-size: 3rem;
+    //   margin-bottom: 20px;
+    //   color: white; 
+    //   background-color: #3f51b5;
+    //   padding: 10px; /* Add padding for better spacing */
+    //   border-radius: 5px; /* Add rounded corners */
+    //   // text-shadow: 2px 2px 4px white; /* Add white text shadow */
+    // }
 
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-    }
+    // p {
+    //   font-size: 1.2rem;
+    //   margin-bottom: 30px;
+    //   color: white; /* Change the p color to black */
+    //   background-color: #3f51b5;
+    //   padding: 10px; /* Add padding for better spacing */
+    //   border-radius: 5px; /* Add rounded corners */
+    //   // text-shadow: 2px 2px 4px white; /* Add white text shadow */
+    // }
 
     .hero-buttons {
       display: flex;
       justify-content: center;
       gap: 15px;
+    }
+
+    .hero-buttons a {
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      color: white;
+      background-color: var(--primary-color);
+      transition: all 0.3s ease;
+      margin-top: 25vh; // very bad spacing dont mind it
+
+      &:hover {
+        background-color: var(--primary-color-dark);
+      }
     }
   }
 }
