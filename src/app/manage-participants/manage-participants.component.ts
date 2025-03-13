@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {doc, updateDoc} from '@angular/fire/firestore';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {EventService} from '../services/event.service';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-manage-participants',
@@ -9,27 +9,30 @@ import {EventService} from '../services/event.service';
   styleUrl: './manage-participants.component.scss'
 })
 export class ManageParticipantsComponent implements OnInit{
-  @Input() eventId!: string; // Received from the parent to identify the event
   pendingParticipants: { id: string; name: string; email: string }[] = [];
   approvedParticipants: { id: string; name: string; email: string }[] = [];
 
-  constructor(private eventService: EventService) {}
+  constructor(
+    private eventService: EventService,
+    @Inject(MAT_DIALOG_DATA) public data: { eventId: string } // Injecting eventId from dialog
+  ) {}
+
 
   ngOnInit() {
-    if (!this.eventId) {
+    if (!this.data.eventId) {
       console.error('No Event ID provided');
       return;
     }
 
     // Fetch participants for the given eventId
-    this.fetchParticipants(this.eventId);
+    this.fetchParticipants(this.data.eventId);
   }
+
 
   fetchParticipants(eventId: string) {
     this.eventService.getEvents().subscribe({
       next: (events) => {
-        // Find the event with the given ID
-        const event = events.find(event => event.id === eventId);
+        const event = events.find((e) => e.id === eventId);
         if (event) {
           this.pendingParticipants = event.pendingParticipants ?? [];
           this.approvedParticipants = event.approvedParticipants ?? [];
@@ -42,6 +45,7 @@ export class ManageParticipantsComponent implements OnInit{
       },
     });
   }
+
 
   // Accept participant
   acceptParticipant(user: { id: string; name: string; email: string }) {
@@ -76,7 +80,7 @@ export class ManageParticipantsComponent implements OnInit{
 
   // Update Firestore participants using EventService
   private updateParticipants() {
-    this.eventService.updateEvent(this.eventId, {
+    this.eventService.updateEvent(this.data.eventId, {
       pendingParticipants: this.pendingParticipants,
       approvedParticipants: this.approvedParticipants,
     }).then(() => {

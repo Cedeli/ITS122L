@@ -3,13 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Firestore, collection, addDoc, doc, deleteDoc, updateDoc, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ManageParticipantsComponent } from '../manage-participants/manage-participants.component';
+import { MatDialog } from '@angular/material/dialog';
 import {WebEvent} from '../models/web-event.model';
 
 @Component({
   selector: 'app-manage-event',
   templateUrl: './manage-event.component.html',
   styleUrls: ['./manage-event.component.scss'],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatDialogModule],
 })
 export class ManageEventComponent {
   events$: Observable<any[]>;
@@ -25,9 +28,10 @@ export class ManageEventComponent {
     approvedParticipants: []
   };
 
-  constructor(private firestore: Firestore) {
+
+  constructor(private firestore: Firestore, private dialog: MatDialog) {
     const eventsCollection = collection(this.firestore, 'events');
-    this.events$ = collectionData(eventsCollection, { idField: 'id' });
+    this.events$ = collectionData(eventsCollection, {idField: 'id'});
   }
 
   async saveEvent() {
@@ -36,11 +40,11 @@ export class ManageEventComponent {
 
       if (this.event.id && this.event.id.trim() !== '') {
         const eventDoc = doc(this.firestore, `events/${this.event.id}`);
-        const { id, ...eventData } = this.event;
+        const {id, ...eventData} = this.event;
         await updateDoc(eventDoc, eventData);
         console.log('Event updated successfully!');
       } else {
-        const { id, ...newEventData } = this.event;
+        const {id, ...newEventData} = this.event;
         const docRef = await addDoc(eventsCollection, newEventData);
         this.event.id = docRef.id;
         console.log('Event added successfully with id:', docRef.id);
@@ -53,7 +57,7 @@ export class ManageEventComponent {
   }
 
   editEvent(eventItem: any) {
-    this.event = { ...eventItem };
+    this.event = {...eventItem};
   }
 
   async deleteEvent(eventId: string) {
@@ -77,5 +81,18 @@ export class ManageEventComponent {
       pendingParticipants: [],
       approvedParticipants: []
     };
+  }
+
+  manageParticipants(eventId: string) {
+    const dialogRef = this.dialog.open(ManageParticipantsComponent, {
+      width: '600px',
+      data: {eventId},
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('Dialog result:', result);
+      }
+    });
   }
 }

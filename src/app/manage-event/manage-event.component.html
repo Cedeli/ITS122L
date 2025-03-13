@@ -13,7 +13,7 @@
         </p>
         <button class="btn btn-primary" (click)="editEvent(event)">Edit</button>
         <button class="btn btn-danger" (click)="deleteEvent(event.id)">Delete</button>
-
+        <button class="btn btn-success" (click)="manageParticipants(event.id)">Manage Participants</button>
       </div>
     </div>
     <ng-template #noEvents>
