@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CommonModule} from '@angular/common';
-import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { CommonModule } from '@angular/common';
+import { EventService } from '../services/event.service';
 import { Observable } from 'rxjs';
 
 export interface Event {
@@ -38,24 +38,28 @@ export class EventComponent implements OnInit {
     'December'
   ]
 
-  constructor(private firestore: Firestore) {}
+  constructor(private eventService: EventService) {}
 
   ngOnInit(): void {
     this.fetchEvents();
   }
 
-  async fetchEvents() {
+  fetchEvents() {
     const currentDate = new Date(); // Current date and time
-    try {
-      this.isLoading = true;
+    this.isLoading = true;
+    console.log(currentDate);
 
-      const eventsCollection = collection(this.firestore, 'events');
-      const events$: Observable<Event[]> = collectionData(eventsCollection, {
-        idField: 'id',
-      }) as Observable<Event[]>;
-
-      events$.subscribe((events) => {
+    this.eventService.getEvents().subscribe({
+      next: (events: Event[]) => {
         this.isLoading = false;
+
+        // Log each event's date for debugging
+        events.forEach((event) => {
+          console.log(`Event Date: ${event.date}, Normalized Event Date: ${new Date(event.date).toISOString()}`);
+        });
+
+        // Separate events into upcoming and previous, and sort
+
 
         this.upcomingEvents = events
           .filter((event) => new Date(event.date) >= currentDate)
@@ -64,10 +68,11 @@ export class EventComponent implements OnInit {
         this.previousEvents = events
           .filter((event) => new Date(event.date) < currentDate)
           .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-      });
-    } catch (e) {
-      console.error('Error fetching events:', e);
-      this.isLoading = false;
-    }
+      },
+      error: (err) => {
+        console.error('Error fetching events:', err);
+        this.isLoading = false;
+      }
+    });
   }
 }
