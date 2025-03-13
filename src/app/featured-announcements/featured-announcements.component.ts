@@ -1,43 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Firestore, collection, query, orderBy, getDocs, Timestamp } from '@angular/fire/firestore';
+import { Firestore, collection, query, orderBy, limit, getDocs, DocumentData, Timestamp } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
 import { Announcement } from '../models/announcement.model';
 
 @Component({
-  selector: 'app-announcements',
-  templateUrl: './announcements.component.html',
+  selector: 'app-featured-announcements',
+  templateUrl: './featured-announcements.component.html',
   imports: [
     RouterLink,
     CommonModule
   ],
-  styleUrls: ['./announcements.component.scss'],
+  styleUrls: ['./featured-announcements.component.scss'],
   standalone: true
 })
-export class AnnouncementsComponent implements OnInit {
-  public announcements: Announcement[] = [];
-  public isLoading = true;
+export class FeaturedAnnouncementsComponent implements OnInit {
+  public recentAnnouncements: Announcement[] = [];
 
   constructor(private firestore: Firestore) {}
 
   ngOnInit() {
-    this.fetchAnnouncements();
+    this.fetchRecentAnnouncements();
   }
 
-  async fetchAnnouncements() {
+  async fetchRecentAnnouncements() {
     try {
-      this.isLoading = true;
       const announcementsRef = collection(this.firestore, 'announcements');
       const q = query(
         announcementsRef,
-        orderBy('date', 'desc')
+        orderBy('date', 'desc'),
+        limit(3)
       );
 
       const querySnapshot = await getDocs(q);
-      this.announcements = querySnapshot.docs.map(doc => {
+      this.recentAnnouncements = querySnapshot.docs.map(doc => {
         const data = doc.data();
 
-        // Format the date
         let formattedDate = '';
         const dateField = data['date'];
 
@@ -64,8 +62,6 @@ export class AnnouncementsComponent implements OnInit {
       });
     } catch (error) {
       console.error('Error fetching announcements:', error);
-    } finally {
-      this.isLoading = false;
     }
   }
 }

@@ -1,0 +1,130 @@
+// Announcement Panel
+.announcements {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f6f8;
+  border-radius: 8px;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+  }
+
+  .announcements-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+  }
+
+  .announcement-card {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+
+    .important-tag {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: #e74c3c;
+      color: #fff;
+      font-size: 0.75em;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 3px;
+    }
+
+    h3 {
+      margin-top: 0;
+      color: #34495e;
+    }
+
+    p {
+      margin-bottom: 1em;
+      color: #7f8c8d;
+      font-size: 0.9em;
+    }
+
+    button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9em;
+      margin-right: 10px;
+    }
+
+    .btn-primary {
+      background-color: #3498db;
+      color: #ffffff;
+    }
+
+    .btn-danger {
+      background-color: #e74c3c;
+      color: #ffffff;
+    }
+  }
+}
+
+.create-announcement {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2c3e50;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #34495e;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #bdc3c7;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    input[type="checkbox"] {
+      width: auto;
+    }
+
+    textarea {
+      min-height: 10vh;
+      max-height: 20vh;
+      resize: none;
+      box-sizing: border-box;
+    }
+  }
+
+  button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: #ffffff;
+  }
+}

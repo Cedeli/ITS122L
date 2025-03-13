@@ -1,0 +1,120 @@
+[debug] [2025-03-13T05:28:24.842Z] ----------------------------------------------------------------------
+[debug] [2025-03-13T05:28:24.844Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\elmwo\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2025-03-13T05:28:24.844Z] CLI Version:   13.33.0
+[debug] [2025-03-13T05:28:24.844Z] Platform:      win32
+[debug] [2025-03-13T05:28:24.844Z] Node Version:  v20.18.0
+[debug] [2025-03-13T05:28:24.844Z] Time:          Thu Mar 13 2025 13:28:24 GMT+0800 (Singapore Standard Time)
+[debug] [2025-03-13T05:28:24.844Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-03-13T05:28:24.989Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-03-13T05:28:24.989Z] > authorizing via signed-in user (edillorluke@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\elmwo\OneDrive\Desktop\SchoolStuff\3rd-Year\Term 2\WebSys\ITS122L
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2025-03-13T05:28:35.014Z] Using project from CLI flag: brmo
+[debug] [2025-03-13T05:28:35.015Z] Checked if tokens are valid: false, expires at: 1741842149244
+[debug] [2025-03-13T05:28:35.015Z] Checked if tokens are valid: false, expires at: 1741842149244
+[debug] [2025-03-13T05:28:35.015Z] > refreshing access token with scopes: []
+[debug] [2025-03-13T05:28:35.017Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-03-13T05:28:35.017Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-03-13T05:28:35.193Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-03-13T05:28:35.193Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-03-13T05:28:35.198Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/brmo [none]
+[debug] [2025-03-13T05:28:35.677Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/brmo 403
+[debug] [2025-03-13T05:28:35.677Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/brmo {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2025-03-13T05:28:35.678Z] Request to https://firebase.googleapis.com/v1beta1/projects/brmo had HTTP Error: 403, The caller does not have permission
+[debug] [2025-03-13T05:28:35.782Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/brmo had HTTP Error: 403, The caller does not have permission
+    at responseToError (C:\Users\elmwo\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:52:12)
+    at RetryOperation._fn (C:\Users\elmwo\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:312:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to get Firebase project brmo. Please make sure the project exists and your account has permission to access it.
+[debug] [2025-03-13T05:30:33.522Z] ----------------------------------------------------------------------
+[debug] [2025-03-13T05:30:33.525Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\elmwo\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2025-03-13T05:30:33.525Z] CLI Version:   13.33.0
+[debug] [2025-03-13T05:30:33.525Z] Platform:      win32
+[debug] [2025-03-13T05:30:33.525Z] Node Version:  v20.18.0
+[debug] [2025-03-13T05:30:33.525Z] Time:          Thu Mar 13 2025 13:30:33 GMT+0800 (Singapore Standard Time)
+[debug] [2025-03-13T05:30:33.525Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-03-13T05:30:33.676Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-03-13T05:30:33.676Z] > authorizing via signed-in user (edillorluke@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\elmwo\OneDrive\Desktop\SchoolStuff\3rd-Year\Term 2\WebSys\ITS122L
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2025-03-13T05:30:42.753Z] Using project from CLI flag: brmo
+[debug] [2025-03-13T05:30:42.754Z] Checked if tokens are valid: true, expires at: 1741847314193
+[debug] [2025-03-13T05:30:42.754Z] Checked if tokens are valid: true, expires at: 1741847314193
+[debug] [2025-03-13T05:30:42.755Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/brmo [none]
+[debug] [2025-03-13T05:30:43.286Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/brmo 403
+[debug] [2025-03-13T05:30:43.286Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/brmo {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2025-03-13T05:30:43.286Z] Request to https://firebase.googleapis.com/v1beta1/projects/brmo had HTTP Error: 403, The caller does not have permission
+[debug] [2025-03-13T05:30:43.409Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/brmo had HTTP Error: 403, The caller does not have permission
+    at responseToError (C:\Users\elmwo\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:52:12)
+    at RetryOperation._fn (C:\Users\elmwo\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:312:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to get Firebase project brmo. Please make sure the project exists and your account has permission to access it.
+[debug] [2025-03-13T05:30:49.050Z] ----------------------------------------------------------------------
+[debug] [2025-03-13T05:30:49.052Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\elmwo\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2025-03-13T05:30:49.053Z] CLI Version:   13.33.0
+[debug] [2025-03-13T05:30:49.053Z] Platform:      win32
+[debug] [2025-03-13T05:30:49.053Z] Node Version:  v20.18.0
+[debug] [2025-03-13T05:30:49.053Z] Time:          Thu Mar 13 2025 13:30:49 GMT+0800 (Singapore Standard Time)
+[debug] [2025-03-13T05:30:49.053Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-03-13T05:30:49.201Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-03-13T05:30:49.201Z] > authorizing via signed-in user (edillorluke@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\elmwo\OneDrive\Desktop\SchoolStuff\3rd-Year\Term 2\WebSys\ITS122L
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+

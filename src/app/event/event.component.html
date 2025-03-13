@@ -4,7 +4,7 @@
     <!-- Upcomming Events -->
     <div class="section-header">
         <h2>Featured & Upcomming Events</h2>
-        <select id="monthFilter">
+        <select>
             <option value="">All Months</option>
             <option value="January">January</option>
             <option value="February">February</option>
@@ -20,7 +20,7 @@
             <option value="December">December</option>
         </select>
     </div>
-    <div class="card-holder"> 
+    <div class="card-holder">
         <div class="events-container">
             <div *ngFor="let event of eventList;" class="event-card">
               <div class="event-image">
@@ -54,7 +54,7 @@
             <option value="December">December</option>
         </select>
     </div>
-    <div class="card-holder"> 
+    <div class="card-holder">
         <div class="events-container">
             <div *ngFor="let event of eventHistory;" class="event-card">
               <div class="event-image">

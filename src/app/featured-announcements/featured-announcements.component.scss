@@ -1,33 +1,3 @@
-.page-container {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.page-header {
-  margin-bottom: 30px;
-
-  h1 {
-    color: #333;
-    margin: 0;
-  }
-}
-
-.loading-indicator {
-  text-align: center;
-  padding: 40px;
-  width: 100%;
-  grid-column: 1 / -1;
-}
-
-.no-announcements {
-  text-align: center;
-  padding: 40px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  grid-column: 1 / -1;
-}
-
 .announcements-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -81,7 +51,9 @@
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-  .announcements-container {
-    grid-template-columns: 1fr;
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 }

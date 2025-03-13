@@ -1,0 +1,17 @@
+<body class="admin-page">
+  <div class="admin-dashboard">
+    <header class="admin-header">
+      <a [routerLink]="['/']"><h1>Admin Dashboard</h1></a>
+    </header>
+    <nav class="admin-nav">
+      <ul>
+        <li><a [routerLink]="['/admin/user']">Manage User</a></li>
+        <li><a [routerLink]="['/admin/event']">Manage Event</a></li>
+        <li><a [routerLink]="['/admin/announcement']">Manage Announcement</a></li>
+      </ul>
+    </nav>
+    <main class="admin-content">
+      <router-outlet />
+    </main>
+  </div>
+</body>
