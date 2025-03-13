@@ -14,17 +14,17 @@ export class AboutComponent {
     {
       id: 1,
       title: 'Document Title #1',
-      description: 'Document Description #1',
+      description: 'To be added by admin',
     },
     {
       id: 2,
       title: 'Document Title #2',
-      description: 'Document Description #2',
+      description: 'To be added by admin',
     },
     {
       id: 3,
       title: 'Document Title #3',
-      description: 'Document Description #3',
+      description: 'To be added by admin',
     }
   ];
 }
