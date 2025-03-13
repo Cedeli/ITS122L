@@ -5,8 +5,8 @@ import { Firestore, doc, getDoc, updateDoc } from '@angular/fire/firestore';
 import { AuthService } from '../services/auth.service';
 
 interface User {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
   address: string;
   age: number;
@@ -28,8 +28,8 @@ interface User {
 })
 export class ManageUserComponent implements OnInit {
   user: User = {
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     email: '',
     address: '',
     age: 0,
@@ -50,15 +50,15 @@ export class ManageUserComponent implements OnInit {
       this.authService.getCombinedUserData().subscribe(userData => {
         if (userData) {
           this.user = {
-            firstName: userData.first_name || '',
-            lastName: userData.last_name || '',
+            first_name: userData.first_name || '',
+            last_name: userData.last_name || '',
             email: userData.email || '',
             address: userData.address || '',
             age: userData.age || 0,
             birthDate: userData.birth_date || '',
             phoneNumber: userData.phone_number || '',
             role: userData.role || 'user',
-            uid: userData.uid || '' // Use uid here
+            uid: userData.uid || '' 
           };
         } else {
           console.log('No user is currently logged in.');
@@ -75,6 +75,7 @@ export class ManageUserComponent implements OnInit {
         const userDocRef = doc(this.firestore, 'users', this.user.uid);
         await updateDoc(userDocRef, { ...this.user });
         console.log('User data updated successfully.');
+        alert('User data updated successfully.');
       } else {
         console.log('No uid found for the user.');
       }
