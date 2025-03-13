@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+// import { AngularFirestore } from '@angular/fire/compat/firestore';
+// import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 interface Member {
@@ -11,23 +11,19 @@ interface Member {
 @Component({
   selector: 'app-members-list',
   imports: [
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './members-list.component.html',
   styleUrls: ['./members-list.component.scss']
 })
 export class MembersListComponent implements OnInit {
-  members: Member[] = [];
+  members: Member[] = [
+    { name: 'John Doe', email: 'email@.com' },
+  ];
 
-  constructor(private firestore: AngularFirestore) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.getMembers();
   }
 
-  getMembers(): void {
-    this.firestore.collection<Member>('members').valueChanges().subscribe(data => {
-      this.members = data;
-    });
-  }
 }

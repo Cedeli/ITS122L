@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NavbarService } from './services/navbar.service';
 import { filter } from 'rxjs';
@@ -14,6 +14,8 @@ import { filter } from 'rxjs';
   ]
 })
 export class AppComponent {
+  title = 'BRMO';
+
   constructor(private router: Router, public nav: NavbarService) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)

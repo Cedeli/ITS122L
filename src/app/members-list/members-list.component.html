@@ -1,1 +1,8 @@
-<p>members-list works!</p>
+<div class="members-list">
+    <h1>Members List</h1>
+    <ul>
+      <li *ngFor="let member of members">
+        {{ member.name }} - {{ member.email }}
+      </li>
+    </ul>
+  </div>
