@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-manage-announcement',
@@ -28,7 +29,12 @@ export class ManageAnnouncementComponent {
     "Event page Information", "About Page Information", "Contact Page Information"
   ];
 
-  constructor(private firestore: Firestore) {
+  announcements$: Observable<any[]> | undefined;
+
+  constructor(private firestore: Firestore) {}
+
+  ngOnInit(): void {
+    this.loadAnnouncements();
   }
 
   saveAnnouncement() {
@@ -43,5 +49,10 @@ export class ManageAnnouncementComponent {
       .catch((error: any) => {
         console.error('Error saving announcement: ', error);
       });
+  }
+
+  loadAnnouncements() {
+    const announcementsCollection = collection(this.firestore, 'announcements');
+    this.announcements$ = collectionData(announcementsCollection, { idField: 'id' });
   }
 }

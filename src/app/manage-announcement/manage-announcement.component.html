@@ -1,7 +1,32 @@
-<section class="manage-announcement">
+
+<!-- Announcement Card -->
+<section class="announcements">
+  <h2> Manage Announcement </h2>
+  <div class="announcements-container">
+    <div *ngIf="announcements$ | async as announcements; else noAnnouncements">
+      <div *ngFor="let announcement of announcements" class="announcement-card">
+        @if (announcement.important) {
+          <span class="important-tag">Important</span>
+        }
+        <h3>{{ announcement.title }}</h3>
+        <p><strong>Date:</strong> {{ announcement.date }}</p>
+        <p><strong>Type:</strong> {{ announcement.type }}</p>
+        <p><strong>Description:</strong> {{ announcement.description }}</p>
+        <p><strong>Summary:</strong> {{ announcement.summary }}</p>
+        <button class="btn btn-primary">Edit</button>
+        <button class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+    <ng-template #noAnnouncements>
+      <p>No announcements found.</p>
+    </ng-template>
+  </div>
+</section>
+
+<!-- Create Announcement -->
+<section class="create-announcement">
   <h2>Create Announcement</h2>
   <form (ngSubmit)="saveAnnouncement()">
-
     <div class="form-group">
       <label for="title">Title</label>
       <input type="text" id="title" [(ngModel)]="announcement.title" name="title" required>
