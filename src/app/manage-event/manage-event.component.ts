@@ -1,72 +1,75 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {addDoc, collection, Firestore} from '@angular/fire/firestore';
-import {getStorage} from '@angular/fire/storage';
+import { Firestore, collection, addDoc, doc, deleteDoc, updateDoc, collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-manage-event',
-  imports: [
-    CommonModule,
-    FormsModule,
-  ],
   templateUrl: './manage-event.component.html',
-  styleUrls: ['./manage-event.component.scss']
+  styleUrls: ['./manage-event.component.scss'],
+  imports: [CommonModule, FormsModule],
 })
-
 export class ManageEventComponent {
+  events$: Observable<any[]>; // Observable for events list
   event = {
     title: '',
     date: '',
     location: '',
     description: '',
-    imgsrc: null,
   };
 
-  file?: File;
-  isUploading = false;
-  uploadProgress = 0;
-
-  constructor(private firestore: Firestore) {}
-
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.file = file;
-    }
+  constructor(private firestore: Firestore) {
+    const eventsCollection = collection(this.firestore, 'events');
+    this.events$ = collectionData(eventsCollection, { idField: 'id' }); // Fetch events and include document ID
   }
 
+  // Save (add or update) an event
   async saveEvent() {
-
-    if (!this.file) {
-      alert('Please select an image to upload.');
-      return;
-    }
-
-    this.isUploading = true;
-
     try {
-      const storage = getStorage();
-      const filePath = `events/${this.file.name}`;
       const eventsCollection = collection(this.firestore, 'events');
-      await addDoc(eventsCollection, this.event);
-      console.log('Event saved successfully!');
 
+      if (this.event.id) {
+        // If event ID exists, update the existing event
+        const eventDoc = doc(this.firestore, `events/${this.event.id}`);
+        await updateDoc(eventDoc, this.event);
+        console.log('Event updated successfully!');
+      } else {
+        // If no ID, create a new event
+        await addDoc(eventsCollection, this.event);
+        console.log('Event added successfully!');
+      }
+
+      // Reset form after saving
       this.resetForm();
     } catch (error) {
       console.error('Error saving event:', error);
     }
   }
 
-  // Reset the form for a new event
+  // Edit an existing event
+  editEvent(eventItem: any) {
+    this.event = { ...eventItem }; // Prepopulate form with selected event data
+  }
+
+  // Delete an event
+  async deleteEvent(eventId: string) {
+    try {
+      const eventDoc = doc(this.firestore, `events/${eventId}`);
+      await deleteDoc(eventDoc);
+      console.log('Event deleted successfully!');
+    } catch (error) {
+      console.error('Error deleting event:', error);
+    }
+  }
+
+  // Reset form for a new event
   resetForm() {
     this.event = {
       title: '',
       date: '',
       location: '',
       description: '',
-      imgsrc: null,
     };
   }
-
 }
