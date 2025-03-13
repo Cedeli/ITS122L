@@ -96,7 +96,7 @@
               }
             ],
             "styles": [
-              "src/global-styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }

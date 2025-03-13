@@ -16,7 +16,7 @@ import { DateService } from '../services/date.service';
   standalone: true
 })
 export class AnnouncementsComponent implements OnInit {
-  public announcements: Announcement[] = [];
+  public announcements: ({ id: string; title: string; date: string; summary: string; important: boolean })[] = [];
   public isLoading = true;
 
   constructor(
