@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Firestore, doc, getDoc, updateDoc, collection, collectionData } from '@angular/fire/firestore';
-import { AuthService } from '../services/auth.service';
+import { Firestore, doc, updateDoc, deleteDoc, collection, collectionData, addDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
 interface User {
   first_name: string;
@@ -19,17 +18,17 @@ interface User {
 
 @Component({
   selector: 'app-manage-user',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-  ],
   templateUrl: './manage-user.component.html',
+  imports: [
+    AsyncPipe,
+    NgIf,
+    NgForOf,
+    FormsModule
+  ],
   styleUrls: ['./manage-user.component.scss']
 })
 export class ManageUserComponent implements OnInit {
   users$: Observable<User[]>;
-  selectedUser: User | null = null;
   user: User = {
     first_name: '',
     last_name: '',
@@ -38,22 +37,20 @@ export class ManageUserComponent implements OnInit {
     age: 0,
     birthDate: '',
     phoneNumber: '',
-    role: 'user', // Default role
-    uid: '' // uid documentID
+    role: 'user',
+    uid: ''
   };
   editing: boolean = false;
 
-  constructor(private firestore: Firestore, private authService: AuthService) {
+  constructor(private firestore: Firestore) {
     const usersCollection = collection(this.firestore, 'users');
     this.users$ = collectionData(usersCollection, { idField: 'uid' }) as Observable<User[]>;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  loadUserData(user: User): void {
-    this.selectedUser = user;
-    this.user = { ...user };
+  editUser(u: User): void {
+    this.user = { ...u };
     this.editing = true;
   }
 
@@ -62,20 +59,37 @@ export class ManageUserComponent implements OnInit {
       if (this.user.uid) {
         const userDocRef = doc(this.firestore, 'users', this.user.uid);
         await updateDoc(userDocRef, { ...this.user });
-        console.log('User data updated successfully.');
-        alert('User data updated successfully.');
-        this.editing = false;
+        console.log('User updated successfully.');
       } else {
-        console.log('No uid found for the user.');
+        const usersCollection = collection(this.firestore, 'users');
+        const docRef = await addDoc(usersCollection, this.user);
+        this.user.uid = docRef.id;
+        console.log('User created with id:', docRef.id);
+      }
+      this.resetForm();
+    } catch (error) {
+      console.error('Error saving user:', error);
+    }
+  }
+
+  async deleteUser(uid: string): Promise<void> {
+    try {
+      const userDocRef = doc(this.firestore, 'users', uid);
+      await deleteDoc(userDocRef);
+      console.log('User deleted successfully.');
+      if (this.user.uid === uid) {
+        this.resetForm();
       }
     } catch (error) {
-      console.error('Error updating user data:', error);
+      console.error('Error deleting user:', error);
     }
   }
 
   cancelEdit(): void {
-    this.editing = false;
-    this.selectedUser = null;
+    this.resetForm();
+  }
+
+  resetForm(): void {
     this.user = {
       first_name: '',
       last_name: '',
@@ -87,5 +101,6 @@ export class ManageUserComponent implements OnInit {
       role: 'user',
       uid: ''
     };
+    this.editing = false;
   }
 }

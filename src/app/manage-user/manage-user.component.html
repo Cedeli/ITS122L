@@ -1,74 +1,84 @@
-<section class="manage-user">
-  <h2>Manage User</h2>
-
-  <div *ngIf="!editing; else editForm">
-    <h3>Select a User to Edit</h3>
-    <ul>
-      <li *ngFor="let user of users$ | async" (click)="loadUserData(user)" style="cursor: pointer;">
-        {{user.first_name}} {{user.last_name}} ({{user.email}})
-      </li>
-    </ul>
+<div class="user">
+  <h2>Manage Users</h2>
+  <div class="users-container">
+    <div *ngIf="users$ | async as users; else noUsers">
+      <div *ngFor="let u of users" class="user-card">
+        <h3>{{ u.first_name }} {{ u.last_name }}</h3>
+        <p><strong>Email:</strong> {{ u.email }}</p>
+        <p><strong>Role:</strong> {{ u.role }}</p>
+        <p><strong>Phone:</strong> {{ u.phoneNumber }}</p>
+        <button class="btn btn-primary" (click)="editUser(u)">Edit</button>
+        <button class="btn btn-danger" (click)="deleteUser(u.uid)">Delete</button>
+      </div>
+    </div>
+    <ng-template #noUsers>
+      <p>No users found.</p>
+    </ng-template>
   </div>
+</div>
 
-  <ng-template #editForm>
-    <h3>Edit User</h3>
-    <form (ngSubmit)="saveUser()">
+<section class="manage-user">
+  <h2>Create or Edit User</h2>
+  <form (ngSubmit)="saveUser()">
+    <div class="form-group">
+      <label for="uid">User ID (Optional)</label>
+      <input type="text" id="uid" [(ngModel)]="user.uid" name="uid" [readonly]="!!user.uid">
+    </div>
 
-      <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input type="text" id="firstName" [(ngModel)]="user.first_name" name="firstName">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" [(ngModel)]="user.first_name" name="firstName" required>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" [(ngModel)]="user.last_name" name="lastName" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" [(ngModel)]="user.email" name="email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input type="text" id="address" [(ngModel)]="user.address" name="address">
+    </div>
+
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input type="number" id="age" [(ngModel)]="user.age" name="age">
+    </div>
+
+    <div class="form-group">
+      <label for="birthDate">Birth Date</label>
+      <input type="date" id="birthDate" [(ngModel)]="user.birthDate" name="birthDate">
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number</label>
+      <input type="tel" id="phoneNumber" [(ngModel)]="user.phoneNumber" name="phoneNumber">
+    </div>
+
+    <div class="form-group">
+      <label>Role</label>
+      <div class="radio-group">
+        <label>
+          <input type="radio" value="user" [(ngModel)]="user.role" name="role">
+          User
+        </label>
+        <label>
+          <input type="radio" value="member" [(ngModel)]="user.role" name="role">
+          Member
+        </label>
+        <label>
+          <input type="radio" value="admin" [(ngModel)]="user.role" name="role">
+          Admin
+        </label>
       </div>
+    </div>
 
-      <div class="form-group">
-        <label for="lastName">Last Name</label>
-        <input type="text" id="lastName" [(ngModel)]="user.last_name" name="lastName">
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" [(ngModel)]="user.email" name="email" required>
-      </div>
-
-      <div class="form-group">
-        <label for="address">Address</label>
-        <input type="text" id="address" [(ngModel)]="user.address" name="address">
-      </div>
-
-      <div class="form-group">
-        <label for="age">Age</label>
-        <input type="number" id="age" [(ngModel)]="user.age" name="age">
-      </div>
-
-      <div class="form-group">
-        <label for="birthDate">Birth Date</label>
-        <input type="date" id="birthDate" [(ngModel)]="user.birthDate" name="birthDate">
-      </div>
-
-      <div class="form-group">
-        <label for="phoneNumber">Phone Number</label>
-        <input type="tel" id="phoneNumber" [(ngModel)]="user.phoneNumber" name="phoneNumber">
-      </div>
-
-      <div class="form-group">
-        <label>Role</label>
-        <div class="radio-group">
-          <label>
-            <input type="radio" value="user" [(ngModel)]="user.role" name="role">
-            User
-          </label>
-          <label>
-            <input type="radio" value="member" [(ngModel)]="user.role" name="role">
-            Member
-          </label>
-          <label>
-            <input type="radio" value="admin" [(ngModel)]="user.role" name="role">
-            Admin
-          </label>
-        </div>
-      </div>
-
-      <button class="btn btn-primary" type="submit">Save Edits to User</button>
-      <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Back</button>
-    </form>
-  </ng-template>
+    <button class="btn btn-primary" type="submit">Save User</button>
+    <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+  </form>
 </section>

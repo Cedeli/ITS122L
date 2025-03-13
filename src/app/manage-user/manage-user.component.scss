@@ -1,3 +1,63 @@
+.user {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f6f8;
+  border-radius: 8px;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+  }
+
+  .users-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+  }
+
+  .user-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+
+    h3 {
+      margin-top: 0;
+      color: #34495e;
+    }
+
+    p {
+      margin-bottom: 1em;
+      color: #7f8c8d;
+      font-size: 0.9em;
+    }
+
+    button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9em;
+      margin-right: 10px;
+    }
+
+    .btn-primary {
+      background-color: #3498db;
+      color: #ffffff;
+    }
+
+    .btn-danger {
+      background-color: #e74c3c;
+      color: #ffffff;
+    }
+  }
+}
+
+/* Manage User Form Section */
 .manage-user {
   max-width: 800px;
   margin: 20px auto;
@@ -21,12 +81,14 @@
       color: #34495e;
     }
 
-    input {
+    input,
+    textarea {
       width: 100%;
       padding: 12px;
       border: 1px solid #bdc3c7;
       border-radius: 5px;
       font-size: 16px;
+      resize: none;
     }
   }
 
@@ -55,16 +117,16 @@
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+    margin-bottom: 10px;
+  }
 
-    // back button
-    &:last-child { 
-      background-color: #777; 
-      color: white; 
-      margin-top: 10px; 
+  .btn-primary {
+    background-color: #3498db;
+    color: #ffffff;
+  }
 
-      &:hover {
-        background-color: #555; 
-      }
-    }
+  .btn-secondary {
+    background-color: #777;
+    color: #ffffff;
   }
 }
