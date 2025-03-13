@@ -1,0 +1,25 @@
+<div class="members-list">
+    <h1>Members List</h1>
+    <ul>
+      <li *ngFor="let user of users$ | async">
+        <div class="member-info">
+          <div class="member-details">
+            <h2>{{ user.name }}</h2>
+            <p>Email: {{ user.email }}</p>
+            <p>Role: {{ user.role }}</p>
+          </div>
+          <div class="member-actions">
+            <button (click)="viewDetails(user)">View Details</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  
+    <div *ngIf="selectedUser">
+      <h2>User Details</h2>
+      <p>Address: {{ selectedUser.address }}</p>
+      <p>Age: {{ selectedUser.age }}</p>
+      <p>First Name: {{ selectedUser.first_name }}</p>
+      <p>Last Name: {{ selectedUser.last_name }}</p>
+    </div>
+  </div>
