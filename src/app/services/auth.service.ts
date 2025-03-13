@@ -15,8 +15,7 @@ import {
   User as FirebaseUser
 } from '@angular/fire/auth';
 import { doc, Firestore, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
-import { from, map, Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { from, map, Observable, of, switchMap } from 'rxjs';
 import { User } from '../models/user.model';
 
 /**
@@ -73,9 +72,33 @@ export class AuthService {
     return from(getDoc(userRef)).pipe(
       map(docSnap => {
         if (docSnap.exists()) {
-          return docSnap.data() as User;
+          const userData = docSnap.data() as User;
+          return { ...userData, uid: docSnap.id }; // Use uid here
         } else {
           return null;
+        }
+      })
+    );
+  }
+
+  /**
+   * Gets the current user with custom data from Firestore database.
+   *
+   * Implementation details:
+   * - Uses getCurrentUser() to get the current Firebase user
+   * - Uses switchMap() to chain the getCurrentUser() Observable with the getUserData() Observable
+   * - If a user is authenticated, it retrieves the user's custom data from Firestore
+   * - If no user is authenticated, it returns an Observable of null
+   *
+   * @returns Observable containing the current user with custom data or null if no user is authenticated
+   */
+  getCombinedUserData(): Observable<User | null> {
+    return this.getCurrentUser().pipe(
+      switchMap(user => {
+        if (user) {
+          return this.getUserData(user.uid);
+        } else {
+          return of(null);
         }
       })
     );

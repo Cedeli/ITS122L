@@ -15,7 +15,6 @@ import { ManageEventComponent } from './manage-event/manage-event.component';
 import { ManageInformationComponent } from './manage-information/manage-information.component';
 import { ManageSubmissionComponent } from './manage-submission/manage-submission.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
-import { AuthGuard } from './services/auth.guard';
 import { AnnouncementDetailComponent } from './announcement-detail/announcement-detail.component';
 
 const routeConfig: Routes = [
