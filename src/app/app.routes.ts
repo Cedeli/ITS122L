@@ -24,6 +24,7 @@ const routeConfig: Routes = [
   { path: 'announcements', component: AnnouncementsComponent, title: 'Announcements' },
   { path: 'announcements/:id', component: AnnouncementDetailComponent, title: 'AnnouncementDetail' },
   { path: 'events',  component: EventComponent,  title: 'Events' },
+  { path: 'members-list', component: MembersListComponent, title: 'Members List', canActivate: [AuthGuard] },
   { path: 'contact',  component: ContactComponent,  title: 'Contact' },
   { path: 'login', component: LoginComponent, title: 'Login' },
   { path: 'register', component: RegisterComponent, title: 'Register' },
