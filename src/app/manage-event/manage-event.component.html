@@ -2,14 +2,17 @@
   <h2>Manage Events</h2>
   <div class="events-container">
     <div *ngIf="events$ | async as events; else noEvents">
-      <div *ngFor="let eventItem of events" class="event-card">
-        <h3>{{ eventItem.title }}</h3>
-        <p><strong>Date:</strong> {{ eventItem.date }}</p>
-        <p><strong>Location:</strong> {{ eventItem.location }}</p>
-        <p><strong>Description:</strong> {{ eventItem.description }}</p>
-        <p *ngIf="eventItem.imageUrl"><strong>Image URL:</strong> <a href="{{ eventItem.imageUrl }}" target="_blank">{{ eventItem.imageUrl }}</a></p>
-        <button class="btn btn-primary" (click)="editEvent(eventItem)">Edit</button>
-        <button class="btn btn-danger" (click)="deleteEvent(eventItem.id)">Delete</button>
+      <div *ngFor="let event of events" class="event-card">
+        <h3>{{ event.title }}</h3>
+        <p><strong>Date:</strong> {{ event.date }}</p>
+        <p><strong>Location:</strong> {{ event.location }}</p>
+        <p><strong>Description:</strong> {{ event.description }}</p>
+        <p>
+          <strong>Image URL:</strong>
+          <a [href]="event.imageUrl" target="_blank">{{ event.imageUrl }}</a>
+        </p>
+        <button class="btn btn-primary" (click)="editEvent(event)">Edit</button>
+        <button class="btn btn-danger" (click)="deleteEvent(event.id)">Delete</button>
       </div>
     </div>
     <ng-template #noEvents>
@@ -18,56 +21,38 @@
   </div>
 </div>
 
+<!-- Create or Edit Event Form -->
 <section class="manage-event">
   <h2>Create or Edit Event</h2>
   <form (ngSubmit)="saveEvent()">
     <div class="form-group">
-      <label for="title">Title</label>
-      <input
-        type="text"
-        id="title"
-        [(ngModel)]="event.title"
-        name="title"
-        required
-      />
+      <label for="id">ID (Optional)</label>
+      <input type="text" id="id" [(ngModel)]="event.id" name="id">
     </div>
+
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" [(ngModel)]="event.title" name="title" required>
+    </div>
+
     <div class="form-group">
       <label for="date">Date</label>
-      <input
-        type="date"
-        id="date"
-        [(ngModel)]="event.date"
-        name="date"
-        required
-      />
+      <input type="date" id="date" [(ngModel)]="event.date" name="date" required>
     </div>
+
     <div class="form-group">
       <label for="location">Location</label>
-      <input
-        type="text"
-        id="location"
-        [(ngModel)]="event.location"
-        name="location"
-        required
-      />
+      <input type="text" id="location" [(ngModel)]="event.location" name="location" required>
     </div>
+
     <div class="form-group">
       <label for="description">Description</label>
-      <textarea
-        id="description"
-        [(ngModel)]="event.description"
-        name="description"
-        required
-      ></textarea>
+      <textarea id="description" [(ngModel)]="event.description" name="description" required></textarea>
     </div>
+
     <div class="form-group">
       <label for="imageUrl">Image URL</label>
-      <input
-        type="url"
-        id="imageUrl"
-        [(ngModel)]="event.imageUrl"
-        name="imageUrl"
-      />
+      <input type="text" id="imageUrl" [(ngModel)]="event.imageUrl" name="imageUrl">
     </div>
 
     <button class="btn btn-primary" type="submit">Save Event</button>

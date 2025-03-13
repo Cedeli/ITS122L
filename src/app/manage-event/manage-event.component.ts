@@ -12,7 +12,9 @@ import { Observable } from 'rxjs';
 })
 export class ManageEventComponent {
   events$: Observable<any[]>;
+
   event: any = {
+    id: '',
     title: '',
     date: '',
     location: '',
@@ -29,7 +31,7 @@ export class ManageEventComponent {
     try {
       const eventsCollection = collection(this.firestore, 'events');
 
-      if (this.event.id) {
+      if (this.event.id && this.event.id.trim() !== '') {
         const eventDoc = doc(this.firestore, `events/${this.event.id}`);
         const { id, ...eventData } = this.event;
         await updateDoc(eventDoc, eventData);
@@ -63,6 +65,7 @@ export class ManageEventComponent {
 
   resetForm() {
     this.event = {
+      id: '',
       title: '',
       date: '',
       location: '',
