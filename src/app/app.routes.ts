@@ -16,11 +16,13 @@ import { ManageInformationComponent } from './manage-information/manage-informat
 import { ManageSubmissionComponent } from './manage-submission/manage-submission.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { AnnouncementDetailComponent } from './announcement-detail/announcement-detail.component';
+import { InfoComponent } from './info/info.component';
 
 const routeConfig: Routes = [
   { path: '', redirectTo: '/register', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, title: 'Home' },
   { path: 'about', component: AboutComponent },
+  { path: 'info', component: InfoComponent },
   { path: 'announcements', component: AnnouncementsComponent, title: 'Announcements' },
   { path: 'announcements/:id', component: AnnouncementDetailComponent, title: 'AnnouncementDetail' },
   { path: 'events',  component: EventComponent,  title: 'Events' },
