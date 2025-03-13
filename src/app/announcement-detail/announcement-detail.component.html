@@ -1,51 +1,54 @@
 <div class="announcement-detail-container">
-  @if (isLoading) {
+  <div *ngIf="isLoading; else loaded">
     <div class="loading-container">
       <p>Loading announcement...</p>
     </div>
-  } @else if (error) {
-    <div class="error-container">
-      <h2>Error</h2>
-      <p>{{ error }}</p>
-      <a [routerLink]="['/announcements']" class="back-button">Back to Announcements</a>
-    </div>
-  } @else if (announcement) {
-    <div class="announcement-header">
-      <div class="back-link">
-        <a [routerLink]="['/announcements']">← Back to Announcements</a>
-      </div>
-      <h1 [class.important-title]="announcement.important">{{ announcement.title }}</h1>
-      @if (announcement.important) {
-        <span class="important-tag">Important</span>
-      }
-      <div class="announcement-meta">
-        <span class="announcement-date">{{ announcement.date }}</span>
-        @if (announcement.author) {
-          <span class="announcement-author">by {{ announcement.author }}</span>
-        }
+  </div>
+  <ng-template #loaded>
+    <div *ngIf="error; else announcementContent">
+      <div class="error-container">
+        <h2>Error</h2>
+        <p>{{ error }}</p>
+        <a [routerLink]="['/announcements']" class="back-button">Back to Announcements</a>
       </div>
     </div>
-
-    <div class="announcement-content">
-      @if (announcement.imageUrl) {
-        <div class="announcement-image">
-          <img [src]="announcement.imageUrl" [alt]="announcement.title">
+    <ng-template #announcementContent>
+      <div *ngIf="announcement; else notFound">
+        <div class="announcement-header">
+          <div class="back-link">
+            <a [routerLink]="['/announcements']">← Back to Announcements</a>
+          </div>
+          <h1 [class.important-title]="announcement.important">{{ announcement.title }}</h1>
+          <span *ngIf="announcement.important" class="important-tag">Important</span>
+          <div class="announcement-meta">
+            <span class="announcement-date">{{ announcement.date }}</span>
+            <span *ngIf="announcement.author" class="announcement-author">
+              by {{ announcement.author }}
+            </span>
+          </div>
         </div>
-      }
 
-      <div class="announcement-summary">
-        <p>{{ announcement.summary }}</p>
-      </div>
+        <div class="announcement-content">
+          <div *ngIf="announcement.imageUrl" class="announcement-image">
+            <img [src]="announcement.imageUrl" [alt]="announcement.title">
+          </div>
 
-      <div class="announcement-body">
-        <p>{{ announcement.content }}</p>
+          <div class="announcement-summary">
+            <p>{{ announcement.summary }}</p>
+          </div>
+
+          <div class="announcement-body">
+            <p>{{ announcement.description }}</p>
+          </div>
+        </div>
       </div>
-    </div>
-  } @else {
-    <div class="not-found">
-      <h2>Announcement Not Found</h2>
-      <p>The announcement you're looking for doesn't exist.</p>
-      <a [routerLink]="['/announcements']" class="back-button">Back to Announcements</a>
-    </div>
-  }
+      <ng-template #notFound>
+        <div class="not-found">
+          <h2>Announcement Not Found</h2>
+          <p>The announcement you're looking for doesn't exist.</p>
+          <a [routerLink]="['/announcements']" class="back-button">Back to Announcements</a>
+        </div>
+      </ng-template>
+    </ng-template>
+  </ng-template>
 </div>

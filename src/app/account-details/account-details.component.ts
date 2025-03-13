@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user.model';
 import { take } from 'rxjs/operators';
 import { NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
@@ -27,7 +27,8 @@ export class AccountDetailsComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.accountForm = this.fb.group({
       email: [{ value: '', disabled: true }],
@@ -118,6 +119,16 @@ export class AccountDetailsComponent implements OnInit {
           this.isLoading = false;
         });
     }
+  }
+
+  logout(): void {
+    this.authService.logout()
+      .then(() => {
+        this.router.navigate(['/login']);
+      })
+      .catch((error) => {
+        this.errorMessage = `Logout failed: ${error.message}`;
+      });
   }
 
   get firstName() { return this.accountForm.get('firstName'); }
