@@ -35,8 +35,6 @@ const routeConfig: Routes = [
     children: [
       { path: 'announcement', component: ManageAnnouncementComponent, title: 'Manage Announcement' },
       { path: 'event', component: ManageEventComponent, title: 'Manage Event' },
-      { path: 'information', component: ManageInformationComponent, title: 'Manage Information' },
-      { path: 'submission', component: ManageSubmissionComponent, title: 'Manage Submission' },
       { path: 'user', component: ManageUserComponent, title: 'Manage User' }
     ]
   },
