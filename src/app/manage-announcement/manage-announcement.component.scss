@@ -21,7 +21,7 @@
       color: #34495e;
     }
 
-    input, textarea {
+    input, textarea, select {
       width: 100%;
       padding: 12px;
       border: 1px solid #bdc3c7;
@@ -31,6 +31,14 @@
 
     input[type="checkbox"] {
       width: auto;
+    }
+
+    textarea {
+      height: fit-content;
+      min-height: 10vh;
+      max-height: 20vh;
+      box-sizing: border-box;
+      resize: none;
     }
   }
 
