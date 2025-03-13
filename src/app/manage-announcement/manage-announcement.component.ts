@@ -14,7 +14,15 @@ import { Observable } from 'rxjs';
   styleUrls: ['./manage-announcement.component.scss']
 })
 export class ManageAnnouncementComponent implements OnInit {
-  announcement = {
+  announcement: {
+    id: string;
+    title: string;
+    date: string | null;
+    type: string;
+    description: string;
+    summary: string;
+    important: boolean;
+  } = {
     id: '',
     title: '',
     date: null,
@@ -23,22 +31,25 @@ export class ManageAnnouncementComponent implements OnInit {
     summary: '',
     important: false
   };
-
   announcements$: Observable<any[]> | undefined;
-
   constructor(private firestore: Firestore) {}
-
   ngOnInit(): void {
     this.loadAnnouncements();
   }
 
   saveAnnouncement() {
     const announcementsCollection = collection(this.firestore, 'announcements');
-
+    let announcementData: any = {
+      title: this.announcement.title,
+      date: this.announcement.date,
+      type: this.announcement.type,
+      description: this.announcement.description,
+      summary: this.announcement.summary,
+      important: this.announcement.important
+    };
     if (this.announcement.id && this.announcement.id.trim() !== '') {
       const announcementDocRef = doc(this.firestore, `announcements/${this.announcement.id}`);
       const { id, ...announcementWithoutId } = this.announcement;
-
       updateDoc(announcementDocRef, announcementWithoutId)
         .then(() => {
           console.log('Announcement updated successfully!');
@@ -48,17 +59,11 @@ export class ManageAnnouncementComponent implements OnInit {
           console.error('Error updating announcement: ', error);
         });
     } else {
-      addDoc(announcementsCollection, {
-        title: this.announcement.title,
-        date: this.announcement.date,
-        type: this.announcement.type,
-        description: this.announcement.description,
-        summary: this.announcement.summary,
-        important: this.announcement.important
-      })
-        .then(() => {
-          console.log('Announcement created successfully!');
+      addDoc(announcementsCollection, announcementData)
+        .then((docRef) => {
+          console.log('Announcement created successfully with ID:', docRef.id);
           this.resetForm();
+          this.announcement.id = docRef.id;
         })
         .catch((error) => {
           console.error('Error creating announcement: ', error);
@@ -72,7 +77,11 @@ export class ManageAnnouncementComponent implements OnInit {
   }
 
   editAnnouncement(announcement: any) {
-    this.announcement = { ...announcement };
+    const dateString = announcement.date instanceof Date
+      ? announcement.date.toISOString().split('T')[0]
+      : announcement.date;
+
+    this.announcement = { ...announcement, date: dateString };
   }
 
   deleteAnnouncement(announcementId: string) {

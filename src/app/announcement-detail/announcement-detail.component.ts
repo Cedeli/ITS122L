@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Firestore, doc, getDoc, Timestamp } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
 import { Announcement } from '../models/announcement.model';
+import {DateService} from "../services/date.service";
 
 @Component({
   selector: 'app-announcement-detail',
@@ -21,7 +22,8 @@ export class AnnouncementDetailComponent implements OnInit {
 
   constructor(
       private firestore: Firestore,
-      private route: ActivatedRoute
+      private route: ActivatedRoute,
+      private dateService: DateService
   ) {}
 
   ngOnInit() {
@@ -42,23 +44,11 @@ export class AnnouncementDetailComponent implements OnInit {
 
       if (docSnap.exists()) {
         const data = docSnap.data();
-        let formattedDate = '';
-        const dateField = data['date'];
-
-        if (dateField instanceof Timestamp) {
-          formattedDate = dateField.toDate().toLocaleDateString();
-        } else if (dateField && typeof dateField.toDate === 'function') {
-          formattedDate = dateField.toDate().toLocaleDateString();
-        } else if (dateField instanceof Date) {
-          formattedDate = dateField.toLocaleDateString();
-        } else if (dateField) {
-          formattedDate = String(dateField);
-        }
 
         this.announcement = {
           id: docSnap.id,
           title: data['title'] || '',
-          date: formattedDate,
+          date: this.dateService.formatDate(data['date']),
           summary: data['summary'] || '',
           description: data['description'] || '',
           important: Boolean(data['important']),
