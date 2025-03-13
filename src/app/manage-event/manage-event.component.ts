@@ -11,48 +11,46 @@ import { Observable } from 'rxjs';
   imports: [CommonModule, FormsModule],
 })
 export class ManageEventComponent {
-  events$: Observable<any[]>; // Observable for events list
-  event = {
+  events$: Observable<any[]>;
+  event: any = {
     title: '',
     date: '',
     location: '',
     description: '',
+    imageUrl: ''
   };
 
   constructor(private firestore: Firestore) {
     const eventsCollection = collection(this.firestore, 'events');
-    this.events$ = collectionData(eventsCollection, { idField: 'id' }); // Fetch events and include document ID
+    this.events$ = collectionData(eventsCollection, { idField: 'id' });
   }
 
-  // Save (add or update) an event
   async saveEvent() {
     try {
       const eventsCollection = collection(this.firestore, 'events');
 
       if (this.event.id) {
-        // If event ID exists, update the existing event
         const eventDoc = doc(this.firestore, `events/${this.event.id}`);
-        await updateDoc(eventDoc, this.event);
+        const { id, ...eventData } = this.event;
+        await updateDoc(eventDoc, eventData);
         console.log('Event updated successfully!');
       } else {
-        // If no ID, create a new event
-        await addDoc(eventsCollection, this.event);
-        console.log('Event added successfully!');
+        const { id, ...newEventData } = this.event;
+        const docRef = await addDoc(eventsCollection, newEventData);
+        this.event.id = docRef.id;
+        console.log('Event added successfully with id:', docRef.id);
       }
 
-      // Reset form after saving
       this.resetForm();
     } catch (error) {
       console.error('Error saving event:', error);
     }
   }
 
-  // Edit an existing event
   editEvent(eventItem: any) {
-    this.event = { ...eventItem }; // Prepopulate form with selected event data
+    this.event = { ...eventItem };
   }
 
-  // Delete an event
   async deleteEvent(eventId: string) {
     try {
       const eventDoc = doc(this.firestore, `events/${eventId}`);
@@ -63,13 +61,13 @@ export class ManageEventComponent {
     }
   }
 
-  // Reset form for a new event
   resetForm() {
     this.event = {
       title: '',
       date: '',
       location: '',
       description: '',
+      imageUrl: ''
     };
   }
 }

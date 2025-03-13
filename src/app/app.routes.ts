@@ -15,20 +15,19 @@ import { ManageEventComponent } from './manage-event/manage-event.component';
 import { ManageInformationComponent } from './manage-information/manage-information.component';
 import { ManageSubmissionComponent } from './manage-submission/manage-submission.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
-import { AuthGuard } from './services/auth.guard';
 import { AnnouncementDetailComponent } from './announcement-detail/announcement-detail.component';
 
 const routeConfig: Routes = [
   { path: '', redirectTo: '/register', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent, title: 'Home', canActivate: [AuthGuard] },
-  { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
-  { path: 'announcements', component: AnnouncementsComponent },
-  { path: 'announcements/:id', component: AnnouncementDetailComponent },
-  { path: 'events',  component: EventComponent,  title: 'Events', canActivate: [AuthGuard] },
-  { path: 'contact',  component: ContactComponent,  title: 'Contact', canActivate: [AuthGuard] },
+  { path: 'home', component: HomeComponent, title: 'Home' },
+  { path: 'about', component: AboutComponent },
+  { path: 'announcements', component: AnnouncementsComponent, title: 'Announcements' },
+  { path: 'announcements/:id', component: AnnouncementDetailComponent, title: 'AnnouncementDetail' },
+  { path: 'events',  component: EventComponent,  title: 'Events' },
+  { path: 'contact',  component: ContactComponent,  title: 'Contact' },
   { path: 'login', component: LoginComponent, title: 'Login' },
   { path: 'register', component: RegisterComponent, title: 'Register' },
-  { path: 'account-details', component: AccountDetailsComponent, title: 'Account Details', },
+  { path: 'account-details', component: AccountDetailsComponent, title: 'Account Details', canActivate: [AuthGuard] },
   {
     path: 'admin',
     component: AdminComponent,

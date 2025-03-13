@@ -7,6 +7,7 @@
         <p><strong>Date:</strong> {{ eventItem.date }}</p>
         <p><strong>Location:</strong> {{ eventItem.location }}</p>
         <p><strong>Description:</strong> {{ eventItem.description }}</p>
+        <p *ngIf="eventItem.imageUrl"><strong>Image URL:</strong> <a href="{{ eventItem.imageUrl }}" target="_blank">{{ eventItem.imageUrl }}</a></p>
         <button class="btn btn-primary" (click)="editEvent(eventItem)">Edit</button>
         <button class="btn btn-danger" (click)="deleteEvent(eventItem.id)">Delete</button>
       </div>
@@ -58,6 +59,15 @@
         name="description"
         required
       ></textarea>
+    </div>
+    <div class="form-group">
+      <label for="imageUrl">Image URL</label>
+      <input
+        type="url"
+        id="imageUrl"
+        [(ngModel)]="event.imageUrl"
+        name="imageUrl"
+      />
     </div>
 
     <button class="btn btn-primary" type="submit">Save Event</button>
