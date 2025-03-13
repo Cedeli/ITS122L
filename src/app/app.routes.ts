@@ -16,11 +16,13 @@ import { ManageEventComponent } from './manage-event/manage-event.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { AdminGuard } from './services/admin.guard';
 import { MemberGuard } from './services/member.guard';
+import { InfoComponent } from './info/info.component';
 
 const routeConfig: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, title: 'Home' },
   { path: 'about', component: AboutComponent },
+  { path: 'info', component: InfoComponent },
   { path: 'announcements', component: AnnouncementsComponent, title: 'Announcements' },
   { path: 'announcements/:id', component: AnnouncementDetailComponent, title: 'AnnouncementDetail' },
   { path: 'events',  component: EventComponent,  title: 'Events' },
