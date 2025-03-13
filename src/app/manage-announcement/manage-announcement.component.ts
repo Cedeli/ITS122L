@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Firestore, collection, addDoc, collectionData } from '@angular/fire/firestore';
+import {Firestore, collection, addDoc, collectionData, doc, updateDoc, deleteDoc} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -40,19 +40,60 @@ export class ManageAnnouncementComponent {
   saveAnnouncement() {
     this.announcement.id = this.number;
     const announcementsCollection = collection(this.firestore, 'announcements');
-    addDoc(announcementsCollection, this.announcement)
+    if (this.announcement.id) {
+      // Update an existing announcement
+      const announcementDocRef = doc(this.firestore, `announcements/${this.announcement.id}`);
+      updateDoc(announcementDocRef, this.announcement)
+        .then(() => {
+          console.log('Announcement updated successfully!');
+          this.resetForm(); // Reset the form
+        })
+        .catch((error) => {
+          console.error('Error updating announcement: ', error);
+        });
+    } else {
+      // Create a new announcement
+      const announcementsCollection = collection(this.firestore, 'announcements');
+      addDoc(announcementsCollection, this.announcement)
+        .then(() => {
+          console.log('Announcement created successfully!');
+          this.resetForm(); // Reset the form
+        })
+        .catch((error) => {
+          console.error('Error creating announcement: ', error);
+        });
+    }
+  }
+
+    loadAnnouncements() {
+      const announcementsCollection = collection(this.firestore, 'announcements');
+      this.announcements$ = collectionData(announcementsCollection, { idField: 'id' });
+    }
+
+    editAnnouncement(announcement: any) {
+      this.announcement = { ...announcement };
+    }
+
+    deleteAnnouncement(announcementId: string) {
+    const announcementDocRef = doc(this.firestore, `announcements/${announcementId}`);
+    deleteDoc(announcementDocRef)
       .then(() => {
-        console.log('Announcement saved successfully!');
-        this.number++;
-        this.announcement = {...this.announcement, id: this.number};
+        console.log('Announcement deleted successfully!');
       })
-      .catch((error: any) => {
-        console.error('Error saving announcement: ', error);
+      .catch((error) => {
+        console.error('Error deleting announcement: ', error);
       });
   }
 
-  loadAnnouncements() {
-    const announcementsCollection = collection(this.firestore, 'announcements');
-    this.announcements$ = collectionData(announcementsCollection, { idField: 'id' });
+  resetForm() {
+    this.announcement = {
+      id: this.number,
+      title: '',
+      date: null,
+      type: '',
+      description: '',
+      summary: '',
+      important: false
+    };
   }
 }

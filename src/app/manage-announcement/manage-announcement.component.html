@@ -13,8 +13,8 @@
         <p><strong>Type:</strong> {{ announcement.type }}</p>
         <p><strong>Description:</strong> {{ announcement.description }}</p>
         <p><strong>Summary:</strong> {{ announcement.summary }}</p>
-        <button class="btn btn-primary">Edit</button>
-        <button class="btn btn-danger">Delete</button>
+        <button class="btn btn-primary" (click)="editAnnouncement(announcement.id)">Edit</button>
+        <button class="btn btn-danger" (click)="deleteAnnouncement(announcement.id)">Delete</button>
       </div>
     </div>
     <ng-template #noAnnouncements>
