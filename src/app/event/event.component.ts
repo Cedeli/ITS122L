@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventService } from '../services/event.service';
-import { Observable } from 'rxjs';
+import {AuthService} from '../services/auth.service';
 
 export interface Event {
+  id: string;
   title: string;
-  date: string; // ISO string format (e.g., "2023-11-10")
+  date: string;
   description: string;
-  imgsrc?: string;
+  imageUrl: string;
+  pendingParticipants?: string[];
+  approvedParticipants?: string[]; // List of IDs (e.g., user IDs) for pending participants
 }
 
 @Component({
@@ -22,6 +25,13 @@ export class EventComponent implements OnInit {
   public upcomingEvents: Event[] = [];
   public previousEvents: Event[] = [];
   public isLoading = true;
+  public currentUser: string = '';
+
+
+  constructor(
+    private eventService: EventService,
+    private authService: AuthService
+  ) {}
 
   months = [
     'January',
@@ -38,29 +48,36 @@ export class EventComponent implements OnInit {
     'December'
   ]
 
-  constructor(private eventService: EventService) {}
-
   ngOnInit(): void {
+    this.getCurrentUser()
     this.fetchEvents();
   }
 
+  getCurrentUser(): void {
+    this.authService.getCurrentUser().subscribe({
+      next: (user) => {
+        if (user?.uid) {
+          this.currentUser = user.uid; // Assuming `uid` is the unique user ID from AuthService
+        } else {
+          console.warn('Not Logged In');
+        }
+      },
+      error: (err) => {
+        console.error('Failed to load user information:', err);
+      }
+    });
+  }
+
+
   fetchEvents() {
-    const currentDate = new Date(); // Current date and time
+    const currentDate = new Date();
     this.isLoading = true;
-    console.log(currentDate);
 
     this.eventService.getEvents().subscribe({
       next: (events: Event[]) => {
         this.isLoading = false;
 
-        // Log each event's date for debugging
-        events.forEach((event) => {
-          console.log(`Event Date: ${event.date}, Normalized Event Date: ${new Date(event.date).toISOString()}`);
-        });
-
-        // Separate events into upcoming and previous, and sort
-
-
+        // Filter and sort as upcoming and previous events
         this.upcomingEvents = events
           .filter((event) => new Date(event.date) >= currentDate)
           .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
@@ -75,4 +92,49 @@ export class EventComponent implements OnInit {
       }
     });
   }
+
+  // Add the current user as a pending participant
+  onSubmit(event: Event) {
+    if (!this.currentUser) {
+      console.warn('User is not logged in. Cannot join event.');
+      return;
+    }
+
+    // Ensure the `pendingParticipants` field exists
+    if (!event.pendingParticipants) {
+      event.pendingParticipants = [];
+    }
+
+    // Check if the current user ID is already in `pendingParticipants` or `approvedParticipants`
+    if (event.pendingParticipants.includes(this.currentUser)) {
+      console.warn('User is already a pending participant for this event.');
+      return;
+    }
+
+    if (event.approvedParticipants && event.approvedParticipants.includes(this.currentUser)) {
+      console.warn('User is already approved to join this event.');
+      return;
+    }
+
+    // Add the current user ID to `pendingParticipants`
+    event.pendingParticipants.push(this.currentUser);
+
+    // Call the service to update the event data in the Firestore
+    this.eventService.updateEvent(event.id, { pendingParticipants: event.pendingParticipants })
+      .then(() => {
+        console.log('User successfully added to the event as a pending participant.');
+      })
+      .catch((error) => {
+        console.error('Failed to update the event with the user:', error);
+      });
+  }
+
+  checkImageUrl(imgsrc: string | undefined): string {
+    // If the imgsrc is empty or undefined, use a default image
+    return imgsrc && imgsrc.trim()
+      ? imgsrc
+      : 'placeholder.png';
+  }
+
+
 }

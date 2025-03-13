@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Firestore, collection, addDoc, doc, deleteDoc, updateDoc, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import {WebEvent} from '../models/web-event.model';
 
 @Component({
   selector: 'app-manage-event',
@@ -13,13 +14,15 @@ import { Observable } from 'rxjs';
 export class ManageEventComponent {
   events$: Observable<any[]>;
 
-  event: any = {
+  event: WebEvent = {
     id: '',
     title: '',
     date: '',
     location: '',
     description: '',
-    imageUrl: ''
+    imageUrl: '',
+    pendingParticipants: [],
+    approvedParticipants: []
   };
 
   constructor(private firestore: Firestore) {
@@ -70,7 +73,9 @@ export class ManageEventComponent {
       date: '',
       location: '',
       description: '',
-      imageUrl: ''
+      imageUrl: '',
+      pendingParticipants: [],
+      approvedParticipants: []
     };
   }
 }

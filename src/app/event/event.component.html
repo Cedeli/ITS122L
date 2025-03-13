@@ -19,7 +19,7 @@
         <div *ngFor="let event of upcomingEvents" class="event-card">
           <div class="event-image">
             <img
-              [src]="event.imgsrc || 'placeholder.png'"
+              [src]="checkImageUrl(event.imageUrl)"
               [alt]="event.title"
             />
           </div>
@@ -27,7 +27,7 @@
             <h3>{{ event.title }}</h3>
             <p class="event-date">{{ event.date | date: 'longDate' }}
             <p class="event-description">{{ event.description }}</p>
-            <a class="btn btn-outline">Join Now</a>
+            <button class="btn btn-outline" (click)="onSubmit(event)">Join Now</button>
           </div>
         </div>
       </div>
@@ -49,7 +49,7 @@
         <div *ngFor="let event of previousEvents" class="event-card">
           <div class="event-image">
             <img
-              [src]="event.imgsrc || 'placeholder.png'"
+              [src] = "checkImageUrl(event.imageUrl)"
               [alt]="event.title"
             />
           </div>
