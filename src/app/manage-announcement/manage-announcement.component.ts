@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Firestore, collection, addDoc, collectionData, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
@@ -13,8 +13,9 @@ import { Observable } from 'rxjs';
   templateUrl: './manage-announcement.component.html',
   styleUrls: ['./manage-announcement.component.scss']
 })
-export class ManageAnnouncementComponent {
+export class ManageAnnouncementComponent implements OnInit {
   announcement = {
+    id: '',
     title: '',
     date: null,
     type: '',
@@ -34,9 +35,9 @@ export class ManageAnnouncementComponent {
   saveAnnouncement() {
     const announcementsCollection = collection(this.firestore, 'announcements');
 
-    if ('id' in this.announcement && this.announcement['id']) {
-      const announcementDocRef = doc(this.firestore, `announcements/${this.announcement['id']}`);
-      const { id, ...announcementWithoutId } = this.announcement; // Remove id before updating
+    if (this.announcement.id && this.announcement.id.trim() !== '') {
+      const announcementDocRef = doc(this.firestore, `announcements/${this.announcement.id}`);
+      const { id, ...announcementWithoutId } = this.announcement;
 
       updateDoc(announcementDocRef, announcementWithoutId)
         .then(() => {
@@ -87,6 +88,7 @@ export class ManageAnnouncementComponent {
 
   resetForm() {
     this.announcement = {
+      id: '',
       title: '',
       date: null,
       type: '',
