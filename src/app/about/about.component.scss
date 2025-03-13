@@ -40,8 +40,7 @@
 }
 
 .multi-col {
-    justify-content: center;
-    gap: 50vh;
+    justify-content: space-around; 
     position: relative;
 }
 
@@ -55,6 +54,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center; 
 }
 
 .documents {
