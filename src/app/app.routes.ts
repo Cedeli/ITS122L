@@ -20,14 +20,15 @@ const routeConfig: Routes = [
   { path: '', redirectTo: '/register', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, title: 'Home', canActivate: [AuthGuard] },
   { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
-  { path: 'announcements', component: AnnouncementsComponent, canActivate: [AuthGuard] },
+  { path: 'announcements', component: AnnouncementsComponent },
+  //{ path: 'announcements/:id', component: AnnouncementDetailComponent },
   { path: 'events',  component: EventComponent,  title: 'Events', canActivate: [AuthGuard] },
   { path: 'contact',  component: ContactComponent,  title: 'Contact', canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent, title: 'Login' },
   { path: 'register', component: RegisterComponent, title: 'Register' },
-  { 
-    path: 'admin', 
-    component: AdminComponent, 
+  {
+    path: 'admin',
+    component: AdminComponent,
     title: 'Admin',
     children: [
       { path: 'announcement', component: ManageAnnouncementComponent, title: 'Manage Announcement' },

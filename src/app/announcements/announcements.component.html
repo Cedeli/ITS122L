@@ -1,0 +1,29 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>All Announcements</h1>
+  </div>
+
+  <div class="announcements-container">
+    @if (isLoading) {
+      <div class="loading-indicator">
+        <p>Loading announcements...</p>
+      </div>
+    } @else if (announcements.length > 0) {
+      @for (announcement of announcements; track announcement.id) {
+        <div class="announcement-card" [class.important]="announcement.important">
+          @if (announcement.important) {
+            <span class="important-tag">Important</span>
+          }
+          <h3>{{ announcement.title }}</h3>
+          <p class="announcement-date">{{ announcement.date }}</p>
+          <p class="announcement-summary">{{ announcement.summary }}</p>
+          <a [routerLink]="['/announcements', announcement.id]" class="read-more">Read More</a>
+        </div>
+      }
+    } @else {
+      <div class="no-announcements">
+        <p>No announcements available at this time.</p>
+      </div>
+    }
+  </div>
+</div>
