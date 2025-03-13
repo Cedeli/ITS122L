@@ -10,15 +10,13 @@ import { AdminComponent } from './admin/admin.component';
 import { AccountDetailsComponent } from './account-details/account-details.component';
 import { ContactComponent } from './contact/contact.component';
 import { MembersListComponent } from './members-list/members-list.component';
+import { AnnouncementDetailComponent } from './announcement-detail/announcement-detail.component';
 import { ManageAnnouncementComponent } from './manage-announcement/manage-announcement.component';
 import { ManageEventComponent } from './manage-event/manage-event.component';
-import { ManageInformationComponent } from './manage-information/manage-information.component';
-import { ManageSubmissionComponent } from './manage-submission/manage-submission.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
-import { AnnouncementDetailComponent } from './announcement-detail/announcement-detail.component';
 
 const routeConfig: Routes = [
-  { path: '', redirectTo: '/register', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, title: 'Home' },
   { path: 'about', component: AboutComponent },
   { path: 'announcements', component: AnnouncementsComponent, title: 'Announcements' },
@@ -38,7 +36,7 @@ const routeConfig: Routes = [
       { path: 'user', component: ManageUserComponent, title: 'Manage User' }
     ]
   },
-  { path: '**', redirectTo: '/register' }
-];
+  { path: '**', redirectTo: '/home' }
+]
 
 export default routeConfig;
