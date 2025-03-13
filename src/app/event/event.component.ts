@@ -1,82 +1,73 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import {CommonModule} from '@angular/common';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+
+export interface Event {
+  title: string;
+  date: string; // ISO string format (e.g., "2023-11-10")
+  description: string;
+  imgsrc?: string; // Optional field for image source
+}
 
 @Component({
   selector: 'app-event',
   imports: [
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './event.component.html',
-  styleUrl: './event.component.scss'
+  styleUrls: ['./event.component.scss'],
 })
-export class EventComponent {
-  public eventList = [
-    {
-      id: 1,
-      title: 'Event Title #1',
-      date: '03/12/2025',
-      description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia quisquam doloremque nostrum laboriosam, blanditiis libero corporis nulla a aut?',
-      imgsrc: '/placeholder.png'
-    },
-    {
-      id: 2,
-      title: 'Event Title #2',
-      date: '03/12/2025',
-      description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia quisquam doloremque nostrum laboriosam, blanditiis libero corporis nulla a aut?',
-      imgsrc: '/placeholder.png'
-    },
-    {
-      id: 3,
-      title: 'Event Title #3',
-      date: '03/12/2025',
-      description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia quisquam doloremque nostrum laboriosam, blanditiis libero corporis nulla a aut?',
-      imgsrc: '/placeholder.png'
-    },
-    {
-      id: 4,
-      title: 'Event Title #3',
-      date: '03/12/2025',
-      description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia quisquam doloremque nostrum laboriosam, blanditiis libero corporis nulla a aut?',
-      imgsrc: '/placeholder.png'
-    },
-  ];
+export class EventComponent implements OnInit {
+  public upcomingEvents: Event[] = [];
+  public previousEvents: Event[] = [];
+  public isLoading = true;
 
-  public eventHistory = [
-    {
-      id: 1,
-      title: 'Event Title #1',
-      date: '03/12/2024',
-      description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia quisquam doloremque nostrum laboriosam, blanditiis libero corporis nulla a aut?',
-      imgsrc: '/placeholder.png'
-    },
-    {
-      id: 2,
-      title: 'Event Title #2',
-      date: '03/12/2024',
-      description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia quisquam doloremque nostrum laboriosam, blanditiis libero corporis nulla a aut?',
-      imgsrc: '/placeholder.png'
-    },
-    {
-      id: 3,
-      title: 'Event Title #3',
-      date: '03/12/2024',
-      description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia quisquam doloremque nostrum laboriosam, blanditiis libero corporis nulla a aut?',
-      imgsrc: '/placeholder.png'
-    },
-  ];
+  months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ]
 
-  /*
-  public filteredEventList = [...this.eventList];
-  public filteredEventHistory = [...this.eventHistory];
+  constructor(private firestore: Firestore) {}
 
-  filterEvents(month: string) {
-    if (month) {
-      this.filteredEventList = this.eventList.filter(event => new Date(event.date).toLocaleString('default', { month: 'long' }) === month);
-      this.filteredEventHistory = this.eventHistory.filter(event => new Date(event.date).toLocaleString('default', { month: 'long' }) === month);
-    } else {
-      this.filteredEventList = [...this.eventList];
-      this.filteredEventHistory = [...this.eventHistory];
+  ngOnInit(): void {
+    this.fetchEvents();
+  }
+
+  async fetchEvents() {
+    const currentDate = new Date(); // Current date and time
+    try {
+      this.isLoading = true;
+
+      const eventsCollection = collection(this.firestore, 'events');
+      const events$: Observable<Event[]> = collectionData(eventsCollection, {
+        idField: 'id',
+      }) as Observable<Event[]>;
+
+      events$.subscribe((events) => {
+        this.isLoading = false;
+
+        this.upcomingEvents = events
+          .filter((event) => new Date(event.date) >= currentDate)
+          .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+        this.previousEvents = events
+          .filter((event) => new Date(event.date) < currentDate)
+          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      });
+    } catch (e) {
+      console.error('Error fetching events:', e);
+      this.isLoading = false;
     }
   }
-  */
 }
