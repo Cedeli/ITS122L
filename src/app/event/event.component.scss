@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;600&display=swap');
+
+$firaSans: 'Fira Sans', sans-serif;
+
+* {
+    color: #1F1D42;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1 {
+    font-size: 5vh;
+}
+
+h2 {
+    font-size: 3vh;
+    padding: 3vh 0 2vh 0;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.section-header {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.section-header select {
+    margin: 3vh 0 2vh 0;
+    padding: 0.5em;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #1F1D42;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    height: fit-content;
+
+    &:hover {
+        border-color: #888;
+    }
+
+    &:focus {
+        border-color: #3f51b5;
+        box-shadow: 0 0 5px rgba(63, 81, 181, 0.5);
+        outline: none;
+    }
+}
+
+.events-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+  
+    .event-card {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+  
+      &:hover {
+        transform: translateY(-5px);
+      }
+  
+      .event-image {
+        height: 200px;
+        overflow: hidden;
+  
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+  
+      .event-content {
+        padding: 20px;
+  
+        h3 {
+          margin-top: 0;
+          color: #3f51b5;
+        }
+  
+        .event-date {
+          color: #666666;
+          font-size: 0.9rem;
+          margin-bottom: 10px;
+        }
+  
+        .event-description {
+          margin-bottom: 20px;
+          line-height: 1.5;
+        }
+      }
+    }
+}  
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
