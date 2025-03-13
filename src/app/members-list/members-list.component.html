@@ -2,7 +2,16 @@
     <h1>Members List</h1>
     <ul>
       <li *ngFor="let user of users$ | async">
-        {{ user.name }} - {{ user.email }} ({{ user.role }})
+        <div class="member-info">
+          <div class="member-details">
+            <h2>{{ user.name }}</h2>
+            <p>Email: {{ user.email }}</p>
+            <p>Role: {{ user.role }}</p>
+          </div>
+          <div class="member-actions">
+            <button>View Details</button>
+          </div>
+        </div>
       </li>
     </ul>
   </div>
