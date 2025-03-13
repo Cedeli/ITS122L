@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 interface User {
   name: string;
   email: string;
+  role: string;
 }
 
 @Component({
@@ -18,17 +19,13 @@ interface User {
   styleUrls: ['./members-list.component.scss']
 })
 export class MembersListComponent implements OnInit {
-  users: User[] = [];
+  users$: Observable<User[]>;
 
-  constructor(private firestore: AngularFirestore) {}
-
-  ngOnInit(): void {
-    this.getUsers();
+  constructor(private firestore: Firestore) {
+    const usersCollection = collection(this.firestore, 'users');
+    this.users$ = collectionData(usersCollection) as Observable<User[]>;
   }
 
-  getUsers(): void {
-    this.firestore.collection<User>('users').valueChanges().subscribe(data => {
-      this.users = data;
-    });
+  ngOnInit(): void {
   }
 }
