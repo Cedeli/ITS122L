@@ -7,7 +7,7 @@ export interface Event {
   title: string;
   date: string; // ISO string format (e.g., "2023-11-10")
   description: string;
-  imgsrc?: string; // Optional field for image source
+  imgsrc?: string;
 }
 
 @Component({
