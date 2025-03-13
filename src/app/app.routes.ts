@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
-
 import { HomeComponent } from './home/home.component';
+import { AuthGuard } from './services/auth.guard';
 import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
 import { EventComponent } from './event/event.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminComponent } from './admin/admin.component';
+import { AccountDetailsComponent } from './account-details/account-details.component';
 import { ContactComponent } from './contact/contact.component';
+import { MembersListComponent } from './members-list/members-list.component';
 import { ManageAnnouncementComponent } from './manage-announcement/manage-announcement.component';
 import { ManageEventComponent } from './manage-event/manage-event.component';
 import { ManageInformationComponent } from './manage-information/manage-information.component';
@@ -26,6 +28,7 @@ const routeConfig: Routes = [
   { path: 'contact',  component: ContactComponent,  title: 'Contact', canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent, title: 'Login' },
   { path: 'register', component: RegisterComponent, title: 'Register' },
+  { path: 'account-details', component: AccountDetailsComponent, title: 'Account Details', },
   {
     path: 'admin',
     component: AdminComponent,
