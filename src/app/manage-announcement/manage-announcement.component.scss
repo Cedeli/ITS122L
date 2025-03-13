@@ -1,39 +1,77 @@
-.announcements-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  flex-direction: row;
+// Styles for the Announcements Panel and Create Announcement Form
+
+// Announcement Panel
+.announcements {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f6f8;
+  border-radius: 8px;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+  }
+
+  .announcements-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+  }
 
   .announcement-card {
     position: relative;
-    box-sizing: border-box;
+    background-color: #ffffff;
+    border-radius: 10px;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 2vh;
-    background-color: #f9f9f9;
-    width: 20vw;
-
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
 
     .important-tag {
       position: absolute;
-      top: 10px;
-      right: 10px;
-      background: #ff4757;
-      color: white;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 0.8em;
+      top: 15px;
+      right: 15px;
+      background-color: #e74c3c;
+      color: #fff;
+      font-size: 0.75em;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 3px;
+    }
+
+    h3 {
+      margin-top: 0;
+      color: #34495e;
+    }
+
+    p {
+      margin-bottom: 1em;
+      color: #7f8c8d;
+      font-size: 0.9em;
     }
 
     button {
-      width: fit-content;
+      padding: 8px 16px;
       border: none;
-      margin: 1em 1em 0 0;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9em;
+      margin-right: 10px;
+    }
+
+    .btn-primary {
+      background-color: #3498db;
+      color: #ffffff;
+    }
+
+    .btn-danger {
+      background-color: #e74c3c;
+      color: #ffffff;
     }
   }
 }
-
 
 .create-announcement {
   max-width: 800px;
@@ -58,7 +96,9 @@
       color: #34495e;
     }
 
-    input, textarea, select {
+    input,
+    textarea,
+    select {
       width: 100%;
       padding: 12px;
       border: 1px solid #bdc3c7;
@@ -71,11 +111,10 @@
     }
 
     textarea {
-      height: fit-content;
       min-height: 10vh;
       max-height: 20vh;
-      box-sizing: border-box;
       resize: none;
+      box-sizing: border-box;
     }
   }
 
@@ -87,5 +126,7 @@
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+    background-color: #3498db;
+    color: #ffffff;
   }
 }
