@@ -1,18 +1,60 @@
 <section class="manage-user">
   <h2>Manage User</h2>
   <form (ngSubmit)="saveUser()">
+
     <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" id="name" [(ngModel)]="user.name" name="name" required>
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" [(ngModel)]="user.first_name" name="firstName">
     </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" [(ngModel)]="user.last_name" name="lastName">
+    </div>
+
     <div class="form-group">
       <label for="email">Email</label>
       <input type="email" id="email" [(ngModel)]="user.email" name="email" required>
     </div>
+
     <div class="form-group">
-      <label for="role">Role</label>
-      <input type="text" id="role" [(ngModel)]="user.role" name="role" required>
+      <label for="address">Address</label>
+      <input type="text" id="address" [(ngModel)]="user.address" name="address">
     </div>
-    <button class="btn btn-primary" type="submit">Save User</button>
+
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input type="number" id="age" [(ngModel)]="user.age" name="age">
+    </div>
+
+    <div class="form-group">
+      <label for="birthDate">Birth Date</label>
+      <input type="date" id="birthDate" [(ngModel)]="user.birthDate" name="birthDate">
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number</label>
+      <input type="tel" id="phoneNumber" [(ngModel)]="user.phoneNumber" name="phoneNumber">
+    </div>
+
+    <div class="form-group">
+      <label>Role</label>
+      <div class="radio-group">
+        <label>
+          <input type="radio" value="user" [(ngModel)]="user.role" name="role">
+          User
+        </label>
+        <label>
+          <input type="radio" value="member" [(ngModel)]="user.role" name="role">
+          Member
+        </label>
+        <label>
+          <input type="radio" value="admin" [(ngModel)]="user.role" name="role">
+          Admin
+        </label>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Save Edits to User</button>
   </form>
 </section>
