@@ -1,0 +1,78 @@
+.participants-list {
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+
+  h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    color: #34495e;
+    margin-bottom: 10px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      background: #fff;
+      margin: 10px 0;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .participant-details {
+        flex: 1;
+
+        p {
+          margin: 5px 0;
+          color: #7f8c8d;
+        }
+      }
+
+      .participant-actions {
+        button {
+          margin-left: 10px;
+          padding: 8px 12px;
+          border: none;
+          border-radius: 4px;
+          font-size: 0.9em;
+          cursor: pointer;
+
+          &.btn-primary {
+            background-color: #3498db;
+            color: #fff;
+
+            &:hover {
+              background-color: #2980b9;
+            }
+          }
+
+          &.btn-danger {
+            background-color: #e74c3c;
+            color: #fff;
+
+            &:hover {
+              background-color: #c0392b;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  p {
+    text-align: center;
+    color: #7f8c8d;
+    font-style: italic;
+  }
+}

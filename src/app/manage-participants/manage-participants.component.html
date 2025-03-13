@@ -1,1 +1,42 @@
-<p>manage-participants works!</p>
+<div class="participants-list">
+  <h1>Manage Participants</h1>
+
+  <!-- Section for Pending Participants -->
+  <div class="pending-participants">
+    <h2>Pending Participants</h2>
+    <ul>
+      <li *ngFor="let user of pendingParticipants">
+        <div class="participant-info">
+          <div class="participant-details">
+            <p>Name: {{ user.name }}</p>
+            <p>Email: {{ user.email }}</p>
+          </div>
+          <div class="participant-actions">
+            <button (click)="acceptParticipant(user)" class="btn btn-primary">Accept</button>
+            <button (click)="rejectParticipant(user)" class="btn btn-danger">Reject</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <p *ngIf="!pendingParticipants.length">No pending participants.</p>
+  </div>
+
+  <!-- Section for Approved Participants -->
+  <div class="approved-participants">
+    <h2>Approved Participants</h2>
+    <ul>
+      <li *ngFor="let user of approvedParticipants">
+        <div class="participant-info">
+          <div class="participant-details">
+            <p>Name: {{ user.name }}</p>
+            <p>Email: {{ user.email }}</p>
+          </div>
+          <div class="participant-actions">
+            <button (click)="removeParticipant(user)" class="btn btn-danger">Remove</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <p *ngIf="!approvedParticipants.length">No approved participants.</p>
+  </div>
+</div>
