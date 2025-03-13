@@ -8,7 +8,7 @@
       <li *ngFor="let user of pendingParticipants">
         <div class="participant-info">
           <div class="participant-details">
-            <p>Name: {{ user.name }}</p>
+            <p>Name: {{ user.first_name }} {{ user.last_name }}</p>
             <p>Email: {{ user.email }}</p>
           </div>
           <div class="participant-actions">
@@ -28,7 +28,7 @@
       <li *ngFor="let user of approvedParticipants">
         <div class="participant-info">
           <div class="participant-details">
-            <p>Name: {{ user.name }}</p>
+            <p>Name: {{ user.first_name }} {{ user.last_name }}</p>
             <p>Email: {{ user.email }}</p>
           </div>
           <div class="participant-actions">
