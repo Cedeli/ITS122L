@@ -42,6 +42,7 @@
 .multi-col {
     justify-content: center;
     gap: 50vh;
+    position: relative;
 }
 
 .single-col {
@@ -89,3 +90,15 @@ img {
     width: 60%;
 }
 
+.learn-more-button {
+    position: absolute; 
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 30px; 
+    font-size: 1.2em; 
+    background-color: #1d2869;
+    color: var(--light-gray);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
