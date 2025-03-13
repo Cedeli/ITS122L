@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Firestore, doc, getDoc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, doc, getDoc, updateDoc, collection, collectionData } from '@angular/fire/firestore';
 import { AuthService } from '../services/auth.service';
+import { Observable } from 'rxjs';
 
 interface User {
   first_name: string;
@@ -13,7 +14,7 @@ interface User {
   birthDate: string;
   phoneNumber: string;
   role: string;
-  uid: string; 
+  uid: string;
 }
 
 @Component({
@@ -27,6 +28,8 @@ interface User {
   styleUrls: ['./manage-user.component.scss']
 })
 export class ManageUserComponent implements OnInit {
+  users$: Observable<User[]>;
+  selectedUser: User | null = null;
   user: User = {
     first_name: '',
     last_name: '',
@@ -35,52 +38,54 @@ export class ManageUserComponent implements OnInit {
     age: 0,
     birthDate: '',
     phoneNumber: '',
-    role: 'user', // default
+    role: 'user', // Default role
     uid: '' // uid documentID
   };
+  editing: boolean = false;
 
-  constructor(private firestore: Firestore, private authService: AuthService) { }
-
-  ngOnInit(): void {
-    this.loadUserData();
+  constructor(private firestore: Firestore, private authService: AuthService) {
+    const usersCollection = collection(this.firestore, 'users');
+    this.users$ = collectionData(usersCollection, { idField: 'uid' }) as Observable<User[]>;
   }
 
-  async loadUserData(): Promise<void> {
-    try {
-      this.authService.getCombinedUserData().subscribe(userData => {
-        if (userData) {
-          this.user = {
-            first_name: userData.first_name || '',
-            last_name: userData.last_name || '',
-            email: userData.email || '',
-            address: userData.address || '',
-            age: userData.age || 0,
-            birthDate: userData.birth_date || '',
-            phoneNumber: userData.phone_number || '',
-            role: userData.role || 'user',
-            uid: userData.uid || '' 
-          };
-        } else {
-          console.log('No user is currently logged in.');
-        }
-      });
-    } catch (error) {
-      console.error('Error loading user data:', error);
-    }
+  ngOnInit(): void {
+  }
+
+  loadUserData(user: User): void {
+    this.selectedUser = user;
+    this.user = { ...user };
+    this.editing = true;
   }
 
   async saveUser(): Promise<void> {
     try {
-      if (this.user.uid) { 
+      if (this.user.uid) {
         const userDocRef = doc(this.firestore, 'users', this.user.uid);
         await updateDoc(userDocRef, { ...this.user });
         console.log('User data updated successfully.');
         alert('User data updated successfully.');
+        this.editing = false;
       } else {
         console.log('No uid found for the user.');
       }
     } catch (error) {
       console.error('Error updating user data:', error);
     }
+  }
+
+  cancelEdit(): void {
+    this.editing = false;
+    this.selectedUser = null;
+    this.user = {
+      first_name: '',
+      last_name: '',
+      email: '',
+      address: '',
+      age: 0,
+      birthDate: '',
+      phoneNumber: '',
+      role: 'user',
+      uid: ''
+    };
   }
 }
