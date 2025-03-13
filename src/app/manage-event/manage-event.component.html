@@ -3,7 +3,7 @@
   <form (ngSubmit)="saveEvent()">
     <div class="form-group">
       <label for="name">Event Name</label>
-      <input type="text" id="name" [(ngModel)]="event.name" name="name" required>
+      <input type="text" id="name" [(ngModel)]="event.title" name="name" required>
     </div>
     <div class="form-group">
       <label for="date">Date</label>
@@ -16,6 +16,10 @@
     <div class="form-group">
       <label for="description">Description</label>
       <textarea id="description" [(ngModel)]="event.description" name="description" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="location">Image</label>
+      <input type="image" id="imgsrc" [(ngModel)]="event.imgsrc" name="imgsrc" required>
     </div>
     <button class="btn btn-primary" type="submit">Save Event</button>
   </form>

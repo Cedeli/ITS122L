@@ -1,36 +1,24 @@
-import { Component } from '@angular/core';
-import {RouterLink} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Firestore, collection, collectionData, query, orderBy, limit } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-announcements',
   templateUrl: './announcements.component.html',
   imports: [
-    RouterLink
+    RouterLink,
+    CommonModule
   ],
-  styleUrls: ['./announcements.component.scss']
+  styleUrls: ['./announcements.component.scss'],
+  standalone: true
 })
-export class AnnouncementsComponent {
-  public recentAnnouncements = [
-    {
-      id: 1,
-      title: 'New Website Launch',
-      date: 'March 7, 2025',
-      summary: 'Cool new website!',
-      important: true
-    },
-    {
-      id: 2,
-      title: 'Membership Renewal',
-      date: 'March 7, 2025',
-      summary: 'Information here.',
-      important: false
-    },
-    {
-      id: 3,
-      title: 'Prayer Schedule Updated',
-      date: 'March 7, 2025',
-      summary: 'Scheduling.',
-      important: false
-    }
-  ];
+export class AnnouncementsComponent implements OnInit {
+  recentAnnouncements$: Observable<any[]> | undefined;
+
+  constructor(private firestore: Firestore) {}
+
+  ngOnInit(): void {
+  }
 }
