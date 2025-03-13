@@ -37,7 +37,6 @@ export class AnnouncementsComponent implements OnInit {
       this.announcements = querySnapshot.docs.map(doc => {
         const data = doc.data();
 
-        // Format the date
         let formattedDate = '';
         const dateField = data['date'];
 
@@ -56,7 +55,7 @@ export class AnnouncementsComponent implements OnInit {
           title: data['title'] || '',
           date: formattedDate,
           summary: data['summary'] || '',
-          content: data['content'] || '',
+          description: data['description'] || '',
           important: Boolean(data['important']),
           author: data['author'] || '',
           imageUrl: data['imageUrl'] || null

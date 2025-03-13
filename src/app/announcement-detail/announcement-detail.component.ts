@@ -20,8 +20,8 @@ export class AnnouncementDetailComponent implements OnInit {
   public error: string | null = null;
 
   constructor(
-    private firestore: Firestore,
-    private route: ActivatedRoute
+      private firestore: Firestore,
+      private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -42,7 +42,6 @@ export class AnnouncementDetailComponent implements OnInit {
 
       if (docSnap.exists()) {
         const data = docSnap.data();
-
         let formattedDate = '';
         const dateField = data['date'];
 
@@ -61,7 +60,7 @@ export class AnnouncementDetailComponent implements OnInit {
           title: data['title'] || '',
           date: formattedDate,
           summary: data['summary'] || '',
-          content: data['content'] || '',
+          description: data['description'] || '',
           important: Boolean(data['important']),
           author: data['author'] || '',
           imageUrl: data['imageUrl'] || null
