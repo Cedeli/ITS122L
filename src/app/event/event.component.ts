@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventService } from '../services/event.service';
 import { AuthService } from '../services/auth.service';
-import { WebEvent } from '../models/web-event.model';
-import {RouterLink} from '@angular/router';
+import type { WebEvent } from '../models/web-event.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-event',
@@ -13,6 +13,7 @@ import {RouterLink} from '@angular/router';
   ],
   templateUrl: './event.component.html',
   styleUrls: ['./event.component.scss'],
+  standalone: true,
 })
 export class EventComponent implements OnInit {
   public upcomingEvents: WebEvent[] = [];

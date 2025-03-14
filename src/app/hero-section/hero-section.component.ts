@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RouterLink, RouterModule} from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-hero-section',
@@ -7,6 +7,7 @@ import {RouterLink, RouterModule} from '@angular/router';
   imports: [
     RouterLink
   ],
-  styleUrls: ['./hero-section.component.scss']
+  styleUrls: ['./hero-section.component.scss'],
+  standalone: true,
 })
 export class HeroSectionComponent { }

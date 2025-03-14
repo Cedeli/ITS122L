@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Firestore, collection, addDoc, collectionData, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { User } from '../models/user.model';
+import type { User } from '../models/user.model';
 
 @Component({
   selector: 'app-manage-announcement',

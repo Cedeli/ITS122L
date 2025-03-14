@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Firestore, collection, query, orderBy, limit, getDocs, DocumentData, Timestamp } from '@angular/fire/firestore';
+import { Firestore, collection, query, orderBy, limit, getDocs } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
-import { Announcement } from '../models/announcement.model';
+import type { Announcement } from '../models/announcement.model';
+import { Timestamp } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-featured-announcements',
@@ -17,7 +18,7 @@ import { Announcement } from '../models/announcement.model';
 export class FeaturedAnnouncementsComponent implements OnInit {
   public recentAnnouncements: Announcement[] = [];
 
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore) { }
 
   ngOnInit() {
     this.fetchRecentAnnouncements();
@@ -31,11 +32,10 @@ export class FeaturedAnnouncementsComponent implements OnInit {
         orderBy('date', 'desc'),
         limit(3)
       );
-
       const querySnapshot = await getDocs(q);
+
       this.recentAnnouncements = querySnapshot.docs.map(doc => {
         const data = doc.data();
-
         let formattedDate = '';
         const dateField = data['date'];
 

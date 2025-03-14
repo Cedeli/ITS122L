@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { User } from '../models/user.model';
+import type { User } from '../models/user.model';
 import { take } from 'rxjs/operators';
 import { NgIf } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
@@ -15,7 +15,8 @@ import { firstValueFrom } from 'rxjs';
     NgIf,
     RouterLink
   ],
-  styleUrls: ['./account-details.component.scss']
+  styleUrls: ['./account-details.component.scss'],
+  standalone: true,
 })
 export class AccountDetailsComponent implements OnInit {
   accountForm: FormGroup;

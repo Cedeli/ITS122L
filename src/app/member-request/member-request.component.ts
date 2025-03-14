@@ -4,8 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-member-request',
   imports: [],
   templateUrl: './member-request.component.html',
-  styleUrl: './member-request.component.scss'
+  styleUrl: './member-request.component.scss',
+  standalone: true,
 })
 export class MemberRequestComponent {
-
 }

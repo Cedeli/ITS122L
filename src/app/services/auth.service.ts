@@ -15,13 +15,9 @@ import {
   User as FirebaseUser
 } from '@angular/fire/auth';
 import {
-  collection, collectionData,
-  deleteDoc,
   doc,
   Firestore,
   getDoc,
-  getDocs,
-  query,
   setDoc,
   updateDoc
 } from '@angular/fire/firestore';

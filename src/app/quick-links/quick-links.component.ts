@@ -3,8 +3,7 @@ import { RouterLink } from '@angular/router';
 import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
 import { AuthService } from '../services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
-
-import { MemberRequestComponent} from '../member-request/member-request.component';
+import { MemberRequestComponent } from '../member-request/member-request.component';
 
 @Component({
   selector: 'app-quick-links',
@@ -12,7 +11,8 @@ import { MemberRequestComponent} from '../member-request/member-request.componen
   imports: [
     RouterLink
   ],
-  styleUrls: ['./quick-links.component.scss']
+  styleUrls: ['./quick-links.component.scss'],
+  standalone: true,
 })
 export class QuickLinksComponent {
 

@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule } from '@angular/forms';
-import {Router, RouterLink, RouterOutlet} from '@angular/router';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { NgIf } from '@angular/common';
-import { Subscription } from 'rxjs';
-import { User as FirebaseUser } from '@angular/fire/auth';
+import type { Subscription } from 'rxjs';
+import type { User as FirebaseUser } from '@angular/fire/auth';
 import { NavbarService } from '../services/navbar.service';
 
 /**
@@ -20,7 +20,8 @@ import { NavbarService } from '../services/navbar.service';
     ReactiveFormsModule,
     NgIf,
   ],
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  standalone: true,
 })
 export class LoginComponent implements OnInit, OnDestroy {
   /**

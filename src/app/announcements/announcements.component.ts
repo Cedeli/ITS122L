@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Firestore, collection, query, orderBy, getDocs, Timestamp } from '@angular/fire/firestore';
+import { Firestore, collection, query, orderBy, getDocs } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
-import { Announcement } from '../models/announcement.model';
+import type { Announcement } from '../models/announcement.model';
 import { DateService } from '../services/date.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { DateService } from '../services/date.service';
     CommonModule
   ],
   styleUrls: ['./announcements.component.scss'],
-  standalone: true
+  standalone: true,
 })
 export class AnnouncementsComponent implements OnInit {
   public announcements: ({ id: string; title: string; date: string; summary: string; important: boolean })[] = [];

@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
-import { WebEvent } from '../models/web-event.model';
+import type { WebEvent } from '../models/web-event.model';
 import { DateService } from '../services/date.service';
 
 @Component({
   selector: 'app-event-detail',
   templateUrl: './event-detail.component.html',
   styleUrls: ['./event-detail.component.scss'],
-  standalone: true,
   imports: [RouterLink, CommonModule],
+  standalone: true,
 })
 export class EventDetailComponent implements OnInit {
   public event: WebEvent | null = null;

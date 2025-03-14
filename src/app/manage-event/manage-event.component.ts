@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Firestore, collection, addDoc, doc, deleteDoc, updateDoc, collectionData, getDoc } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, doc, deleteDoc, updateDoc, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ManageParticipantsComponent } from '../manage-participants/manage-participants.component';
 import { MatDialog } from '@angular/material/dialog';
-import { WebEvent } from '../models/web-event.model';
+import { ManageParticipantsComponent } from '../manage-participants/manage-participants.component';
+import type { WebEvent } from '../models/web-event.model';
 import { AuthService } from '../services/auth.service';
-import { User } from '../models/user.model';
-
+import type { User } from '../models/user.model';
 
 @Component({
   selector: 'app-manage-event',

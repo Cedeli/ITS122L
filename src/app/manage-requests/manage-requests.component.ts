@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {filter, Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { map } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
-import {collection, collectionData, Firestore} from '@angular/fire/firestore';
+import { collection, collectionData, Firestore } from '@angular/fire/firestore';
 
 interface UserRequest {
   id: string;
@@ -21,6 +21,7 @@ interface UserRequest {
     CommonModule,
   ],
   styleUrls: ['./manage-requests.component.scss'],
+  standalone: true,
 })
 export class ManageRequestsComponent implements OnInit {
 

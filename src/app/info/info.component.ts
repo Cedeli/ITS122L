@@ -13,14 +13,14 @@ export class InfoComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private el: ElementRef, private renderer: Renderer2) { }
 
   ngOnInit(): void {
-  }
 
+  }
   ngAfterViewInit(): void {
-    this.showSection('policies'); 
+    this.showSection('policies');
   }
 
   ngOnDestroy(): void {
-    // idk
+
   }
 
   showSection(sectionId: string): void {

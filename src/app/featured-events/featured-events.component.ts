@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { EventService } from '../services/event.service';
-import { Observable } from 'rxjs';
-import { WebEvent } from '../models/web-event.model';
+import type { WebEvent } from '../models/web-event.model';
 
 @Component({
   selector: 'app-featured-events',
@@ -12,24 +11,23 @@ import { WebEvent } from '../models/web-event.model';
     RouterLink,
     NgForOf
   ],
-  styleUrls: ['./featured-events.component.scss']
+  styleUrls: ['./featured-events.component.scss'],
+  standalone: true,
 })
 export class FeaturedEventsComponent implements OnInit {
   featuredEvents: WebEvent[] = [];
   isLoading: boolean = true;
 
-  constructor(private eventService: EventService) {}
+  constructor(private eventService: EventService) { }
 
   ngOnInit(): void {
     this.fetchFeaturedEvents();
   }
 
   fetchFeaturedEvents(): void {
-    const currentDate = new Date(); // Current date and time
-
+    const currentDate = new Date();
     this.eventService.getEvents().subscribe({
       next: (events: WebEvent[]) => {
-        // Filter upcoming events and sort them by date
         this.featuredEvents = events
           .filter((event) => new Date(event.date) >= currentDate)
           .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())

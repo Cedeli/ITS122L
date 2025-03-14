@@ -7,6 +7,7 @@ import {RouterLink} from '@angular/router';
   imports: [
     RouterLink
   ],
-  styleUrls: ['./about-summary.component.scss']
+  styleUrls: ['./about-summary.component.scss'],
+  standalone: true,
 })
 export class AboutSummaryComponent { }

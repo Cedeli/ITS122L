@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Firestore, doc, getDoc, Timestamp } from '@angular/fire/firestore';
+import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
-import { Announcement } from '../models/announcement.model';
-import {DateService} from "../services/date.service";
+import type { Announcement } from '../models/announcement.model';
+import { DateService } from "../services/date.service";
 
 @Component({
   selector: 'app-announcement-detail',
@@ -13,7 +13,7 @@ import {DateService} from "../services/date.service";
     CommonModule
   ],
   styleUrls: ['./announcement-detail.component.scss'],
-  standalone: true
+  standalone: true,
 })
 export class AnnouncementDetailComponent implements OnInit {
   public announcement: Announcement | null = null;

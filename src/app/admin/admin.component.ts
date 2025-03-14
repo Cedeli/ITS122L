@@ -8,7 +8,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     RouterLink
   ],
   templateUrl: './admin.component.html',
-  styleUrl: './admin.component.scss'
+  styleUrl: './admin.component.scss',
+  standalone: true,
 })
 export class AdminComponent {
 

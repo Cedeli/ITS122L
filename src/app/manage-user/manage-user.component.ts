@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { UserService } from '../services/user.service';
 
 interface User {

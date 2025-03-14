@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractContro
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { NgIf } from '@angular/common';
-import { Subscription } from 'rxjs';
-import { User as FirebaseUser } from '@angular/fire/auth';
-import { User } from '../models/user.model';
-import {NavbarService} from '../services/navbar.service';
+import type { Subscription } from 'rxjs';
+import type { User as FirebaseUser } from '@angular/fire/auth';
+import type { User } from '../models/user.model';
+import { NavbarService } from '../services/navbar.service';
 
 /**
  * Component that handles user registration functionality.
@@ -21,7 +21,8 @@ import {NavbarService} from '../services/navbar.service';
     ReactiveFormsModule,
     NgIf,
   ],
-  styleUrls: ['../login/login.component.scss']
+  styleUrls: ['../login/login.component.scss'],
+  standalone: true,
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   registerForm: FormGroup;

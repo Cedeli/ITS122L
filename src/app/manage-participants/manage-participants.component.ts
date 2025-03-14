@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '../services/auth.service';
 import { EventService } from '../services/event.service';
-import { User } from '../models/user.model';
+import type { User } from '../models/user.model';
 
 @Component({
   selector: 'app-manage-participants',
   templateUrl: './manage-participants.component.html',
   imports: [CommonModule],
   styleUrls: ['./manage-participants.component.scss'],
+  standalone: true,
 })
 export class ManageParticipantsComponent implements OnInit {
   pendingParticipants: { first_name?: string; last_name?: string; email: string; uid: string }[] = [];
@@ -17,19 +18,17 @@ export class ManageParticipantsComponent implements OnInit {
   isLoading = true;
 
   constructor(
-    private eventService: EventService, // Inject EventService
-    private authService: AuthService,    // Inject AuthService
-    @Inject(MAT_DIALOG_DATA) public data: { eventId: string } // Inject data (eventId from dialog)
+    private eventService: EventService,
+    private authService: AuthService,
+    @Inject(MAT_DIALOG_DATA) public data: { eventId: string }
   ) {}
 
   ngOnInit(): void {
-    // Check if eventId passed in data
     if (!this.data.eventId) {
       console.error('Event ID is not provided!');
       return;
     }
 
-    // Fetch participants with additional user info
     this.fetchParticipantsAndUserData(this.data.eventId);
   }
 
@@ -37,7 +36,6 @@ export class ManageParticipantsComponent implements OnInit {
    * Fetch event participants and their user details using EventService and AuthService
    */
   private fetchParticipantsAndUserData(eventId: string): void {
-    // Get event with specified eventId
     this.eventService.getEvents().subscribe({
       next: (events) => {
         const event = events.find((e) => e.id === eventId); // Find the matching event
@@ -45,7 +43,6 @@ export class ManageParticipantsComponent implements OnInit {
           const pendingUids: string[] = event.pendingParticipants || [];
           const approvedUids: string[] = event.approvedParticipants || [];
 
-          // Fetch user data for pending and approved participants
           this.resolveUserDetails(pendingUids).then((pendingUsers) => {
             this.pendingParticipants = pendingUsers;
           });
@@ -72,9 +69,8 @@ export class ManageParticipantsComponent implements OnInit {
   private async resolveUserDetails(
     uids: string[]
   ): Promise<{ first_name?: string; last_name?: string; email: string; uid: string }[]> {
-    // Use Promise.all to fetch details for multiple users concurrently
     const userDetailsPromises = uids.map((uid) =>
-      this.authService.getUserData(uid).toPromise() // Convert Observable to Promise
+      this.authService.getUserData(uid).toPromise()
     );
 
     const userDetails = await Promise.all(userDetailsPromises); // Wait for all results
@@ -85,7 +81,7 @@ export class ManageParticipantsComponent implements OnInit {
         first_name: user.first_name,
         last_name: user.last_name,
         email: user.email,
-      })); // Map user details
+      }));
   }
 
   /**
@@ -95,7 +91,6 @@ export class ManageParticipantsComponent implements OnInit {
     this.pendingParticipants = this.pendingParticipants.filter((u) => u.uid !== user.uid);
     this.approvedParticipants.push(user);
 
-    // Reflect changes in Firestore
     this.updateEventParticipants();
   }
 
@@ -105,7 +100,6 @@ export class ManageParticipantsComponent implements OnInit {
   rejectParticipant(user: { uid: string; first_name?: string; last_name?: string; email: string }): void {
     this.pendingParticipants = this.pendingParticipants.filter((u) => u.uid !== user.uid);
 
-    // Reflect changes in Firestore
     this.updateEventParticipants();
   }
 
@@ -115,7 +109,6 @@ export class ManageParticipantsComponent implements OnInit {
   removeParticipant(user: { uid: string; first_name?: string; last_name?: string; email: string }): void {
     this.approvedParticipants = this.approvedParticipants.filter((u) => u.uid !== user.uid);
 
-    // Reflect changes in Firestore
     this.updateEventParticipants();
   }
 
