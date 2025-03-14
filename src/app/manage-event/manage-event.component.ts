@@ -34,6 +34,7 @@ export class ManageEventComponent {
   }
 
   async saveEvent() {
+    const eventsCollection = collection(this.firestore, 'events');
     try {
       if (this.event.id && this.event.id.trim() !== '') {
         const eventDoc = doc(this.firestore, `events/${this.event.id}`);
@@ -64,14 +65,15 @@ export class ManageEventComponent {
   }
 
   async deleteEvent(eventId: string) {
+    const eventDoc = doc(this.firestore, `events/${eventId}`);
     try {
-      await this.eventService.deleteEvent(eventId);
+      await deleteDoc(eventDoc);
       console.log('Event deleted successfully!');
     } catch (error) {
       console.error('Error deleting event:', error);
     }
   }
-
+  
   resetForm() {
     this.event = {
       id: '',
