@@ -4,6 +4,7 @@
       <p>Loading announcement...</p>
     </div>
   </div>
+
   <ng-template #loaded>
     <div *ngIf="error; else announcementContent">
       <div class="error-container">
@@ -12,12 +13,11 @@
         <a [routerLink]="['/announcements']" class="back-button">Back to Announcements</a>
       </div>
     </div>
+
     <ng-template #announcementContent>
       <div *ngIf="announcement; else notFound">
         <div class="announcement-header">
-          <div class="back-link">
-            <a [routerLink]="['/announcements']">← Back to Announcements</a>
-          </div>
+          <a [routerLink]="['/announcements']" class="back-link">← Back to Announcements</a>
           <h1 [class.important-title]="announcement.important">{{ announcement.title }}</h1>
           <span *ngIf="announcement.important" class="important-tag">Important</span>
           <div class="announcement-meta">
@@ -28,20 +28,15 @@
           </div>
         </div>
 
-        <div class="announcement-content">
-          <div *ngIf="announcement.imageUrl" class="announcement-image">
-            <img [src]="announcement.imageUrl" [alt]="announcement.title">
+        <div class="announcement-body">
+          <div class="announcement-image-container" *ngIf="announcement.imageUrl">
+            <img [src]="announcement.imageUrl" [alt]="announcement.title" class="announcement-image">
           </div>
-
-          <div class="announcement-summary">
-            <p>{{ announcement.summary }}</p>
-          </div>
-
-          <div class="announcement-body">
-            <p>{{ announcement.description }}</p>
-          </div>
+          <p class="announcement-summary">{{ announcement.summary }}</p>
+          <p class="announcement-description">{{ announcement.description }}</p>
         </div>
       </div>
+
       <ng-template #notFound>
         <div class="not-found">
           <h2>Announcement Not Found</h2>

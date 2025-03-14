@@ -1,18 +1,17 @@
-
-<!-- Announcement Card -->
 <div class="announcements">
   <h2> Manage Announcement </h2>
   <div class="announcements-container">
     <div *ngIf="announcements$ | async as announcements; else noAnnouncements">
       <div *ngFor="let announcement of announcements" class="announcement-card">
-        @if (announcement.important) {
-          <span class="important-tag">Important</span>
-        }
+        <span *ngIf="announcement.important" class="important-tag">Important</span>
         <h3>{{ announcement.title }}</h3>
         <p><strong>Date:</strong> {{ announcement.date }}</p>
-        <p><strong>Type:</strong> {{ announcement.type }}</p>
+        <p><strong>Author:</strong> {{ announcement.author }}</p>
         <p><strong>Description:</strong> {{ announcement.description }}</p>
         <p><strong>Summary:</strong> {{ announcement.summary }}</p>
+        <div *ngIf="announcement.imageUrl" class="image-container">
+          <img [src]="announcement.imageUrl" [alt]="announcement.title">
+        </div>
         <button class="btn btn-primary" (click)="editAnnouncement(announcement)">Edit</button>
         <button class="btn btn-danger" (click)="deleteAnnouncement(announcement.id)">Delete</button>
       </div>
@@ -23,7 +22,6 @@
   </div>
 </div>
 
-<!-- Create or Edit Announcement -->
 <section class="create-announcement">
   <h2>Create or Edit Announcement</h2>
   <form (ngSubmit)="saveAnnouncement()">
@@ -35,6 +33,11 @@
     <div class="form-group">
       <label for="title">Title</label>
       <input type="text" id="title" [(ngModel)]="announcement.title" name="title" required>
+    </div>
+
+    <div class="form-group">
+      <label for="author">Author (Optional)</label>
+      <input type="text" id="author" [(ngModel)]="announcement.author" name="author">
     </div>
 
     <div class="form-group">
@@ -53,10 +56,16 @@
     </div>
 
     <div class="form-group">
+      <label for="imageUrl">Image URL</label>
+      <input type="text" id="imageUrl" [(ngModel)]="announcement.imageUrl" name="imageUrl">
+    </div>
+
+    <div class="form-group">
       <label for="important">Important</label>
       <input type="checkbox" id="important" [(ngModel)]="announcement.important" name="important">
     </div>
 
     <button class="btn btn-primary" type="submit">Save Announcement</button>
+    <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancel</button>
   </form>
 </section>

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Firestore, collection, addDoc, collectionData, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-manage-announcement',
@@ -18,35 +20,57 @@ export class ManageAnnouncementComponent implements OnInit {
     id: string;
     title: string;
     date: string | null;
-    type: string;
     description: string;
     summary: string;
     important: boolean;
+    author: string;
+    imageUrl: string;
   } = {
     id: '',
     title: '',
     date: null,
-    type: '',
     description: '',
     summary: '',
-    important: false
+    important: false,
+    author: '',
+    imageUrl: ''
   };
   announcements$: Observable<any[]> | undefined;
-  constructor(private firestore: Firestore) {}
+  currentUser: User | null = null;
+
+  constructor(private firestore: Firestore, private authService: AuthService) {} // Inject AuthService
+
   ngOnInit(): void {
     this.loadAnnouncements();
+    this.loadCurrentUser();
+  }
+
+  loadCurrentUser() {
+    this.authService.getCombinedUserData().subscribe(user => {
+      this.currentUser = user;
+      if (this.announcement.id && !this.announcement.author) {
+        this.announcement.author = this.currentUser ? `${this.currentUser.first_name} ${this.currentUser.last_name}`: 'Anonymous';
+      }
+    });
   }
 
   saveAnnouncement() {
     const announcementsCollection = collection(this.firestore, 'announcements');
+
+    this.announcement.author = this.currentUser
+      ? `${this.currentUser.first_name} ${this.currentUser.last_name}`
+      : 'Anonymous';
+
     let announcementData: any = {
       title: this.announcement.title,
       date: this.announcement.date,
-      type: this.announcement.type,
       description: this.announcement.description,
       summary: this.announcement.summary,
-      important: this.announcement.important
+      important: this.announcement.important,
+      author: this.announcement.author,
+      imageUrl: this.announcement.imageUrl || null,
     };
+
     if (this.announcement.id && this.announcement.id.trim() !== '') {
       const announcementDocRef = doc(this.firestore, `announcements/${this.announcement.id}`);
       const { id, ...announcementWithoutId } = this.announcement;
@@ -80,8 +104,11 @@ export class ManageAnnouncementComponent implements OnInit {
     const dateString = announcement.date instanceof Date
       ? announcement.date.toISOString().split('T')[0]
       : announcement.date;
-
     this.announcement = { ...announcement, date: dateString };
+
+    if (!this.announcement.author) {
+      this.announcement.author = this.currentUser ? `${this.currentUser.first_name} ${this.currentUser.last_name}`: 'Anonymous';
+    }
   }
 
   deleteAnnouncement(announcementId: string) {
@@ -100,10 +127,11 @@ export class ManageAnnouncementComponent implements OnInit {
       id: '',
       title: '',
       date: null,
-      type: '',
       description: '',
       summary: '',
-      important: false
+      important: false,
+      author: '',
+      imageUrl: ''
     };
   }
 }

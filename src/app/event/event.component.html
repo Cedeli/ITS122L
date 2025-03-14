@@ -26,7 +26,7 @@
           <div class="event-content">
             <h3>{{ event.title }}</h3>
             <p class="event-date">{{ event.date | date: 'longDate' }}
-            <p class="event-description">{{ event.description }}</p>
+            <p class="event-description">{{ event.summary }}</p>
             <button class="btn btn-outline" (click)="onSubmit(event)">Join Now</button>
           </div>
         </div>
@@ -56,7 +56,7 @@
           <div class="event-content">
             <h3>{{ event.title }}</h3>
             <p class="event-date">{{ event.date | date: 'longDate' }}
-            <p class="event-description">{{ event.description }}</p>
+            <p class="event-description">{{ event.summary }}</p>
           </div>
         </div>
       </div>

@@ -97,3 +97,28 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+.btn-secondary {
+  background-color: #777; // Gray color
+  color: #ffffff;
+}
+button{
+  margin-bottom: 10px; // Add some spacing
+}
+.form-group {
+  margin-bottom: 20px;
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #34495e;
+  }
+  input,
+  textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none;
+  }
+}
+

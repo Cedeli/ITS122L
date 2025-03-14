@@ -18,6 +18,7 @@ import { ManageRequestsComponent} from './manage-requests/manage-requests.compon
 import { AdminGuard } from './services/admin.guard';
 import { MemberGuard } from './services/member.guard';
 import { InfoComponent } from './info/info.component';
+import { EventDetailComponent } from './event-detail/event-detail.component';
 
 const routeConfig: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -33,6 +34,7 @@ const routeConfig: Routes = [
   { path: 'register', component: RegisterComponent, title: 'Register' },
   { path: 'account-details', component: AccountDetailsComponent, title: 'Account Details', canActivate: [AuthGuard] },
   { path: 'members', component: MembersListComponent, title: 'Members List', canActivate: [MemberGuard] },
+  { path: 'events/:id', component: EventDetailComponent, title: 'Event Detail' },
   {
     path: 'admin',
     component: AdminComponent,

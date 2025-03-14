@@ -1,17 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventService } from '../services/event.service';
-import {AuthService} from '../services/auth.service';
-
-export interface Event {
-  id: string;
-  title: string;
-  date: string;
-  description: string;
-  imageUrl: string;
-  pendingParticipants?: string[];
-  approvedParticipants?: string[]; // List of IDs (e.g., user IDs) for pending participants
-}
+import { AuthService } from '../services/auth.service';
+import { WebEvent } from '../models/web-event.model';
 
 @Component({
   selector: 'app-event',
@@ -22,11 +13,10 @@ export interface Event {
   styleUrls: ['./event.component.scss'],
 })
 export class EventComponent implements OnInit {
-  public upcomingEvents: Event[] = [];
-  public previousEvents: Event[] = [];
+  public upcomingEvents: WebEvent[] = [];
+  public previousEvents: WebEvent[] = [];
   public isLoading = true;
   public currentUser: string = '';
-
 
   constructor(
     private eventService: EventService,
@@ -57,7 +47,7 @@ export class EventComponent implements OnInit {
     this.authService.getCurrentUser().subscribe({
       next: (user) => {
         if (user?.uid) {
-          this.currentUser = user.uid; // Assuming `uid` is the unique user ID from AuthService
+          this.currentUser = user.uid;
         } else {
           console.warn('Not Logged In');
         }
@@ -74,7 +64,7 @@ export class EventComponent implements OnInit {
     this.isLoading = true;
 
     this.eventService.getEvents().subscribe({
-      next: (events: Event[]) => {
+      next: (events: WebEvent[]) => {
         this.isLoading = false;
 
         // Filter and sort as upcoming and previous events
@@ -94,7 +84,7 @@ export class EventComponent implements OnInit {
   }
 
   // Add the current user as a pending participant
-  onSubmit(event: Event) {
+  onSubmit(event: WebEvent) {
     if (!this.currentUser) {
       window.location.href = '/login';
       return;
@@ -133,8 +123,6 @@ export class EventComponent implements OnInit {
     // If the imgsrc is empty or undefined, use a default image
     return imgsrc && imgsrc.trim()
       ? imgsrc
-      : 'placeholder.png';
+      : 'BRM Logo.jpg';
   }
-
-
 }

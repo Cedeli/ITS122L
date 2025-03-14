@@ -1,0 +1,45 @@
+<div class="event-detail-container">
+  <div *ngIf="isLoading; else loaded">
+    <div class="loading-container">
+      <p>Loading event...</p>
+    </div>
+  </div>
+
+  <ng-template #loaded>
+    <div *ngIf="error; else eventContent">
+      <div class="error-container">
+        <h2>Error</h2>
+        <p>{{ error }}</p>
+        <a [routerLink]="['/events']" class="back-button">Back to Events</a>
+      </div>
+    </div>
+
+    <ng-template #eventContent>
+      <div *ngIf="event; else notFound">
+        <div class="event-header">
+          <a [routerLink]="['/events']" class="back-link">← Back to Events</a>
+          <h1>{{ event.title }}</h1>
+          <div class="event-meta">
+            <span class="event-date">{{ event.date }}</span>
+            <span class="event-location">Location: {{ event.location }}</span>
+          </div>
+        </div>
+
+        <div class="event-body">
+          <div class="event-image-container" *ngIf="event.imageUrl">
+            <img [src]="event.imageUrl" [alt]="event.title" class="event-image">
+          </div>
+          <p class="event-description">{{ event.description }}</p>
+
+        </div>
+      </div>
+      <ng-template #notFound>
+        <div class="not-found">
+          <h2>Event Not Found</h2>
+          <p>The event you're looking for doesn't exist.</p>
+          <a [routerLink]="['/events']" class="back-button">Back to Events</a>
+        </div>
+      </ng-template>
+    </ng-template>
+  </ng-template>
+</div>

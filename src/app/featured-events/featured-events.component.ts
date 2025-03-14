@@ -3,14 +3,7 @@ import { RouterLink } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { EventService } from '../services/event.service';
 import { Observable } from 'rxjs';
-
-export interface Event {
-  id?: string;
-  title: string;
-  date: string; // ISO string format (e.g., "2023-11-10")
-  description: string;
-  imgsrc?: string;
-}
+import { WebEvent } from '../models/web-event.model';
 
 @Component({
   selector: 'app-featured-events',
@@ -22,7 +15,7 @@ export interface Event {
   styleUrls: ['./featured-events.component.scss']
 })
 export class FeaturedEventsComponent implements OnInit {
-  featuredEvents: Event[] = [];
+  featuredEvents: WebEvent[] = [];
   isLoading: boolean = true;
 
   constructor(private eventService: EventService) {}
@@ -35,12 +28,12 @@ export class FeaturedEventsComponent implements OnInit {
     const currentDate = new Date(); // Current date and time
 
     this.eventService.getEvents().subscribe({
-      next: (events: Event[]) => {
+      next: (events: WebEvent[]) => {
         // Filter upcoming events and sort them by date
         this.featuredEvents = events
           .filter((event) => new Date(event.date) >= currentDate)
           .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-          .slice(0, 3); // Limit to the top 3 featured events
+          .slice(0, 3);
         this.isLoading = false;
       },
       error: (err) => {

@@ -3,7 +3,6 @@ import { environment } from '../environments/environment.development';
 import { initializeApp, provideFirebaseApp, getApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager, provideFirestore } from '@angular/fire/firestore';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 import routeConfig from './app.routes';
 
@@ -21,7 +20,6 @@ export const appConfig: ApplicationConfig = {
           tabManager: persistentMultipleTabManager(),
         }),
       })
-    ),
-    provideAnimationsAsync(),
+    )
   ]
 };
