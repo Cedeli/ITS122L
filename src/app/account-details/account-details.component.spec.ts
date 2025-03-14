@@ -20,7 +20,7 @@ describe('AccountDetailsComponent', () => {
         email: 'test@example.com',
         first_name: 'Test',
         last_name: 'User',
-        birth_date: '1990-01-01',
+        birth_date: '2025-01-01',
         phone_number: '123-456-7890',
         address: '123 Main St',
         role: 'user'
@@ -57,7 +57,7 @@ describe('AccountDetailsComponent', () => {
     expect(component.accountForm.get('lastName')?.value).toBe('User');
     expect(component.accountForm.get('email')?.value).toBe('test@example.com');
     expect(component.accountForm.get('email')?.disabled).toBeTrue();
-    expect(component.accountForm.get('birthDate')?.value).toBe('1990-01-01');
+    expect(component.accountForm.get('birthDate')?.value).toBe('2025-01-01');
     expect(component.accountForm.get('phoneNumber')?.value).toBe('123-456-7890');
     expect(component.accountForm.get('address')?.value).toBe('123 Main St');
   }));
