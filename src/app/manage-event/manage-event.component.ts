@@ -28,7 +28,6 @@ export class ManageEventComponent {
     approvedParticipants: []
   };
 
-
   constructor(private firestore: Firestore, private dialog: MatDialog) {
     const eventsCollection = collection(this.firestore, 'events');
     this.events$ = collectionData(eventsCollection, {idField: 'id'});
@@ -36,8 +35,6 @@ export class ManageEventComponent {
 
   async saveEvent() {
     try {
-      const eventsCollection = collection(this.firestore, 'events');
-
       if (this.event.id && this.event.id.trim() !== '') {
         const eventDoc = doc(this.firestore, `events/${this.event.id}`);
         const docSnap = await getDoc(eventDoc);
@@ -56,7 +53,6 @@ export class ManageEventComponent {
         this.event.id = docRef.id;
         alert('Event added successfully with id:' + docRef.id);
       }
-
       this.resetForm();
     } catch (error) {
       alert('Error saving event:' + error);
@@ -69,8 +65,7 @@ export class ManageEventComponent {
 
   async deleteEvent(eventId: string) {
     try {
-      const eventDoc = doc(this.firestore, `events/${eventId}`);
-      await deleteDoc(eventDoc);
+      await this.eventService.deleteEvent(eventId);
       console.log('Event deleted successfully!');
     } catch (error) {
       console.error('Error deleting event:', error);

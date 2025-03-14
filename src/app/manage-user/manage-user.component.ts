@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Firestore, doc, updateDoc, deleteDoc, collection, collectionData, addDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import { UserService } from '../services/user.service';
 
 interface User {
   first_name: string;
@@ -42,9 +42,8 @@ export class ManageUserComponent implements OnInit {
   };
   editing: boolean = false;
 
-  constructor(private firestore: Firestore) {
-    const usersCollection = collection(this.firestore, 'users');
-    this.users$ = collectionData(usersCollection, { idField: 'uid' }) as Observable<User[]>;
+  constructor(private userService: UserService) {
+    this.users$ = this.userService.getUsers() as Observable<User[]>;
   }
 
   ngOnInit(): void {}
@@ -57,14 +56,11 @@ export class ManageUserComponent implements OnInit {
   async saveUser(): Promise<void> {
     try {
       if (this.user.uid) {
-        const userDocRef = doc(this.firestore, 'users', this.user.uid);
-        await updateDoc(userDocRef, { ...this.user });
+        await this.userService.updateUser(this.user.uid, this.user);
         console.log('User updated successfully.');
       } else {
-        const usersCollection = collection(this.firestore, 'users');
-        const docRef = await addDoc(usersCollection, this.user);
-        this.user.uid = docRef.id;
-        console.log('User created with id:', docRef.id);
+        await this.userService.createUser(this.user);
+        console.log('User created successfully.');
       }
       this.resetForm();
     } catch (error) {
@@ -74,8 +70,7 @@ export class ManageUserComponent implements OnInit {
 
   async deleteUser(uid: string): Promise<void> {
     try {
-      const userDocRef = doc(this.firestore, 'users', uid);
-      await deleteDoc(userDocRef);
+      await this.userService.deleteUser(uid);
       console.log('User deleted successfully.');
       if (this.user.uid === uid) {
         this.resetForm();

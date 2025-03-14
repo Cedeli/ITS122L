@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { Firestore, collection, query, orderBy, getDocs, Timestamp } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
 import { Announcement } from '../models/announcement.model';
+import { DateService } from '../services/date.service';
 
 @Component({
   selector: 'app-announcements',
@@ -15,10 +16,13 @@ import { Announcement } from '../models/announcement.model';
   standalone: true
 })
 export class AnnouncementsComponent implements OnInit {
-  public announcements: Announcement[] = [];
+  public announcements: ({ id: string; title: string; date: string; summary: string; important: boolean })[] = [];
   public isLoading = true;
 
-  constructor(private firestore: Firestore) {}
+  constructor(
+    private firestore: Firestore,
+    private dateService: DateService
+  ) {}
 
   ngOnInit() {
     this.fetchAnnouncements();
@@ -37,23 +41,10 @@ export class AnnouncementsComponent implements OnInit {
       this.announcements = querySnapshot.docs.map(doc => {
         const data = doc.data();
 
-        let formattedDate = '';
-        const dateField = data['date'];
-
-        if (dateField instanceof Timestamp) {
-          formattedDate = dateField.toDate().toLocaleDateString();
-        } else if (dateField && typeof dateField.toDate === 'function') {
-          formattedDate = dateField.toDate().toLocaleDateString();
-        } else if (dateField instanceof Date) {
-          formattedDate = dateField.toLocaleDateString();
-        } else if (dateField) {
-          formattedDate = String(dateField);
-        }
-
         return {
           id: doc.id,
           title: data['title'] || '',
-          date: formattedDate,
+          date: this.dateService.formatDate(data['date']),
           summary: data['summary'] || '',
           description: data['description'] || '',
           important: Boolean(data['important']),
