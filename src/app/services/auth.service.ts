@@ -14,7 +14,17 @@ import {
   updateProfile,
   User as FirebaseUser
 } from '@angular/fire/auth';
-import { doc, Firestore, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
+import {
+  collection, collectionData,
+  deleteDoc,
+  doc,
+  Firestore,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  updateDoc
+} from '@angular/fire/firestore';
 import { from, map, Observable, of, switchMap } from 'rxjs';
 import { User } from '../models/user.model';
 
@@ -286,4 +296,25 @@ export class AuthService {
       })
     );
   }
+
+  approveMembershipRequest(userId: string): Observable<void> {
+    const userRef = doc(this.firestore, `users/${userId}`);
+    return from(updateDoc(userRef, { role: 'member', pending_request: false }));
+  }
+
+  rejectMembershipRequest(userId: string): Observable<void> {
+    const userRef = doc(this.firestore, `users/${userId}`);
+    return from(updateDoc(userRef, { pending_request: false }));
+  }
+}
+
+export interface UserRequest {
+  id: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  role: string;
+  created_at: string;
+  updated_at: string;
+  pending_request: boolean;
 }

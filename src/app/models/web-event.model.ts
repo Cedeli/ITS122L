@@ -5,4 +5,6 @@ export interface WebEvent {
   location: string,
   description: string,
   imageUrl: string,
+  pendingParticipants: [],
+  approvedParticipants: []
 }

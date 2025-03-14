@@ -6,7 +6,7 @@
   <div class="events-container">
     <div *ngFor="let event of featuredEvents;" class="event-card">
       <div class="event-image">
-        <img [src]="event.imageUrl || 'placeholder.png'" [alt]="event.title"/>
+        <img [src]="event.imgsrc || 'placeholder.png'" [alt]="event.title"/>
       </div>
       <div class="event-content">
         <h3>{{ event.title }}</h3>
