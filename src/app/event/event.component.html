@@ -25,9 +25,10 @@
           </div>
           <div class="event-content">
             <h3>{{ event.title }}</h3>
-            <p class="event-date">{{ event.date | date: 'longDate' }}
+            <p class="event-date">{{ event.date | date: 'longDate' }}</p>
             <p class="event-description">{{ event.summary }}</p>
-            <button class="btn btn-outline" (click)="onSubmit(event)">Join Now</button>
+            <button class="join btn btn-outline" (click)="onSubmit(event)">Join Now</button>
+            <a [routerLink]="['/events', event.id]" class="btn btn-outline">Learn More</a>
           </div>
         </div>
       </div>
@@ -55,8 +56,9 @@
           </div>
           <div class="event-content">
             <h3>{{ event.title }}</h3>
-            <p class="event-date">{{ event.date | date: 'longDate' }}
+            <p class="event-date">{{ event.date | date: 'longDate' }}</p>
             <p class="event-description">{{ event.summary }}</p>
+            <a [routerLink]="['/events', event.id]" class="btn btn-outline">Learn More</a>
           </div>
         </div>
       </div>

@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { EventService } from '../services/event.service';
 import { AuthService } from '../services/auth.service';
 import { WebEvent } from '../models/web-event.model';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-event',
   imports: [
     CommonModule,
+    RouterLink,
   ],
   templateUrl: './event.component.html',
   styleUrls: ['./event.component.scss'],
