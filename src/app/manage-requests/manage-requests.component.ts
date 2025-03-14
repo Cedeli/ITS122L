@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import {filter, Observable} from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { map } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
+import {collection, collectionData, Firestore} from '@angular/fire/firestore';
 
 interface UserRequest {
   id: string;
@@ -23,24 +24,22 @@ interface UserRequest {
 })
 export class ManageRequestsComponent implements OnInit {
 
-  users: Observable<any[]> = new Observable<any[]>();
+  users$: Observable<any[]>;
 
-  constructor(private authService: AuthService) {}
-
-  ngOnInit() {
-    this.fetchUserRequest();
+  constructor(private authService: AuthService, private firestore: Firestore) {
+    const userCollection = collection(this.firestore, 'users');
+    this.users$ = collectionData(userCollection, { idField: 'id' }) as Observable<any[]>;
+    this.users$ = this.users$.pipe(
+      map(users => users.filter(user => user.pending_request === true))
+    );
   }
 
-  fetchUserRequest(): void {
-      this.users = this.authService.getMembershipRequests();
-  }
-
+  ngOnInit(): void {}
 
   approveRequest(user: UserRequest) {
     this.authService.approveMembershipRequest(user.id).subscribe({
       next: () => {
         alert(`Membership for ${user.first_name} ${user.last_name} has been approved!`);
-        this.fetchUserRequest();
       },
       error: (err) => {
         console.error('Error approving membership request:', err);
@@ -52,7 +51,6 @@ export class ManageRequestsComponent implements OnInit {
     this.authService.rejectMembershipRequest(user.id).subscribe({
       next: () => {
         alert(`Membership for ${user.first_name} ${user.last_name} has been rejected!`);
-        this.fetchUserRequest();
       },
       error: (err) => {
         console.error('Error rejecting membership request:', err);

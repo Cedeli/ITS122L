@@ -1,7 +1,7 @@
 <div class="manage-requests">
   <h1>Manage Requests</h1>
   <ul>
-    <li *ngFor="let user of users | async">
+    <li *ngFor="let user of users$ | async">
       <div class="request-info">
         <div class="request-details">
           <h2>{{ user.first_name }} {{ user.last_name }}</h2>

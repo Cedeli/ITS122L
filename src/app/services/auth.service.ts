@@ -297,24 +297,14 @@ export class AuthService {
     );
   }
 
-  getMembershipRequests(): Observable<any[]> {
-    const usersCollection = collection(this.firestore, 'users');
-    return collectionData(usersCollection, {idField: 'id'}).pipe(
-      map((users) =>
-        users
-          .filter((user: any) => user.pending_request === true)
-      )
-    );
-  }
-
   approveMembershipRequest(userId: string): Observable<void> {
     const userRef = doc(this.firestore, `users/${userId}`);
-    return from(updateDoc(userRef, { role: 'member', pending_request: 'false' }));
+    return from(updateDoc(userRef, { role: 'member', pending_request: false }));
   }
 
   rejectMembershipRequest(userId: string): Observable<void> {
     const userRef = doc(this.firestore, `users/${userId}`);
-    return from(updateDoc(userRef, { pending_request: 'false' }));
+    return from(updateDoc(userRef, { pending_request: false }));
   }
 }
 
