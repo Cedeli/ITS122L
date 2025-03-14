@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Firestore, collection, addDoc, doc, deleteDoc, updateDoc, collectionData } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, doc, deleteDoc, updateDoc, collectionData, getDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ManageParticipantsComponent } from '../manage-participants/manage-participants.component';
 import { MatDialog } from '@angular/material/dialog';
-import {WebEvent} from '../models/web-event.model';
+import { WebEvent} from '../models/web-event.model';
 
 @Component({
   selector: 'app-manage-event',
@@ -40,19 +40,26 @@ export class ManageEventComponent {
 
       if (this.event.id && this.event.id.trim() !== '') {
         const eventDoc = doc(this.firestore, `events/${this.event.id}`);
-        const {id, ...eventData} = this.event;
-        await updateDoc(eventDoc, eventData);
-        console.log('Event updated successfully!');
+        const docSnap = await getDoc(eventDoc);
+                  // check if event exists
+        if (!docSnap.exists()) {
+          alert('Event does not exist. Leave the event ID blank to create new event.');
+          this.event.id = '';
+        } else {  // update if event exists
+          const {id, ...eventData} = this.event;
+          await updateDoc(eventDoc, eventData);
+          alert('Event updated successfully!');
+        }
       } else {
         const {id, ...newEventData} = this.event;
         const docRef = await addDoc(eventsCollection, newEventData);
         this.event.id = docRef.id;
-        console.log('Event added successfully with id:', docRef.id);
+        alert('Event added successfully with id:' + docRef.id);
       }
 
       this.resetForm();
     } catch (error) {
-      console.error('Error saving event:', error);
+      alert('Error saving event:' + error);
     }
   }
 
