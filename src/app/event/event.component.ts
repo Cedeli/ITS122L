@@ -96,7 +96,7 @@ export class EventComponent implements OnInit {
   // Add the current user as a pending participant
   onSubmit(event: Event) {
     if (!this.currentUser) {
-      console.warn('User is not logged in. Cannot join event.');
+      window.location.href = '/login';
       return;
     }
 
@@ -107,12 +107,12 @@ export class EventComponent implements OnInit {
 
     // Check if the current user ID is already in `pendingParticipants` or `approvedParticipants`
     if (event.pendingParticipants.includes(this.currentUser)) {
-      console.warn('User is already a pending participant for this event.');
+      alert('User is already a pending participant for this event.');
       return;
     }
 
     if (event.approvedParticipants && event.approvedParticipants.includes(this.currentUser)) {
-      console.warn('User is already approved to join this event.');
+      alert('User is already approved to join this event.');
       return;
     }
 
@@ -122,7 +122,7 @@ export class EventComponent implements OnInit {
     // Call the service to update the event data in the Firestore
     this.eventService.updateEvent(event.id, { pendingParticipants: event.pendingParticipants })
       .then(() => {
-        console.log('User successfully added to the event as a pending participant.');
+        alert('User successfully added to the event as a pending participant.');
       })
       .catch((error) => {
         console.error('Failed to update the event with the user:', error);
