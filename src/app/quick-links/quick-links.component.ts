@@ -23,30 +23,30 @@ export class QuickLinksComponent {
   async becomeMember(): Promise<void> {
     try {
       this.authService.getCurrentUser().subscribe(user => {
-        if (user) {
+        if (user != null) {
           const userDocRef = doc(this.firestore, 'users', user.uid);
           updateDoc(userDocRef, { pending_request: true }).then(() => {
             console.log('Request Sent');
           }).catch(error => {
             console.error('Error updating request:', error);
           });
+          const dialogRef = this.dialog.open(MemberRequestComponent, {
+            width: '400px',
+            height: '200px',
+          });
+
+          dialogRef.afterClosed().subscribe((result) => {
+            if (result) {
+              console.log('Dialog result:', result);
+            }
+          });
+
         } else {
-          console.log('No user is currently logged in.');
+          window.location.href = '/login';
         }
       });
     } catch (error) {
       console.error('Error updating role:', error);
     }
-
-    const dialogRef = this.dialog.open(MemberRequestComponent, {
-      width: '400px',
-      height: '200px',
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        console.log('Dialog result:', result);
-      }
-    });
   }
 }
