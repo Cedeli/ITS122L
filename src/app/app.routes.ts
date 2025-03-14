@@ -14,6 +14,7 @@ import { AnnouncementDetailComponent } from './announcement-detail/announcement-
 import { ManageAnnouncementComponent } from './manage-announcement/manage-announcement.component';
 import { ManageEventComponent } from './manage-event/manage-event.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
+import { ManageRequestsComponent} from './manage-requests/manage-requests.component';
 import { AdminGuard } from './services/admin.guard';
 import { MemberGuard } from './services/member.guard';
 import { InfoComponent } from './info/info.component';
@@ -40,7 +41,8 @@ const routeConfig: Routes = [
     children: [
       { path: 'announcement', component: ManageAnnouncementComponent, title: 'Manage Announcement' },
       { path: 'event', component: ManageEventComponent, title: 'Manage Event' },
-      { path: 'user', component: ManageUserComponent, title: 'Manage User' }
+      { path: 'user', component: ManageUserComponent, title: 'Manage User' },
+      { path: 'request', component: ManageRequestsComponent, title: 'Manage Requests'}
     ]
   },
   { path: '**', redirectTo: '/home' }

@@ -1,71 +1,65 @@
 <div class="container">
-    <h1>EVENTS</h1>
+  <h1>EVENTS</h1>
 
-    <!-- Upcomming Events -->
+  <!-- LOADING SPINNER -->
+  <div *ngIf="isLoading" class="loading">Loading...</div>
+
+  <!-- UPCOMING EVENTS SECTION -->
+  <div *ngIf="!isLoading" class="section">
     <div class="section-header">
-        <h2>Featured & Upcomming Events</h2>
-        <select>
-            <option value="">All Months</option>
-            <option value="January">January</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
-        </select>
-    </div>
-    <div class="card-holder">
-        <div class="events-container">
-            <div *ngFor="let event of eventList;" class="event-card">
-              <div class="event-image">
-                <img [src]="event.imgsrc || 'placeholder.png'" [alt]="event.title"/>
-              </div>
-              <div class="event-content">
-                <h3>{{ event.title }}</h3>
-                <p class="event-date">{{ event.date }}</p>
-                <p class="event-description">{{ event.description }}</p>
-                <a class="btn btn-outline">Join Now</a>
-              </div>
-            </div>
-        </div>
+      <h2>Featured & Upcoming Events</h2>
+      <select>
+        <option value="">All Months</option>
+        <option *ngFor="let month of months">{{ month }}</option>
+      </select>
     </div>
 
-    <div class="section-header">
-        <h2>Previous Events</h2>
-        <select id="monthFilter">
-            <option value="">All Months</option>
-            <option value="January">January</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
-        </select>
-    </div>
     <div class="card-holder">
-        <div class="events-container">
-            <div *ngFor="let event of eventHistory;" class="event-card">
-              <div class="event-image">
-                <img [src]="event.imgsrc || 'placeholder.png'" [alt]="event.title"/>
-              </div>
-              <div class="event-content">
-                <h3>{{ event.title }}</h3>
-                <p class="event-date">{{ event.date }}</p>
-                <p class="event-description">{{ event.description }}</p>
-              </div>
-            </div>
+      <div class="events-container">
+        <div *ngFor="let event of upcomingEvents" class="event-card">
+          <div class="event-image">
+            <img
+              [src]="checkImageUrl(event.imageUrl)"
+              [alt]="event.title"
+            />
+          </div>
+          <div class="event-content">
+            <h3>{{ event.title }}</h3>
+            <p class="event-date">{{ event.date | date: 'longDate' }}
+            <p class="event-description">{{ event.description }}</p>
+            <button class="btn btn-outline" (click)="onSubmit(event)">Join Now</button>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+
+  <!-- PREVIOUS EVENTS SECTION -->
+  <div *ngIf="!isLoading" class="section">
+    <div class="section-header">
+      <h2>Previous Events</h2>
+      <select>
+        <option value="">All Months</option>
+        <option *ngFor="let month of months">{{ month }}</option>
+      </select>
+    </div>
+
+    <div class="card-holder">
+      <div class="events-container">
+        <div *ngFor="let event of previousEvents" class="event-card">
+          <div class="event-image">
+            <img
+              [src] = "checkImageUrl(event.imageUrl)"
+              [alt]="event.title"
+            />
+          </div>
+          <div class="event-content">
+            <h3>{{ event.title }}</h3>
+            <p class="event-date">{{ event.date | date: 'longDate' }}
+            <p class="event-description">{{ event.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
