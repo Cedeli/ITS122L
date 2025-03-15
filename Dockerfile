@@ -12,19 +12,19 @@ RUN npm run build
 
 FROM nginx:alpine
 
-# Install gettext for envsubst
-RUN apk add --no-cache gettext
-
 # Copy the built Angular app
-COPY --from=build /app/dist/brmo /usr/share/nginx/html
+COPY --from=build /app/dist/brmo/browser /usr/share/nginx/html
 
-# Copy the entrypoint script
+# Create a config.js file that will be loaded at runtime
+RUN echo "window.ENV = {};" > /usr/share/nginx/html/config.js
+
+# Copy the entrypoint script that will update config.js at runtime
 COPY entrypoint.sh /usr/local/bin/
 
 # Make the entrypoint script executable
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# Update the nginx configuration file path
+# Copy nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Ensure the container listens on the PORT environment variable

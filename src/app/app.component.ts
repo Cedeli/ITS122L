@@ -18,7 +18,10 @@ import { filter } from 'rxjs';
 export class AppComponent {
   isAdminPage: boolean = false;
 
-  constructor(private router: Router, public nav: NavbarService) {
+  constructor(
+    private router: Router,
+    public nav: NavbarService,
+  ) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
