@@ -9,44 +9,40 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Auth to Google Cloud
-      id: auth
-      uses: google-github-actions/auth@v2
-      with:
-        credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+      - name: Auth to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
-    # Create Artifact Registry Repository if it does not exist
-    - name: Create Artifact Registry Repository
-      run: |-
-        gcloud artifacts repositories create cloud-run-source-deploy \
-            --repository-format=docker \
-            --location=asia-southeast1 \
-            --project=${{ secrets.GCP_PROJECT_ID }} \
-            --description="Docker repository for Cloud Run" || true
+      - name: Create Artifact Registry Repository
+        run: |-
+          gcloud artifacts repositories create cloud-run-source-deploy \
+              --repository-format=docker \
+              --location=asia-southeast1 \
+              --project=${{ secrets.GCP_PROJECT_ID }} \
+              --description="Docker repository for Cloud Run" || true
 
+      - name: Configure Docker
+        run: |-
+          gcloud auth configure-docker asia-southeast1-docker.pkg.dev
 
-    - name: Configure Docker
-      run: |-
-        gcloud auth configure-docker asia-southeast1-docker.pkg.dev
-
-    - name: Build Docker image
-      run: |
-        docker build \
+      - name: Build Docker image
+        run: |
+          docker build \
             -t asia-southeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-source-deploy/its122l:latest .
 
+      - name: Push Docker image
+        run: |
+          docker push asia-southeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-source-deploy/its122l:latest
 
-    - name: Push Docker image
-      run: |
-        docker push asia-southeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-source-deploy/its122l:latest
-
-    - name: Deploy to Cloud Run
-      uses: google-github-actions/deploy-cloudrun@v2
-      with:
-            service: its122l
-            region: asia-southeast1
-            image: asia-southeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-source-deploy/its122l:latest
+      - name: Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: its122l
+          region: asia-southeast1
+          image: asia-southeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-source-deploy/its122l:latest
