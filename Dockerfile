@@ -8,14 +8,28 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build --omit=dev
+RUN npm run build
 
 FROM nginx:alpine
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Install gettext for envsubst
+RUN apk add --no-cache gettext
 
-COPY --from=build /app/dist/brmo/browser /usr/share/nginx/html
+# Copy the built Angular app
+COPY --from=build /app/dist/brmo /usr/share/nginx/html
 
-EXPOSE 80
+# Copy the entrypoint script
+COPY entrypoint.sh /usr/local/bin/
 
-CMD ["nginx", "-g", "daemon off;"]
+# Make the entrypoint script executable
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Update the nginx configuration file path
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Ensure the container listens on the PORT environment variable
+ENV PORT=8080
+EXPOSE 8080
+
+# Use the entrypoint script as the entrypoint
+ENTRYPOINT ["entrypoint.sh"]
