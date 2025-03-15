@@ -1,33 +1,56 @@
-name: Build and Push Docker Image
+name: Docker Image CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-
     steps:
-      # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Log in to the container registry
-      - name: Log in to Google Container Registry
-        uses: docker/login-action@v2
+      - name: Auth to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
         with:
-          registry: gcr.io
-          username: _json_key
-          password: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
-      # Build the Docker image
+      - name: Create Artifact Registry Repository
+        run: |-
+          gcloud artifacts repositories create cloud-run-source-deploy \
+              --repository-format=docker \
+              --location=asia-southeast1 \
+              --project=${{ secrets.GCP_PROJECT_ID }} \
+              --description="Docker repository for Cloud Run" || true
+
+      - name: Configure Docker
+        run: |-
+          gcloud auth configure-docker asia-southeast1-docker.pkg.dev
+
       - name: Build Docker image
+        env:  # Set environment variables for the *workflow step*
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+          FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
+          FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+          FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
         run: |
-          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/its122l:latest .
+          docker build \
+            -t asia-southeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-source-deploy/its122l:latest .
 
-      # Push the Docker image
       - name: Push Docker image
         run: |
-          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/its122l:latest
+          docker push asia-southeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-source-deploy/its122l:latest
+
+      - name: Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: its122l
+          region: asia-southeast1
+          image: asia-southeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-source-deploy/its122l:latest
