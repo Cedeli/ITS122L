@@ -7,28 +7,21 @@ RUN npm install
 
 COPY . .
 
-ARG FIREBASE_API_KEY
-ARG FIREBASE_AUTH_DOMAIN
-ARG FIREBASE_PROJECT_ID
-ARG FIREBASE_STORAGE_BUCKET
-ARG FIREBASE_MESSAGING_SENDER_ID
-ARG FIREBASE_APP_ID
-ARG FIREBASE_MEASUREMENT_ID
-
-ENV FIREBASE_API_KEY=$FIREBASE_API_KEY
-ENV FIREBASE_AUTH_DOMAIN=$FIREBASE_AUTH_DOMAIN
-ENV FIREBASE_PROJECT_ID=$FIREBASE_PROJECT_ID
-ENV FIREBASE_STORAGE_BUCKET=$FIREBASE_STORAGE_BUCKET
-ENV FIREBASE_MESSAGING_SENDER_ID=$FIREBASE_MESSAGING_SENDER_ID
-ENV FIREBASE_APP_ID=$FIREBASE_APP_ID
-ENV FIREBASE_MEASUREMENT_ID=$FIREBASE_MEASUREMENT_ID
-
+# Build with environment variables that will be replaced at runtime
 RUN npm run build
 
 FROM nginx:alpine
 
-COPY --from=build /app/dist/brmo/browser /usr/share/nginx/html
+# Copy nginx config
 COPY nginx.conf /etc/nginx/nginx.conf
 
+# Copy built Angular app
+COPY --from=build /app/dist/brmo/browser /usr/share/nginx/html
+
+# Copy a script to replace environment variables at runtime
+COPY config-env.sh /docker-entrypoint.d/40-config-env.sh
+RUN chmod +x /docker-entrypoint.d/40-config-env.sh
+
 EXPOSE 8080
+
 CMD ["nginx", "-g", "daemon off;"]
