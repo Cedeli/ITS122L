@@ -1,12 +1,12 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "FIREBASE_API_KEY_PLACEHOLDER",
-    authDomain: "FIREBASE_AUTH_DOMAIN_PLACEHOLDER",
-    projectId: "FIREBASE_PROJECT_ID_PLACEHOLDER",
-    storageBucket: "FIREBASE_STORAGE_BUCKET_PLACEHOLDER",
-    messagingSenderId: "FIREBASE_MESSAGING_SENDER_ID_PLACEHOLDER",
-    appId: "FIREBASE_APP_ID_PLACEHOLDER",
-    measurementId: "FIREBASE_MEASUREMENT_ID_PLACEHOLDER"
+    apiKey: "YAIzaSyDrlVyTCk2MImhWZEckPPkyNJpJa3Hpja0",
+    authDomain: "brm-organization-website.firebaseapp.com",
+    projectId: "brm-organization-website",
+    storageBucket: "brm-organization-website.firebasestorage.app",
+    messagingSenderId: "126186357660",
+    appId: "1:126186357660:web:c8a3158c41739c9ef77e59",
+    measurementId: "G-VPK809C3FW"
   }
 };
