@@ -12,10 +12,11 @@ RUN npm run build --omit=dev
 
 FROM nginx:alpine
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Update the nginx configuration file path
+COPY nginx.conf /etc/nginx/nginx.conf
 
-COPY --from=build /app/dist/brmo/browser /usr/share/nginx/html
-
+# Ensure the container listens on the PORT environment variable
+ENV PORT=8080
 EXPOSE 8080
 
 CMD ["nginx", "-g", "daemon off;"]
